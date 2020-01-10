@@ -3,7 +3,7 @@ import csv
 import json
 
 # csvfile = open('users3.csv', 'r')
-# res = open('users.json', 'w')
+res = open('usersHashed.json', 'w')
 
 # fieldnames = ("fname", "lname", "street", "city", "state",
 #               "zip_code", "email", "password", "phone")
@@ -26,17 +26,13 @@ def checkHash(password, hashedPassword):
 users = open('users.json', 'r')
 data = json.load(users)
 salt = bcrypt.gensalt()
-# for user in data:
-#     password = user["password"]
-#     print(password)
-#     print(hashPassword(password, salt))
-#     checkHash(password)
-#     print("-------------------------\n")
-
-original = "testingPassword"
-hashedPass = hashPassword("original", salt)
-
-if(checkHash(original, hashedPass)):
-    print("the hashing is working")
-else:
-    print("the hashing did not work")
+# print(data)
+# res.write(output)
+# print("done")
+for user in data:
+    password = user["password"]
+    hashedPassword = hashPassword(password, salt)
+    user["password"] = hashedPassword.decode()
+output = json.dumps(data)
+res.write(output)
+print(data)
