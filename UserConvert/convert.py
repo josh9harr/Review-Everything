@@ -12,15 +12,31 @@ import json
 # res.write(output)
 
 
-def hashPassword(password):
-    res = bcrypt.hashpw(password, bcrypt.gensalt())
+def hashPassword(password, salt):
+
+    res = bcrypt.hashpw(password.encode(), salt)
     return res
+
+
+def checkHash(password, hashedPassword):
+    coded = password.encode()
+    return bcrypt.checkpw(coded, hashedPassword)
 
 
 users = open('users.json', 'r')
 data = json.load(users)
-for user in data:
-    password = user["password"]
-    hashedPas = hashPassword(password)
-    print(hashedPas)
-    print("-------------------------\n")
+salt = bcrypt.gensalt()
+# for user in data:
+#     password = user["password"]
+#     print(password)
+#     print(hashPassword(password, salt))
+#     checkHash(password)
+#     print("-------------------------\n")
+
+original = "testingPassword"
+hashedPass = hashPassword("original", salt)
+
+if(checkHash(original, hashedPass)):
+    print("the hashing is working")
+else:
+    print("the hashing did not work")
