@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { ReviewComponent } from './review/review.component';
 // Firebase
 import { AngularFireModule } from '@angular/fire';
-import {AngularFireDatabaseModule, AngularFireDatabase} from '@angular/fire/database';
+import { AngularFireDatabaseModule, AngularFireDatabase} from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     ReviewComponent,
+    SearchComponent,
     
   ],
   imports: [
@@ -24,7 +26,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     FormsModule,
   ],

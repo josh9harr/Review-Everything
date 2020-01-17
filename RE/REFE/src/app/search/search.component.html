@@ -1,0 +1,10 @@
+<input name='movieSearch' type="text" [formControl]='movieSearch'>
+<button (click)='getMovies()'> Get movies</button>
+
+<ul>
+    <li *ngFor='let movie of list'>{{movie.title}}</li>
+</ul>
+
+<h3>Search a Movie</h3>
+<br>
+<h2>Value: {{movieSearch.value}}</h2>

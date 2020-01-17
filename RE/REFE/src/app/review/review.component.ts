@@ -15,27 +15,19 @@ export class ReviewComponent implements OnInit {
   review = new FormControl('');
   itemValue = '';
   items: Observable<any[]>;
-  movies;
 
-  constructor(private moviesService: MoviesService, public db: AngularFireDatabase) {
+
+
+  constructor( public db: AngularFireDatabase) {
     this.items = db.list('reviews').valueChanges();
    }
 
-   getMovies() {
-    this.movies = this.moviesService.getPeople().subscribe(data => {
-       
-      console.log(data)
-     this.movies = data
-     },
-         err => console.error(err), 
-         () => console.log('getMovies completed') 
-       );
-   }
+
  
-   onSubmit() {
-     this.db.list('reviews').push({ content: this.itemValue});
-     this.itemValue = '';
-   }
+  //  onSubmit() {
+  //    this.db.list('reviews').push({ content: this.itemValue});
+  //    this.itemValue = '';
+  //  }
 
   ngOnInit() {
   }
