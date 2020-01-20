@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReviewComponent } from './review/review.component';
 // Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase} from '@angular/fire/database';
@@ -17,7 +16,6 @@ import { SearchComponent } from './search/search.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ReviewComponent,
     SearchComponent,
     
   ],
