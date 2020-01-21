@@ -1,14 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms'
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// Firebase
+import { RouterModule } from '@angular/router';
+
+// Components
+import { ReviewComponent } from './review/review.component';
+
+//firebase
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule, AngularFireDatabase} from '@angular/fire/database';
 import { environment } from '../environments/environment';
-import { FormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+//Search
 import { SearchComponent } from './search/search.component';
 
 
@@ -17,7 +26,8 @@ import { SearchComponent } from './search/search.component';
   declarations: [
     AppComponent,
     SearchComponent,
-    
+    ReviewComponent
+
   ],
   imports: [
     BrowserModule,
@@ -25,13 +35,20 @@ import { SearchComponent } from './search/search.component';
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule,
+    AngularFirestoreModule, // Only required for database features
+    AngularFireAuthModule, // Only required for auth features,
+    AngularFireStorageModule, // Only required for storage features
     FormsModule,
+    RouterModule.forRoot([
+      { path: "reviews/:id", component: ReviewComponent },
+      { path: "home", component: SearchComponent },
+      { path: "", redirectTo: "/home", pathMatch: 'full' }
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 
-  
- }
+
+}

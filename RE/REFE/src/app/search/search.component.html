@@ -1,31 +1,29 @@
 <h3>Search a Movie</h3>
-    <!-- input to search movies -->
-    <input name='movieSearch' type="text" [formControl]='movieSearch'>
-    <button (click)='getMovies()'>Search</button>
+<!-- input to search movies -->
+<input name='movieSearch' type="text" [formControl]='movieSearch'>
+<button (click)='getMovies()'>Search</button>
 <ul>
     <!-- printing list of movies that are clickable  -->
-    <li *ngFor='let movie of list'
-        [class.selected]="movie === selectedMovie"
-        (click)='select(movie)'>
-    {{movie.title}}
+    <li *ngFor='let movie of list' [class.selected]="movie === selectedMovie" (click)='select(movie)'>
+        {{movie.title}}
     </li>
 </ul>
 
-    <!-- if statement to show selected movie details  -->
+<!-- if statement to show selected movie details  -->
 <div *ngIf='selectedMovie'>
-    <p>Writing a review for</p> 
     <!-- Background poster (currently doesnt work) -->
-    <img src="selectedMovie.poster_path" alt='{{selectedMovie.title}} poster' height="150" weight='75'/>
+    <img src="selectedMovie.poster_path" alt='{{selectedMovie.title}} poster' height="150" weight='75' />
 
     <!-- Im pretty sure you can figure out what these are -->
     <h2>
-        {{selectedMovie.title}} 
+        {{selectedMovie.title}}
     </h2>
-    <h4>({{selectedMovie.id}})</h4> 
+    <h4>({{selectedMovie.id}})</h4>
     <p>{{selectedMovie.release_date}}</p>
     <p>
         {{selectedMovie.overview}}
     </p>
+    <button (click)=loadReview(selectedMovie.id)>Load review</button>
 
 
 </div>
