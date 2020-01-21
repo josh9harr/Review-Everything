@@ -31,13 +31,23 @@ export class SearchComponent implements OnInit {
       this.list = this.movies.results
     },
       err => console.error(err),
-      () => console.log(this.list)
+      // () => console.log(this.list)
     );
   }
 
   //needed for selecting the movie and displaying the data
   select(movie): void {
+    this.firebaseService.getReviews(movie.id).subscribe(data => {
+      this.reviews = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        }
+      })
+      console.log(this.reviews);
+    });
     this.selectedMovie = movie;
+
   }
 
   loadReview(id: string) {
@@ -51,7 +61,7 @@ export class SearchComponent implements OnInit {
       this.firebaseService.createMedia(media, this.selectedMovie.id).then(_ => {
         this.router.navigate(['/reviews/', id])
       });
-      
+
     }
   }
 
