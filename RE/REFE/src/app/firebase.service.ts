@@ -14,8 +14,8 @@ export class FirebaseService {
   constructor(private firestore: AngularFirestore) { }
 
   //The method made for getting all of the reviews
-  getReviews() {
-    return this.firestore.collection('reviews').snapshotChanges();
+  getReviews(mediaID: string) {
+    return this.firestore.collection(`media/${mediaID}/reviews`).snapshotChanges();
   }
 
   getReview(mediaID: string, reviewID: string) {

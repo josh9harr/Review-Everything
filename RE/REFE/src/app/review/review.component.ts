@@ -28,7 +28,7 @@ export class ReviewComponent implements OnInit {
   };
 
   submit(revUsername: string, revRating: number, revMessage: string) {
-    const userID = "00YBraFkPMTPiBhbvtVWQ9QeEUx2"
+    const userID = "01K7ooPL2pPDKutXHV8qYE0Et1h2"
     let newReview = new Reviews;
     let mediaID = `${this.id}${userID}`;
 
