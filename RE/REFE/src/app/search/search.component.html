@@ -12,7 +12,7 @@
 <!-- if statement to show selected movie details  -->
 <div *ngIf='selectedMovie'>
     <!-- Background poster (currently doesnt work) -->
-    <img src="selectedMovie.poster_path" alt='{{selectedMovie.title}} poster' height="150" weight='75' />
+    <img src="{{imageBase}}{{size}}{{selectedMovie.poster_path}}" alt='{{selectedMovie.title}} poster' height="150" weight='75' />
 
     <!-- Im pretty sure you can figure out what these are -->
     <h2>

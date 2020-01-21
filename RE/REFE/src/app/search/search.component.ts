@@ -15,6 +15,8 @@ export class SearchComponent implements OnInit {
   movieSearch = new FormControl('');
   list;
   selectedMovie;
+  imageBase = 'https://image.tmdb.org/t/p/';
+  size = 'original';
 
   constructor(private moviesService: MoviesService, private router: Router, private firebaseService: FirebaseService) { }
 
