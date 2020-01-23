@@ -1,3 +1,27 @@
+
+<!-- if statement to show selected movie details  -->
+<div>
+        <!-- Background poster (currently doesnt work) -->
+        <img src="{{imageBase}}{{size}}{{movieData.poster_path}}" alt='{{movieData.title}} poster' height="150" weight='75' />
+    
+        <!-- Displays the selected movie title, id release_date and overview -->
+        <h2>
+            {{movieData.title}}
+             We out here
+        </h2>
+        <h4>({{movieData.id}})</h4>
+        <p>{{movieData.release_date}}</p>
+        <p>
+            {{movieData.overview}}
+        </p>
+        <!-- <button (click)=loadReview(movieData.id)>Write review</button> -->
+    
+    
+    </div>
+
+
+
+
 <h1>Write Review For {{movieName}} <h1>
         <section>
             <input type="text" placeholder="Username" [(ngModel)]="revUsername">

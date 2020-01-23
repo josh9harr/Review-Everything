@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/firebase.service'
 import { ActivatedRoute } from '@angular/router'
 import { Reviews } from '../reviews.model';
+import { MoviesService } from '../movies.service';
 
 @Component({
   selector: 'app-review',
@@ -13,8 +14,12 @@ export class ReviewComponent implements OnInit {
   media: Reviews;
   movieName: string;
   id = this.route.snapshot.params.id;
-
-  constructor(private firebaseService: FirebaseService, private route: ActivatedRoute) { }
+  movieData;
+  constructor(
+    private firebaseService: FirebaseService,
+    private route: ActivatedRoute,
+    private movieService: MoviesService,
+    ) { }
 
   ngOnInit() {
 
@@ -25,7 +30,20 @@ export class ReviewComponent implements OnInit {
         this.movieName = data.data().name;
       }
     });
+
+    this.getMovieData();
+
   };
+
+
+  getMovieData(){
+    this.movieData = this.movieService.getMovieData(this.id).subscribe(data=> {
+      this.movieData = data
+    },
+    err => console.error(err),
+    () => console.log(this.movieData)
+    )
+  }
 
   submit(revUsername: string, revRating: number, revMessage: string) {
     const userID = "01K7ooPL2pPDKutXHV8qYE0Et1h2"

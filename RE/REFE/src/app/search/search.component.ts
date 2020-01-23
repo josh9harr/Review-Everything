@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit {
   selectedMovie;
   imageBase = 'https://image.tmdb.org/t/p/';
   size = 'original';
+  reviews;
 
   constructor(private moviesService: MoviesService, private router: Router, private firebaseService: FirebaseService) { }
 
@@ -47,7 +48,7 @@ export class SearchComponent implements OnInit {
       console.log(this.reviews);
     });
     this.selectedMovie = movie;
-
+    this.loadReview(movie.id)
   }
 
   loadReview(id: string) {
