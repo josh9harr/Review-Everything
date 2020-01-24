@@ -1,8 +1,8 @@
+
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
@@ -19,6 +19,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 //Search
 import { SearchComponent } from './search/search.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -26,7 +28,8 @@ import { SearchComponent } from './search/search.component';
   declarations: [
     AppComponent,
     SearchComponent,
-    ReviewComponent
+    ReviewComponent,
+    LoginComponent
 
   ],
   imports: [
@@ -42,13 +45,12 @@ import { SearchComponent } from './search/search.component';
     RouterModule.forRoot([
       { path: "reviews/:id", component: ReviewComponent },
       { path: "home", component: SearchComponent },
+      { path: "login", component: LoginComponent },
       { path: "", redirectTo: "/home", pathMatch: 'full' }
     ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
+export class AppModule { }
 
-
-}
