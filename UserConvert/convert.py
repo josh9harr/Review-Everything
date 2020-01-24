@@ -26,13 +26,13 @@ def checkHash(password, hashedPassword):
 users = open('users.json', 'r')
 data = json.load(users)
 salt = bcrypt.gensalt()
-# print(data)
-# res.write(output)
-# print("done")
+
 for user in data:
     password = user["password"]
     hashedPassword = hashPassword(password, salt)
+    user["orig-password"] = password
     user["password"] = hashedPassword.decode()
+    print(user)
 output = json.dumps(data)
 res.write(output)
 print(data)

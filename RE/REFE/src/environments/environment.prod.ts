@@ -3,12 +3,12 @@ export const environment = {
 };
 
 var firebaseConfig = {
-  apiKey: "AIzaSyAGsiEBXZ9St3QBodPp2z4koVFdbOp1mHA",
-  authDomain: "review-everything-bbd6e.firebaseapp.com",
-  databaseURL: "https://review-everything-bbd6e.firebaseio.com",
-  projectId: "review-everything-bbd6e",
-  storageBucket: "review-everything-bbd6e.appspot.com",
-  messagingSenderId: "639198892038",
-  appId: "1:639198892038:web:43312323d455c82443f387",
-  measurementId: "G-H4YCPT7ZBM"
+  apiKey: "AIzaSyAjxvHSXJEQZs4XfpnY-KV62tVVrduFNRw",
+  authDomain: "review-everything-e5518.firebaseapp.com",
+  databaseURL: "https://review-everything-e5518.firebaseio.com",
+  projectId: "review-everything-e5518",
+  storageBucket: "review-everything-e5518.appspot.com",
+  messagingSenderId: "102843499461",
+  appId: "1:102843499461:web:4e909afa70ff0dabcd01ac",
+  measurementId: "G-7ZE6F7X5CJ"
 };

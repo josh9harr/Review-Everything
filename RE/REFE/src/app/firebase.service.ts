@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 //This import will take in the model that you will be basing the data off of
 import { Reviews } from 'src/app/reviews.model'
+import * as firebase from "firebase/app"
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ import { Reviews } from 'src/app/reviews.model'
 export class FirebaseService {
 
   //This is creating an instance of firebase
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private auth: AngularFireAuth) { }
 
   //The method made for getting all of the reviews
   getReviews(mediaID: string) {
@@ -60,5 +62,29 @@ export class FirebaseService {
   createUserReview(review, id: string) {
     let data = JSON.parse(JSON.stringify(review))
     return this.firestore.collection('users').doc(id).collection('reviews').add(data);
+  }
+
+  //User sign in and out
+  async signIn(email: string, password: string) {
+    this.auth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+      .then(async function () {
+        await firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+          console.log("Email and/or password are incorrect")
+        })
+      });
+  }
+
+  signOut() {
+    return firebase.auth().signOut();
+  }
+
+  //Checks who the user is
+  async checkUser() {
+    await firebase.auth().onAuthStateChanged(function (user) {
+      console.log(user);
+      if (user) {
+        return user.uid;
+      }
+    });
   }
 }
