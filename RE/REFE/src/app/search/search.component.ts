@@ -19,7 +19,10 @@ export class SearchComponent implements OnInit {
   size = 'original';
   reviews;
 
-  constructor(private moviesService: MoviesService, private router: Router, private firebaseService: FirebaseService) { }
+  constructor(private moviesService: MoviesService, 
+    private router: Router, 
+    private firebaseService: FirebaseService
+    ) { }
 
   ngOnInit() {
   }

@@ -15,6 +15,10 @@ export class ReviewComponent implements OnInit {
   movieName: string;
   id = this.route.snapshot.params.id;
   movieData;
+  allReviews;
+  imageBase = 'https://image.tmdb.org/t/p/';
+  size = 'original';
+
   constructor(
     private firebaseService: FirebaseService,
     private route: ActivatedRoute,
@@ -33,6 +37,15 @@ export class ReviewComponent implements OnInit {
 
     this.getMovieData();
 
+    this.firebaseService.getReviews(this.id).subscribe(data => {
+      this.allReviews = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        }
+      })
+    });
+  
   };
 
 

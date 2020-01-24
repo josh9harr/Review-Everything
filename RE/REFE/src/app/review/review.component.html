@@ -1,31 +1,41 @@
 
 <!-- if statement to show selected movie details  -->
 <div>
-        <!-- Background poster (currently doesnt work) -->
-        <img src="{{imageBase}}{{size}}{{movieData.poster_path}}" alt='{{movieData.title}} poster' height="150" weight='75' />
+    <!-- Background poster (currently doesnt work) -->
+    <img src="{{imageBase}}{{size}}{{movieData.poster_path}}" alt='{{movieData.title}} poster' height="150" weight='75' />
+
+    <!-- Displays the selected movie title, id release_date and overview -->
+    <h2>
+        {{movieData.title}}
+    </h2>
+    <!-- <h4>({{movieData.id}})</h4> -->
+    <p>{{movieData.release_date}}</p>
+    <p>
+        {{movieData.overview}}
+    </p>
+    <!-- <button (click)=loadReview(movieData.id)>Write review</button> -->
     
-        <!-- Displays the selected movie title, id release_date and overview -->
-        <h2>
-            {{movieData.title}}
-             We out here
-        </h2>
-        <h4>({{movieData.id}})</h4>
-        <p>{{movieData.release_date}}</p>
-        <p>
-            {{movieData.overview}}
-        </p>
-        <!-- <button (click)=loadReview(movieData.id)>Write review</button> -->
     
-    
-    </div>
+</div>
 
 
 
 
-<h1>Write Review For {{movieName}} <h1>
+<h1>Write Review For {{movieName}}</h1>
         <section>
             <input type="text" placeholder="Username" [(ngModel)]="revUsername">
             <input type="number" placeholder="Rating" [(ngModel)]="revRating">
             <input type="text" placeholder="Review" [(ngModel)]="revMessage">
             <button (click)="submit(revUsername, revRating, revMessage)" formtarget="_blank">Submit</button>
         </section>
+
+
+    <div >
+        <ul>
+            <li *ngFor='let review of allReviews'>
+                <h2>{{review.username}}</h2>
+                <h3>{{review.rating}}/5</h3>
+                <p>{{review.reviewMessage}}</p>
+            </li>
+        </ul>
+    </div>
