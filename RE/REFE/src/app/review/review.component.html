@@ -24,7 +24,7 @@
 <h1>Write Review For {{movieName}}</h1>
         <section>
             <input type="text" placeholder="Username" [(ngModel)]="revUsername">
-            <input type="number" placeholder="Rating" [(ngModel)]="revRating">
+            <input type="number" max='5' min='1' [(ngModel)]="revRating">
             <input type="text" placeholder="Review" [(ngModel)]="revMessage">
             <button (click)="submit(revUsername, revRating, revMessage)" formtarget="_blank">Submit</button>
         </section>
