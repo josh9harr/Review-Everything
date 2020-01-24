@@ -9,13 +9,21 @@ export class MoviesService {
 
   constructor(private http: HttpClient) { }
   start = 'https://api.themoviedb.org/3/';
-  key = '917bf8547464514e193b8bc4841df69c';
+  key = '?api_key=917bf8547464514e193b8bc4841df69c';
+
 
   //Gets all the data from the api
   getMovie(search){
     let data = this.http
-      .get(`${this.start}search/movie?api_key=${this.key}&query=${search}`);
+      .get(`${this.start}search/movie${this.key}&query=${search}`);
     // .get("https://api.themoviedb.org/3/search/movie?api_key=917bf8547464514e193b8bc4841df69c&query=${})
+    return data
+  }
+
+  getMovieData(id){
+    let data = this.http.get(
+      `${this.start}movie/${id}${this.key}`
+    );
     return data
   }
 
