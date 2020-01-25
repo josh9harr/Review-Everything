@@ -59,19 +59,25 @@ export class FirebaseService {
     return docExists
   }
 
-  createUserReview(review, id: string) {
+  createUserReview(review, id: string, reviewID: string) {
     let data = JSON.parse(JSON.stringify(review))
-    return this.firestore.collection('users').doc(id).collection('reviews').add(data);
+    return this.firestore.collection('users').doc(id).collection('reviews').doc(reviewID).set(data);
   }
 
   //User sign in and out
   async signIn(email: string, password: string) {
-    this.auth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-      .then(async function () {
-        await firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
-          console.log("Email and/or password are incorrect")
-        })
-      });
+    try {
+
+      await this.auth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(async function () {
+          await firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
+          }).catch(function (error) {
+            console.log("Email and/or password are incorrect")
+          })
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   signOut() {

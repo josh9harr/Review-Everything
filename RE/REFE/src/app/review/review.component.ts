@@ -3,6 +3,8 @@ import { FirebaseService } from 'src/app/firebase.service'
 import { ActivatedRoute } from '@angular/router'
 import { Reviews } from '../reviews.model';
 import { MoviesService } from '../movies.service';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { Router } from "@angular/router"
 
 @Component({
   selector: 'app-review',
@@ -14,6 +16,7 @@ export class ReviewComponent implements OnInit {
   media: Reviews;
   movieName: string;
   id = this.route.snapshot.params.id;
+  userID;
   movieData;
   allReviews;
   imageBase = 'https://image.tmdb.org/t/p/';
@@ -23,9 +26,18 @@ export class ReviewComponent implements OnInit {
     private firebaseService: FirebaseService,
     private route: ActivatedRoute,
     private movieService: MoviesService,
-    ) { }
+    private fireAuth: AngularFireAuth,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.fireAuth.auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.userID = user.uid
+      } else {
+        this.router.navigate(['/login'])
+      }
+    });
 
     this.firebaseService.getMedia(this.id).subscribe(data => {
       if (data.data() == undefined) {
@@ -45,38 +57,41 @@ export class ReviewComponent implements OnInit {
         }
       })
     });
-  
+
   };
 
 
-  getMovieData(){
-    this.movieData = this.movieService.getMovieData(this.id).subscribe(data=> {
+  getMovieData() {
+    this.movieData = this.movieService.getMovieData(this.id).subscribe(data => {
       this.movieData = data
     },
-    err => console.error(err),
-    () => console.log(this.movieData)
+      err => console.error(err),
+      () => console.log(this.movieData)
     )
   }
 
   submit(revUsername: string, revRating: number, revMessage: string) {
-    const userID = "01K7ooPL2pPDKutXHV8qYE0Et1h2"
     let newReview = new Reviews;
-    let mediaID = `${this.id}${userID}`;
+    let mediaID = `${this.id}${this.userID}`;
+    let userReviewId = `${this.userID}${this.id}`
 
     newReview.username = revUsername
     newReview.rating = revRating
     newReview.reviewMessage = revMessage
-    newReview.id = userID;
+    newReview.userID = this.userID;
+    newReview.id = userReviewId;
     this.firebaseService.createReview(newReview, this.id, mediaID);
 
     const userReview = {
       mediaName: this.movieName,
-      mediaId: mediaID,
+      mediaReviewId: mediaID,
+      mediaId: this.id,
       rating: newReview.rating,
       reviewMessage: newReview.reviewMessage
     }
 
-    this.firebaseService.createUserReview(userReview, userID);
+    this.firebaseService.createUserReview(userReview, this.userID, userReviewId);
+    this.router.navigate(['/home'])
   }
 
 };
