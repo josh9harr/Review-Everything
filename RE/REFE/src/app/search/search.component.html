@@ -1,7 +1,16 @@
 <h3>Search a Movie</h3>
+
+<!-- dropdown to select what you are searching by -->
+<select id="searchBy" [formControl]="searchBy">
+    <option value="title">Title</option>
+    <option value="actor">Actor</option>
+    <option value="genre">Genre</option>
+</select>
+
 <!-- input to search movies -->
 <input name='movieSearch' type="text" [formControl]='movieSearch'>
-<button (click)='getMovies()'>Search</button>
+<button (click)='getMovies(searchBy.value)'>Search</button>
+
 <ul>
     <!-- printing list of movies that are clickable  -->
     <li *ngFor='let movie of list' [class.selected]="movie === selectedMovie" (click)='select(movie)'>
