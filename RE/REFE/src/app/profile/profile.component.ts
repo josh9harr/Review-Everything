@@ -20,7 +20,8 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private firebaseService: FirebaseService,
     private fireAuth: AngularFireAuth,
-    private userReview: UserReview) { }
+    private userReview: UserReview
+  ) { }
 
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
@@ -44,7 +45,8 @@ export class ProfileComponent implements OnInit {
     this.firebaseService.deleteReview(this.uid, userReviewid, mediaId, mediaReviewId)
   }
 
-  editReview(mediaId: string){
-    
+  editReview(userReviewid) {
+    // console.log(userReviewid)
+    this.router.navigate([`/update/${userReviewid}`])
   }
 }

@@ -20,8 +20,13 @@ export class FirebaseService {
     return this.firestore.collection(`media/${mediaID}/reviews`).snapshotChanges();
   }
 
-  getReview(mediaID: string, reviewID: string) {
+  getMediaReview(mediaID: string, reviewID: string) {
     return this.firestore.doc(`media/${mediaID}/reviews/${reviewID}`).get();
+  }
+
+  getUserReview(userID: string, reviewID: string) {
+    return this.firestore.doc(`users/${userID}/reviews/${reviewID}`).get();
+
   }
 
   //The method made for creating a review
@@ -34,9 +39,8 @@ export class FirebaseService {
   updateReview(userReview, mediaReview) {
     let userReviewdata = JSON.parse(JSON.stringify(userReview))
     let mediaReviewdata = JSON.parse(JSON.stringify(mediaReview))
-    console.log(userReviewdata);
-    console.log(mediaReviewdata);
-    // this.firestore.doc(`user/${mediaReview.userID}`).update(userReviewdata);
+    this.firestore.doc(`users/${mediaReview.userID}/reviews/${mediaReview.id}`).update(userReviewdata);
+    this.firestore.doc(`media/${userReviewdata.mediaId}/reviews/${userReviewdata.mediaReviewId}`).update(mediaReviewdata);
   }
 
   //The method made for deleteing a review
