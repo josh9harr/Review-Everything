@@ -15,8 +15,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
-
-      } else {
+        this.router.navigate(['/profile'])
       }
     });
   }
@@ -32,14 +31,6 @@ export class LoginComponent implements OnInit {
         console.log("User is not logged in")
       }
     });
-  }
-
-  logout() {
-    this.firebaseService.signOut();
-  }
-
-  check() {
-    console.log(this.firebaseService.checkUser());
   }
 
   delay(ms: number) {

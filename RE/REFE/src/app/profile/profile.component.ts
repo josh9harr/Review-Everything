@@ -49,4 +49,8 @@ export class ProfileComponent implements OnInit {
     // console.log(userReviewid)
     this.router.navigate([`/update/${userReviewid}`])
   }
+
+  logout() {
+    this.firebaseService.signOut();
+  }
 }

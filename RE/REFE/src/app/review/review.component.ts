@@ -57,8 +57,8 @@ export class ReviewComponent implements OnInit {
           ...e.payload.doc.data()
         }
       })
+      console.log(this.allReviews);
     });
-
   };
 
 
@@ -90,8 +90,8 @@ export class ReviewComponent implements OnInit {
     userReview.mediaId = this.id;
     userReview.rating = newReview.rating;
     userReview.reviewMessage = newReview.reviewMessage;
-
     this.firebaseService.createUserReview(userReview, this.userID, userReviewId);
+
     this.router.navigate(['/home'])
   }
 
