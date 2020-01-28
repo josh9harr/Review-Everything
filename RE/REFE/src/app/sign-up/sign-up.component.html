@@ -1,0 +1,17 @@
+<p>sign-up works!</p>
+<section>
+    <input type="text" placeholder="Email" [(ngModel)]="email">
+    <input type="text" placeholder="Password" [(ngModel)]="password">
+    <input type="text" placeholder="First Name" [(ngModel)]="fname">
+    <input type="text" placeholder="Last Name" [(ngModel)]="lname">
+    <input type="text" placeholder="Phone #" [(ngModel)]="phone">
+    <input type="text" placeholder="State" [(ngModel)]="state">
+    <input type="text" placeholder="City" [(ngModel)]="city">
+    <input type="text" placeholder="Street" [(ngModel)]="street">
+    <input type="text" placeholder="Zip-code" [(ngModel)]="zipcode">
+    <button (click)="signUp(email,password,fname,lname,phone,state,city,street,zipcode)"
+        formtarget="_blank">Submit</button>
+    <div ngif="checkExists">
+        <h1>{{checkExists}}</h1>
+    </div>
+</section>

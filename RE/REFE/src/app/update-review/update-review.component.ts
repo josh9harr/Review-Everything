@@ -41,6 +41,7 @@ export class UpdateReviewComponent implements OnInit {
   }
 
   updateReview(revMessage: string, rating: number) {
+    // console.log("this is running")
     if (revMessage != undefined) {
       this.userReview.reviewMessage = revMessage;
       this.mediaReview.reviewMessage = revMessage;

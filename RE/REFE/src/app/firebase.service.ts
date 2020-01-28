@@ -91,6 +91,18 @@ export class FirebaseService {
     }
   }
 
+  async singUp(email: string, password: string, userData) {
+    await firebase.auth().createUserWithEmailAndPassword(email, password).catch(errpr => {
+      console.log("Username already in use");
+    }).then(_ => {
+      const user = firebase.auth().currentUser;
+      if (user != null) {
+        let data = JSON.parse(JSON.stringify(userData));
+        this.firestore.collection("users").doc(user.uid).set(data);
+      }
+    });
+  }
+
   signOut() {
     return firebase.auth().signOut();
   }

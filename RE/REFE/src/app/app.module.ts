@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UpdateReviewComponent } from './update-review/update-review.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 
 
@@ -33,7 +34,8 @@ import { UpdateReviewComponent } from './update-review/update-review.component';
     ReviewComponent,
     LoginComponent,
     ProfileComponent,
-    UpdateReviewComponent
+    UpdateReviewComponent,
+    SignUpComponent
 
   ],
   imports: [
@@ -50,6 +52,7 @@ import { UpdateReviewComponent } from './update-review/update-review.component';
       { path: "reviews/:id", component: ReviewComponent },
       { path: "home", component: SearchComponent },
       { path: "login", component: LoginComponent },
+      { path: "signUp", component: SignUpComponent },
       { path: "profile", component: ProfileComponent },
       { path: "update/:reviewId", component: UpdateReviewComponent },
       { path: "", redirectTo: "/home", pathMatch: 'full' }
