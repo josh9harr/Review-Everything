@@ -21,6 +21,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { UpdateReviewComponent } from './update-review/update-review.component';
 
 
 
@@ -29,7 +31,9 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     SearchComponent,
     ReviewComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent,
+    UpdateReviewComponent
 
   ],
   imports: [
@@ -46,6 +50,8 @@ import { LoginComponent } from './login/login.component';
       { path: "reviews/:id", component: ReviewComponent },
       { path: "home", component: SearchComponent },
       { path: "login", component: LoginComponent },
+      { path: "profile", component: ProfileComponent },
+      { path: "update/:reviewId", component: UpdateReviewComponent },
       { path: "", redirectTo: "/home", pathMatch: 'full' }
     ]),
   ],

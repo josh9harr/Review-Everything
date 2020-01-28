@@ -1,0 +1,9 @@
+<p>Profile Page</p>
+<section id="reviews">
+    <div *ngFor="let review of reviews">
+        <h2>{{review.mediaName}}</h2>
+        <h3>{{review.rating}}</h3>
+        <p>{{review.reviewMessage}}</p>
+        <button (click)="delete(review.userReviewId,review.mediaId,review.mediaReviewId)">Delete Review</button>
+    </div>
+</section>

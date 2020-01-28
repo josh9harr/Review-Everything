@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 import { Reviews } from '../reviews.model';
 import { MoviesService } from '../movies.service';
 import { AngularFireAuth } from "@angular/fire/auth";
+import { UserReview } from "../user-review.model"
 import { Router } from "@angular/router"
 
 @Component({
@@ -72,6 +73,7 @@ export class ReviewComponent implements OnInit {
 
   submit(revUsername: string, revRating: number, revMessage: string) {
     let newReview = new Reviews;
+    let userReview = new UserReview;
     let mediaID = `${this.id}${this.userID}`;
     let userReviewId = `${this.userID}${this.id}`
 
@@ -82,13 +84,12 @@ export class ReviewComponent implements OnInit {
     newReview.id = userReviewId;
     this.firebaseService.createReview(newReview, this.id, mediaID);
 
-    const userReview = {
-      mediaName: this.movieName,
-      mediaReviewId: mediaID,
-      mediaId: this.id,
-      rating: newReview.rating,
-      reviewMessage: newReview.reviewMessage
-    }
+
+    userReview.mediaName = this.movieName;
+    userReview.mediaReviewId = mediaID;
+    userReview.mediaId = this.id;
+    userReview.rating = newReview.rating;
+    userReview.reviewMessage = newReview.reviewMessage;
 
     this.firebaseService.createUserReview(userReview, this.userID, userReviewId);
     this.router.navigate(['/home'])
