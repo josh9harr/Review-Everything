@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
+
       } else {
       }
     });

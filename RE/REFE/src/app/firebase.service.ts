@@ -20,8 +20,13 @@ export class FirebaseService {
     return this.firestore.collection(`media/${mediaID}/reviews`).snapshotChanges();
   }
 
-  getReview(mediaID: string, reviewID: string) {
+  getMediaReview(mediaID: string, reviewID: string) {
     return this.firestore.doc(`media/${mediaID}/reviews/${reviewID}`).get();
+  }
+
+  getUserReview(userID: string, reviewID: string) {
+    return this.firestore.doc(`users/${userID}/reviews/${reviewID}`).get();
+
   }
 
   //The method made for creating a review
@@ -31,15 +36,17 @@ export class FirebaseService {
   }
 
   //The method made for updating a review
-  updateReview(review) {
-    delete review.id;
-    let data = JSON.parse(JSON.stringify(review))
-    this.firestore.doc('reviews/' + review.id).update(data);
+  updateReview(userReview, mediaReview) {
+    let userReviewdata = JSON.parse(JSON.stringify(userReview))
+    let mediaReviewdata = JSON.parse(JSON.stringify(mediaReview))
+    this.firestore.doc(`users/${mediaReview.userID}/reviews/${mediaReview.id}`).update(userReviewdata);
+    this.firestore.doc(`media/${userReviewdata.mediaId}/reviews/${userReviewdata.mediaReviewId}`).update(mediaReviewdata);
   }
 
   //The method made for deleteing a review
-  deleteReview(reivewId: string) {
-    this.firestore.doc('reviews/' + reivewId).delete();
+  deleteReview(userID: string, userReviewid: string, mediaId: string, mediaReviewId: string) {
+    this.firestore.collection("media").doc(mediaId).collection("reviews").doc(mediaReviewId).delete();
+    this.firestore.collection("users").doc(userID).collection("reviews").doc(userReviewid).delete();
   }
 
   createMedia(media, id) {
@@ -62,6 +69,10 @@ export class FirebaseService {
   createUserReview(review, id: string, reviewID: string) {
     let data = JSON.parse(JSON.stringify(review))
     return this.firestore.collection('users').doc(id).collection('reviews').doc(reviewID).set(data);
+  }
+
+  getUserReviews(userID: string) {
+    return this.firestore.collection("users").doc(userID).collection("reviews").snapshotChanges();
   }
 
   //User sign in and out
