@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Fonts (titles, everthing else)
+$titleFont: 'Righteous', cursive;
+$otherFont: 'Kanit', sans-serif;
+
+
+nav{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    font-family: $titleFont;
+    font-size: 22px;
+    height: 50px;
+    a{
+        text-decoration: none;
+        color: #fff;
+    }
+}
+.container {
+    background-color: #0033aa;
+    margin: 0px;
+}
+
+#searchBox{
+   
+}
+
+
+#searchBox {
+    height: 150px;
+}
+
+ul {
+    list-style: none;
+}

@@ -50,7 +50,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     FormsModule,
     RouterModule.forRoot([
       { path: "reviews/:id", component: ReviewComponent },
-      { path: "home", component: SearchComponent },
+      { path: "home", component: ProfileComponent },
       { path: "login", component: LoginComponent },
       { path: "signUp", component: SignUpComponent },
       { path: "profile", component: ProfileComponent },

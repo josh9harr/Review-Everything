@@ -1,5 +1,3 @@
-<h3>Search a Movie</h3>
-
 <!-- dropdown to select what you are searching by -->
 <select id="searchBy" [formControl]="searchBy">
     <option value="title">Title</option>
@@ -8,7 +6,7 @@
 </select>
 
 <!-- input to search movies -->
-<input name='movieSearch' type="text" [formControl]='movieSearch'>
+<input name='movieSearch' placeholder="Search" type="text" [formControl]='movieSearch'>
 <button (click)='getMovies(searchBy.value)'>Search</button>
 
 <ul>
