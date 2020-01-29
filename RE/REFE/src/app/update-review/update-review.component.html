@@ -1,4 +1,4 @@
-<h1>Updating Review for {{userReview.mediaName}}</h1>
-<input type="text" placeholder="Review text" value="{{userReview.reviewMessage}}" [(ngModel)]="revMessage">
-<input type="number" max='5' min='1' value="{{userReview.rating}}" [(ngModel)]="revRating">
+<h1>Updating Review for {{displayReview.mediaName}}</h1>
+<input type="text" placeholder="Review text" value="{{displayReview.reviewMessage}}" [(ngModel)]="revMessage">
+<input type="number" max='5' min='1' value="{{displayReview.rating}}" [(ngModel)]="revRating">
 <button (click)="updateReview(revMessage,revRating)">Edit Review</button>

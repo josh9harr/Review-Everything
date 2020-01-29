@@ -3,6 +3,7 @@ import { Router } from "@angular/router"
 import { FirebaseService } from 'src/app/firebase.service'
 import { AngularFireAuth } from "@angular/fire/auth";
 import { ActivatedRoute } from '@angular/router'
+import { UserReview } from '../user-review.model'
 
 @Component({
   selector: 'app-update-review',
@@ -13,7 +14,8 @@ import { ActivatedRoute } from '@angular/router'
 export class UpdateReviewComponent implements OnInit {
 
   uid: string
-  userReview = {};
+  displayReview = {};
+  userReview: UserReview;
   mediaReview;
 
   constructor(
@@ -29,7 +31,14 @@ export class UpdateReviewComponent implements OnInit {
         this.uid = user.uid;
         this.firebaseService.getUserReview(user.uid, this.route.snapshot.params.reviewId).toPromise().then(data => {
           let reviewData = data.data();
-          this.userReview = reviewData;
+          let resReview = new UserReview;
+          this.displayReview = reviewData;
+          resReview.mediaId = reviewData.mediaId;
+          resReview.mediaName = reviewData.mediaName;
+          resReview.mediaReviewId = reviewData.mediaReviewId;
+          resReview.rating = reviewData.rating;
+          resReview.reviewMessage = reviewData.reviewMessage;
+          this.userReview = resReview;
           this.firebaseService.getMediaReview(reviewData.mediaId, reviewData.mediaReviewId).toPromise().then(data => {
             this.mediaReview = data.data();
           });
