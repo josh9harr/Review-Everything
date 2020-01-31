@@ -1,1 +1,11 @@
-<p>display works!</p>
+<ul id="allMovies">
+        <!-- printing list of movies that are clickable  -->
+        <li *ngFor='let movie of list' [class.selected]="movie === selectedMovie" (click)='select(movie)'>
+            <div class="clickableMovie">
+                <img class="poster" 
+                src="{{imageBase}}{{size}}{{movie.poster_path}}" 
+                alt='{{movie.title}} poster' height="150" weight='75' />
+                <b>{{movie.title}}</b>
+            </div>
+        </li>
+    </ul>

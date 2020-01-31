@@ -57,7 +57,7 @@ import { DisplayComponent } from './display/display.component';
       { path: "signUp", component: SignUpComponent },
       { path: "profile", component: ProfileComponent },
       { path: "update/:reviewId", component: UpdateReviewComponent },
-      { path: "display/:searched", component: DisplayComponent },
+      { path: "display/:filter/:searched", component: DisplayComponent },
       { path: "", redirectTo: "/home", pathMatch: 'full' },
 
 
