@@ -6,8 +6,8 @@
 </select>
 
 <!-- input to search movies -->
-<input name='movieSearch' placeholder="Search" type="text" [formControl]='movieSearch'>
-<button (click)='getMovies(searchBy.value)'>Search</button>
+<input id='movieSearch' placeholder="Search" type="text" [formControl]='movieSearch'>
+<button id="sBtn" (click)='getMovies(searchBy.value)'>Search</button>
 
 <ul>
     <!-- printing list of movies that are clickable  -->

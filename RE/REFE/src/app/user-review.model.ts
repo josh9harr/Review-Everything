@@ -6,3 +6,16 @@ export class UserReview {
     rating: number;
     reviewMessage: string;
 }
+
+export class UserData {
+    city: string;
+    email: string;
+    username: string;
+    fname:string;
+    lname: string;
+    password: string;
+    phone:string;
+    state:string;
+    street:string;
+    zip_code:string;
+}

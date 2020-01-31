@@ -1,9 +1,12 @@
 <div class="container">
     <nav>
-      <div id="Home"><a href="/home">Review Everything!</a></div>
-      <app-search id="searchBox"></app-search>
-      <div id="login"><a href="/login">Login</a></div>
-      <div id="signup"><a href="/signUp">Sign Up</a></div>
+        <div id="Home"><a href="/home">Review Everything!</a></div>
+        <app-search id="searchBox"></app-search>
+        <div id="lisu" *ngIf='loggedin==false'>
+          <div id="login"><a href="/login">Login</a></div>
+          <div id="signup"><a href="/signUp">Sign Up</a></div>
+        </div>
+        <div id="profile" *ngIf='loggedin==true'><a href="/profile">Profile</a></div>
     </nav>
 </div>
 

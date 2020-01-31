@@ -1,5 +1,10 @@
-<p>Profile Page</p>
+<h1>Profile Page</h1>
 <button (click)="logout()" formtarget="_blank">Logout</button>
+
+<div id="userData">
+    <h2></h2>
+</div>
+
 <section id="reviews">
     <div *ngFor="let review of reviews">
         <h2>{{review.mediaName}}</h2>

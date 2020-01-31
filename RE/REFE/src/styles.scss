@@ -4,6 +4,9 @@
 $titleFont: 'Righteous', cursive;
 $otherFont: 'Kanit', sans-serif;
 
+body{
+    margin: 0px;
+}
 
 nav{
     flex: 1;
@@ -14,9 +17,14 @@ nav{
     font-family: $titleFont;
     font-size: 22px;
     height: 50px;
+    padding: 10px;
+    align-items: center;
     a{
         text-decoration: none;
         color: #fff;
+    }
+    div{
+        flex: 1;
     }
 }
 .container {
@@ -25,13 +33,10 @@ nav{
 }
 
 #searchBox{
-   
+    align-content: center;
+    flex: 2;
 }
 
-
-#searchBox {
-    height: 150px;
-}
 
 ul {
     list-style: none;

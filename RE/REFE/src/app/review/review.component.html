@@ -24,16 +24,16 @@
 </div>
 
 
-
-
-<h3>Write Review For {{movieName}}</h3>
-        <section>
-            <!-- <input type="text" placeholder="Username" [(ngModel)]="revUsername"> -->
-            <input type="number" max='5' min='1' [(ngModel)]="revRating">
-            <input type="text" placeholder="Review" [(ngModel)]="revMessage">
-            <button (click)="submit(revUsername, revRating, revMessage)" formtarget="_blank">Submit</button>
-        </section>
-
+<div id="writeReview">
+    <h3>Write Review For {{movieName}}</h3>
+    <section>
+        <!-- <input type="text" placeholder="Username" [(ngModel)]="revUsername"> -->
+        <input type="number" max='5' min='1' [(ngModel)]="revRating">
+        <input type="text" placeholder="Review" [(ngModel)]="revMessage">
+        <button (click)="submit(revUsername, revRating, revMessage)" formtarget="_blank">Submit</button>
+    </section>
+</div>
+    
 
     <div >
         <ul>

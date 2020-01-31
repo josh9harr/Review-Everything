@@ -19,14 +19,22 @@ export class FirebaseService {
   getReviews(mediaID: string) {
     return this.firestore.collection(`media/${mediaID}/reviews`).snapshotChanges();
   }
-
+  
   getMediaReview(mediaID: string, reviewID: string) {
     return this.firestore.doc(`media/${mediaID}/reviews/${reviewID}`).get();
   }
-
+  
   getUserReview(userID: string, reviewID: string) {
     return this.firestore.doc(`users/${userID}/reviews/${reviewID}`).get();
+    
+  }
 
+  getMedia(id: string) {
+    return this.firestore.doc('media/' + id).get();
+  }
+  //This should get it from database
+  getUser(userID: string){
+    return this.firestore.doc(`users/${userID}`).get();
   }
 
   //The method made for creating a review
@@ -54,9 +62,6 @@ export class FirebaseService {
     return this.firestore.collection("media").doc(`${id}`).set(data)
   }
 
-  getMedia(id: string) {
-    return this.firestore.doc('media/' + id).get();
-  }
 
   checkMedia(id: string) {
     let docExists: boolean;
