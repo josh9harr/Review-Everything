@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  createUser(email, password, fname, lname, phone, state, city, street, zipcode) {
+  createUser(email, password, fname, lname, phone, state, city, street, zipcode, username) {
     const user = {
       city: city,
       email: email,
@@ -32,8 +32,9 @@ export class SignUpComponent implements OnInit {
       street: street,
       zip_code: zipcode
     }
+    console.log(user);
     this.firebaseService.singUp(email, password, user);
-    this.router.navigate(['/profile'])
+    // this.router.navigate(['/profile'])
   }
 
 }

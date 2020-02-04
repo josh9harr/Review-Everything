@@ -14,9 +14,13 @@ nav{
     font-family: $titleFont;
     font-size: 22px;
     height: 50px;
+    padding: 1%;
     a{
         text-decoration: none;
         color: #fff;
+    }
+    div{
+        flex: 1;
     }
 }
 .container {
@@ -26,11 +30,6 @@ nav{
 
 #searchBox{
    
-}
-
-
-#searchBox {
-    height: 150px;
 }
 
 ul {

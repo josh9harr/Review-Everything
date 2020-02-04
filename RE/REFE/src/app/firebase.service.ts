@@ -92,8 +92,8 @@ export class FirebaseService {
   }
 
   async singUp(email: string, password: string, userData) {
-    await firebase.auth().createUserWithEmailAndPassword(email, password).catch(errpr => {
-      console.log("Username already in use");
+    await firebase.auth().createUserWithEmailAndPassword(email, password).catch(error => {
+      console.log(error);
     }).then(_ => {
       const user = firebase.auth().currentUser;
       if (user != null) {
