@@ -1,21 +1,11 @@
 <!-- dropdown to select what you are searching by -->
-<select id="searchBy" [formControl]="searchBy">
-    <option value="title">Title</option>
+<select id="searchBy" [(ngModel)]="searchBy">
+    <option value="title" >Title</option>
     <option value="actor">Actor</option>
     <option value="genre">Genre</option>
 </select>
 
 <!-- input to search movies -->
-<input name='movieSearch' placeholder="Search" type="text" [formControl]='movieSearch'>
-<button (click)='getMovies(searchBy.value)'>Search</button>
+<input id='movieSearch' placeholder="Search" type="text" [(ngModel)]='movieSearch'>
+<button id="sBtn" (click)='searched(searchBy, movieSearch)'>Search</button>
 
-<ul>
-    <!-- printing list of movies that are clickable  -->
-    <li *ngFor='let movie of list' [class.selected]="movie === selectedMovie" (click)='select(movie)'>
-        <div class="clickableMovie">
-            <img src="{{imageBase}}{{size}}{{movie.poster_path}}" alt='{{movie.title}} poster' height="150"
-                weight='75' />
-            {{movie.title}}
-        </div>
-    </li>
-</ul>

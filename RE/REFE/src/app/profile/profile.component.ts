@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router"
 import { FirebaseService } from 'src/app/firebase.service'
 import { AngularFireAuth } from "@angular/fire/auth";
-import { UserReview } from "../user-review.model"
+import { UserReview, UserData } from "../user-review.model"
 
 
 @Component({
@@ -12,7 +12,7 @@ import { UserReview } from "../user-review.model"
   providers: [UserReview]
 })
 export class ProfileComponent implements OnInit {
-
+  users: UserData[];
   reviews: UserReview[];
   uid: string
 
@@ -25,9 +25,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
-      console.log(user);
       if (user) {
         this.uid = user.uid;
+        //get review data from database
         this.firebaseService.getUserReviews(user.uid).subscribe(data => {
           this.reviews = data.map(e => {
             return {
@@ -36,9 +36,21 @@ export class ProfileComponent implements OnInit {
             } as UserReview
           })
         })
+        //get user data from database
+          this.firebaseService.getUser(user.uid).subscribe(data => {
+            // this.users = data.map(e => {
+            //   return {s
+            //     fname: e.payload.doc.fname,
+            //     ...e.payload.doc.data()
+            //   } as UserData
+            // })
+          })          
+      
       } else {
         this.router.navigate(['/login'])
       }
+
+
     })
   }
 

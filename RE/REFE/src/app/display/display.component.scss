@@ -1,0 +1,20 @@
+
+#allMovies{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.clickableMovie{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 5px;
+    width: 200px;
+}
+
+.poster{
+    height: auto;
+    width: 200px; 
+    border: black solid 2px; 
+}
