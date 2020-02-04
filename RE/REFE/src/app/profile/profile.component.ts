@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   users: UserData[];
   reviews: UserReview[];
   uid: string
+  curUser: UserData
 
   constructor(
     private router: Router,
@@ -37,15 +38,13 @@ export class ProfileComponent implements OnInit {
           })
         })
         //get user data from database
-          this.firebaseService.getUser(user.uid).subscribe(data => {
-            // this.users = data.map(e => {
-            //   return {s
-            //     fname: e.payload.doc.fname,
-            //     ...e.payload.doc.data()
-            //   } as UserData
-            // })
-          })          
-      
+        this.firebaseService.getUser(user.uid).subscribe(data => {
+          const res = data.data();
+          let userData = new UserData;
+          userData.username = res.username;
+          this.curUser = userData;
+        });
+
       } else {
         this.router.navigate(['/login'])
       }

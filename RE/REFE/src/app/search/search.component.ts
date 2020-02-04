@@ -15,21 +15,21 @@ export class SearchComponent implements OnInit {
   filter;
   searchBy = 'title';
 
-  constructor(private moviesService: MoviesService, 
-    private router: Router, 
+  constructor(private moviesService: MoviesService,
+    private router: Router,
     private firebaseService: FirebaseService,
     private fb: FormBuilder,
-    ) { 
-      this.filter = new FormGroup({
-        searchBy: new FormControl('title')
-     });
-    }
-
-  ngOnInit() {
-   
+  ) {
+    this.filter = new FormGroup({
+      searchBy: new FormControl('title')
+    });
   }
 
-  searched(searchBy, title){
+  ngOnInit() {
+
+  }
+
+  searched(searchBy, title) {
     this.router.navigate([`display/${searchBy}/${title}`])
   }
 

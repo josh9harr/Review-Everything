@@ -25,6 +25,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UpdateReviewComponent } from './update-review/update-review.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { DisplayComponent } from './display/display.component';
+import { UpdateUserComponent } from './update-user/update-user.component';
 
 
 
@@ -37,7 +38,8 @@ import { DisplayComponent } from './display/display.component';
     ProfileComponent,
     UpdateReviewComponent,
     SignUpComponent,
-    DisplayComponent
+    DisplayComponent,
+    UpdateUserComponent
 
   ],
   imports: [

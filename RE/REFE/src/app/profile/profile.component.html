@@ -2,7 +2,7 @@
 <button (click)="logout()" formtarget="_blank">Logout</button>
 
 <div id="userData">
-    <h2></h2>
+    <h2 *ngIf="curUser">{{curUser.username}}</h2>
 </div>
 
 <section id="reviews">
