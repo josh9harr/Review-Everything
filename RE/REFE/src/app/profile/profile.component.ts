@@ -40,9 +40,20 @@ export class ProfileComponent implements OnInit {
         //get user data from database
         this.firebaseService.getUser(user.uid).subscribe(data => {
           const res = data.data();
+          console.log(res)
           let userData = new UserData;
+          userData.fname = res.fname;
+          userData.lname = res.lname;
+          userData.email = res.email;
+          userData.password = res.password;
+          userData.street = res.street;
+          userData.city = res.city;
+          userData.state = res.state;
+          userData.zip_code = res.zip_code;
+          userData.phone = res.phone;
           userData.username = res.username;
           this.curUser = userData;
+          console.log(this.curUser)
         });
 
       } else {
@@ -58,7 +69,6 @@ export class ProfileComponent implements OnInit {
   }
 
   editReview(userReviewid) {
-    // console.log(userReviewid)
     this.router.navigate([`/update/${userReviewid}`])
   }
 

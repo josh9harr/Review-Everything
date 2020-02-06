@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 import { Reviews } from '../reviews.model';
 import { MoviesService } from '../movies.service';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { UserReview } from "../user-review.model"
+import { UserReview, UserData } from "../user-review.model"
 import { Router } from "@angular/router"
 
 @Component({
@@ -17,6 +17,7 @@ export class ReviewComponent implements OnInit {
   media: Reviews;
   movieName: string;
   id = this.route.snapshot.params.id;
+  currentUser;
   userID;
   movieData;
   allReviews;
@@ -34,7 +35,26 @@ export class ReviewComponent implements OnInit {
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
-        this.userID = user.uid
+        this.userID = user.uid;
+        this.currentUser = this.firebaseService.getUser(user.uid).subscribe(data => {
+          const res = data.data();
+          console.log(res)
+          let userData = new UserData;
+          userData.fname = res.fname;
+          userData.lname = res.lname;
+          userData.email = res.email;
+          userData.password = res.password;
+          userData.street = res.street;
+          userData.city = res.city;
+          userData.state = res.state;
+          userData.zip_code = res.zip_code;
+          userData.phone = res.phone;
+          userData.username = res.username;
+          this.currentUser = userData;
+          console.log(this.currentUser)
+        });
+
+        
       } else {
         this.router.navigate(['/login'])
       }
@@ -71,13 +91,13 @@ export class ReviewComponent implements OnInit {
     )
   }
 
-  submit(revUsername: string, revRating: number, revMessage: string) {
+  submit(revRating: number, revMessage: string) {
     let newReview = new Reviews;
     let userReview = new UserReview;
     let mediaID = `${this.id}${this.userID}`;
     let userReviewId = `${this.userID}${this.id}`
 
-    newReview.username = revUsername
+    newReview.username = this.currentUser.username
     newReview.rating = revRating
     newReview.reviewMessage = revMessage
     newReview.userID = this.userID;
