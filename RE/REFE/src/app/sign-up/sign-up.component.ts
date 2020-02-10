@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router"
 import { FirebaseService } from 'src/app/firebase.service'
 import { AngularFireAuth } from "@angular/fire/auth";
+import { RegexService } from '../regex.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +11,14 @@ import { AngularFireAuth } from "@angular/fire/auth";
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private router: Router, private firebaseService: FirebaseService, private fireAuth: AngularFireAuth) { }
+  safe = false;
+
+  constructor(
+    private router: Router, 
+    private firebaseService: FirebaseService, 
+    private fireAuth: AngularFireAuth,
+    private regex: RegexService,
+    ) { }
 
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
@@ -30,11 +38,22 @@ export class SignUpComponent implements OnInit {
       phone: phone,
       state: state,
       street: street,
-      zip_code: zipcode
+      zip_code: zipcode,
+      username: username
     }
     console.log(user);
-    this.firebaseService.singUp(email, password, user);
-    // this.router.navigate(['/profile'])
+
+    this.safe = this.regex.testForm(user);
+
+    if(this.safe){
+      this.firebaseService.singUp(email, password, user);
+      console.log(user + ' was added')
+    }else{
+      console.log("It didnt work bud")
+    }
+
   }
+
+
 
 }
