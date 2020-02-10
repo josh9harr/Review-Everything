@@ -20,6 +20,7 @@ export class DisplayComponent implements OnInit {
   genreId;
   actorId;
   actorData;
+  searchResult = this.route.snapshot.params.searched;
   searchBy = new FormControl('title');
   imageBase = 'https://image.tmdb.org/t/p/';
   size = 'original';
@@ -49,7 +50,7 @@ getMovies(searchBy: string, title: string) {
       this.movies = data
       this.list = this.movies.results
     },
-    err => console.error(err),
+    err => console.error(err ),
     );
     // returns movies searched by actor
   }else if(searchBy == 'actor'){
@@ -94,6 +95,15 @@ getMovies(searchBy: string, title: string) {
   }
 }
 
+  checkError(){
+    if(this.list = []){
+      console.log('not coming ')
+
+    }else{
+      console.log('it should be there')
+    }
+  }
+
 
   //needed for selecting the movie and displaying the data
   select(movie): void {
@@ -104,7 +114,7 @@ getMovies(searchBy: string, title: string) {
           ...e.payload.doc.data()
         }
       })
-      console.log(this.reviews);
+      // console.log(this.reviews);
     });
     this.selectedMovie = movie;
     this.loadReview(movie.id)

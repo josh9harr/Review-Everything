@@ -3,7 +3,5 @@
     <input type="text" placeholder="Email" [(ngModel)]="email">
     <input type="text" placeholder="Password" [(ngModel)]="password">
     <button (click)="login(email, password)" formtarget="_blank">Submit</button>
-    <div ngif="checkExists">
-        <h1>{{checkExists}}</h1>
-    </div>
+        <p id="failed" *ngIf="checkExists">{{checkExists}}</p>
 </section>

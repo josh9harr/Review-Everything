@@ -1,0 +1,70 @@
+@import '../../styles.scss';
+
+body{
+    justify-content: center;
+}
+
+.check{
+    color: red;
+    padding: 0px;
+    margin: 0px;
+    align-items: flex-start;
+}
+
+#top{
+    margin: 0px;
+    background-color: $blue;
+    width: 100%;
+    text-align: center;
+    #head{
+        margin: 15px 0px 0px 0px;
+    }
+    #toLog{
+        margin: 0px 0px 15px 0px;
+    }
+}
+
+#signup{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    background-color: lightgray;    
+    color: white;
+    align-items: center;
+    box-shadow: gray 5px 5px 5px;
+    margin: 3% 25%;
+
+}
+
+#inputs{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 15px;
+    align-items: center;
+    input{
+        margin: 5px;
+        padding: 5px;
+        border: gray 2px solid;
+        width: 80%;
+    }
+    #addy{
+        justify-content: center;
+    }
+    #city{
+        width: 40%;
+    }
+    #state{
+        width: 10%;
+    }
+    #zip{
+        width: 20%;
+    }
+    button{
+        @include Buttons;
+        width: 25%;
+        padding: 10px;
+        margin: 10px;
+
+    }
+}

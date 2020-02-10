@@ -40,7 +40,6 @@ export class ProfileComponent implements OnInit {
         //get user data from database
         this.firebaseService.getUser(user.uid).subscribe(data => {
           const res = data.data();
-          console.log(res)
           let userData = new UserData;
           userData.fname = res.fname;
           userData.lname = res.lname;
@@ -53,7 +52,6 @@ export class ProfileComponent implements OnInit {
           userData.phone = res.phone;
           userData.username = res.username;
           this.curUser = userData;
-          console.log(this.curUser)
         });
 
       } else {

@@ -30,7 +30,11 @@ export class SearchComponent implements OnInit {
   }
 
   searched(searchBy, title) {
-    this.router.navigate([`display/${searchBy}/${title}`])
+    if(title == undefined){
+      console.log("undefined bruh")
+    }else{
+      this.router.navigate([`display/${searchBy}/${title}`])
+    }
   }
 
 

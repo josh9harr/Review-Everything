@@ -4,6 +4,16 @@
 $titleFont: 'Righteous', cursive;
 $otherFont: 'Kanit', sans-serif;
 
+$blue: #0033aa;
+
+h1,h2,h3,h4 {
+    font-family: $titleFont;
+}
+
+p{
+    font-family: $otherFont;
+}
+
 body{
     margin: 0px;
 }
@@ -27,10 +37,6 @@ nav{
         flex: 1;
     }
 }
-.container {
-    background-color: #0033aa;
-    margin: 0px;
-}
 
 #searchBox{
     align-content: center;
@@ -39,4 +45,33 @@ nav{
 
 ul {
     list-style: none;
+}
+
+//********************************** Classes ******************************************************************************************
+    .container {
+        background-color: #0033aa;
+        margin: 0px;
+    }
+
+    .row{
+        display: flex;
+        flex-direction: row;
+    }
+
+//********************************** Mixins *******************************************************************************************
+
+@mixin Buttons($textColor: #03a,$backgroundColor: #fff){
+    cursor: pointer;
+    font-size: 16px;
+    font-family: $titleFont;
+    border-radius: 25px;
+    padding: 10px;
+    background-color: $backgroundColor;
+    color: $textColor;   
+    border: $textColor solid 2px;
+    &:hover {
+        background-color: $textColor;
+        color: $backgroundColor;
+        border: $backgroundColor solid 2px;
+    }
 }

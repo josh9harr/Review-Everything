@@ -38,7 +38,6 @@ export class ReviewComponent implements OnInit {
         this.userID = user.uid;
         this.currentUser = this.firebaseService.getUser(user.uid).subscribe(data => {
           const res = data.data();
-          console.log(res)
           let userData = new UserData;
           userData.fname = res.fname;
           userData.lname = res.lname;
@@ -51,7 +50,6 @@ export class ReviewComponent implements OnInit {
           userData.phone = res.phone;
           userData.username = res.username;
           this.currentUser = userData;
-          console.log(this.currentUser)
         });
 
         

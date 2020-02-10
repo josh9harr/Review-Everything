@@ -1,18 +1,40 @@
-<p>sign-up works!</p>
-<section>
-    <input type="email" placeholder="Email" [(ngModel)]="email">
-    <input type="text" placeholder="Username" [(ngModel)]="username">
-    <input type="password" placeholder="Password" [(ngModel)]="password">
-    <input type="text" placeholder="First Name" [(ngModel)]="fname">
-    <input type="text" placeholder="Last Name" [(ngModel)]="lname">
-    <input type="text" placeholder="Phone #" [(ngModel)]="phone">
-    <input type="text" placeholder="State" [(ngModel)]="state">
-    <input type="text" placeholder="City" [(ngModel)]="city">
-    <input type="text" placeholder="Street" [(ngModel)]="street">
-    <input type="text" placeholder="Zip-code" [(ngModel)]="zipcode">
-    <button (click)="createUser(email,password,fname,lname,phone,state,city,street,zipcode,username)"
-        formtarget="_blank">Submit</button>
-    <div ngif="checkExists">
-        <h1>{{checkExists}}</h1>
+
+<div id="signup">
+    <div id="top">
+        <h1 id='head'> Sign Up!</h1>
+        <p id="toLog">Already have an account? 
+            <a href="/login">
+                Log In Here!
+            </a>
+        </p>
     </div>
-</section>
+    <section id="inputs">
+        <div class="row">
+            <input type="text" placeholder="First Name" [(ngModel)]="fname">
+            <input type="text" placeholder="Last Name" [(ngModel)]="lname">
+        <p class="check" *ngIf="checkExists">{{checkExists.nameError}}</p>
+        </div>
+        <input  type="text" placeholder="Username" [(ngModel)]="username">
+        <input  type="email" placeholder="Email" [(ngModel)]="email">
+        <p class="check" *ngIf="checkExists">{{checkExists.emailError}}</p>
+
+        <input type="password" placeholder="Password" [(ngModel)]="password">
+        <p class="check" *ngIf="checkExists">{{checkExists.passwordError}}</p>
+        <input type="password" placeholder="Confirm Password" [(ngModel)]="verPassword">
+        <p class="check" *ngIf="checkExists">{{checkExists.passwordError}}</p>
+        <input type="text" placeholder="Street" [(ngModel)]="street">
+        <p class="check" *ngIf="checkExists">{{checkExists.addressError}}</p>
+
+        <div id="addy" class="row">
+            <input id='city' type="text" placeholder="City" [(ngModel)]="city">
+            <input id='state' type="text" placeholder="State" [(ngModel)]="state">
+            <input id='zip' type="text" placeholder="Zip-code" [(ngModel)]="zipcode">
+        </div>
+        <p class="check" *ngIf="checkExists">{{checkExists.stateError}}</p>
+        <p class="check" *ngIf="checkExists">{{checkExists.zipError}}</p>
+        <input type="text" placeholder="Phone #" [(ngModel)]="phone">
+        <p class="check" *ngIf="checkExists">{{checkExists.phoneError}}</p>
+        <button (click)="createUser(email,password, verPassword, fname,lname,phone,state,city,street,zipcode,username)"
+        formtarget="_blank">Submit</button>
+    </section>
+</div>

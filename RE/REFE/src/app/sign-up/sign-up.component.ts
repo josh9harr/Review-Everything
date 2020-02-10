@@ -10,8 +10,8 @@ import { RegexService } from '../regex.service';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-
-  safe = false;
+  checkExists;
+  safe;
 
   constructor(
     private router: Router, 
@@ -28,28 +28,32 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  createUser(email, password, fname, lname, phone, state, city, street, zipcode, username) {
-    const user = {
-      city: city,
-      email: email,
-      fname: fname,
-      lname: lname,
-      password: password,
-      phone: phone,
-      state: state,
-      street: street,
-      zip_code: zipcode,
-      username: username
-    }
-    console.log(user);
-
-    this.safe = this.regex.testForm(user);
-
-    if(this.safe){
-      this.firebaseService.singUp(email, password, user);
-      console.log(user + ' was added')
+  createUser(email, password, verPassword, fname, lname, phone, state, city, street, zipcode, username) {
+    if(verPassword == password){
+      var user = {
+        city: city,
+        email: email,
+        fname: fname,
+        lname: lname,
+        password: password,
+        phone: phone,
+        state: state,
+        street: street,
+        zip_code: zipcode,
+        username: username
+      }
+      console.log(user);
     }else{
-      console.log("It didnt work bud")
+      console.log("Passwords dont match")
+    }
+      
+    this.safe = this.regex.testForm(user);
+    console.log(this.safe)
+    if(this.safe == true){
+      this.firebaseService.singUp(email, password, user);
+      console.log(user.fname + user.lname + ' was added')
+    }else{
+      this.checkExists = this.safe;
     }
 
   }

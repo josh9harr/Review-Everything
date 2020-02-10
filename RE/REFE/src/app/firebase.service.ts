@@ -37,6 +37,11 @@ export class FirebaseService {
     return this.firestore.doc(`users/${userID}`).get();
   }
 
+  async getAllUsers(){
+    const users = await firebase.firestore().collection('users').get()
+    return users.docs.map(doc => doc.data());
+  }
+
   //The method made for creating a review
   createReview(review, id: string, docID: string) {
     let data = JSON.parse(JSON.stringify(review))
