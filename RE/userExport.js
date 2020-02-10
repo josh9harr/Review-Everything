@@ -69,11 +69,15 @@ async function getMarker() {
     }).then(async function () {
         let ind = 0;
         res.forEach(async function (user) {
-            let username = `${user.fname}${user.lname[0]}`
-            user.username = username
-            firebase.firestore().doc(`users/${IDCollection[ind]}/`).update(user).then(_ => {
-                console.log(`User #${ind} was updated`);
-            });
+            if (user.username == undefined) {
+                let username = `${user.fname}${user.lname[0]}`
+                user.username = username
+                console.log(user)
+                // firebase.firestore().doc(`users/${IDCollection[ind]}/`).update(user).then(_ => {
+                //     console.log(`User #${ind} was updated`);
+                // });
+            }
+
             ind += 1;
         });
 

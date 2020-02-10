@@ -19,21 +19,21 @@ export class FirebaseService {
   getReviews(mediaID: string) {
     return this.firestore.collection(`media/${mediaID}/reviews`).snapshotChanges();
   }
-  
+
   getMediaReview(mediaID: string, reviewID: string) {
     return this.firestore.doc(`media/${mediaID}/reviews/${reviewID}`).get();
   }
-  
+
   getUserReview(userID: string, reviewID: string) {
     return this.firestore.doc(`users/${userID}/reviews/${reviewID}`).get();
-    
   }
 
   getMedia(id: string) {
     return this.firestore.doc('media/' + id).get();
   }
+
   //This should get it from database
-  getUser(userID: string){
+  getUser(userID: string) {
     return this.firestore.doc(`users/${userID}`).get();
   }
 
@@ -80,15 +80,21 @@ export class FirebaseService {
     return this.firestore.collection("users").doc(userID).collection("reviews").snapshotChanges();
   }
 
+  //The method made for updating a user
+  updateUser(user, id) {
+    let userData = JSON.parse(JSON.stringify(user))
+    this.firestore.collection("users").doc(id).update(userData);
+  }
+
   //User sign in and out
   async signIn(email: string, password: string) {
     try {
-
+      console.log(email);
       await this.auth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         .then(async function () {
           await firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
           }).catch(function (error) {
-            console.log("Email and/or password are incorrect")
+            console.log(error)
           })
         });
     } catch (error) {

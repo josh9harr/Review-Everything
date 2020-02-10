@@ -48,8 +48,6 @@ export class ProfileComponent implements OnInit {
       } else {
         this.router.navigate(['/login'])
       }
-
-
     })
   }
 

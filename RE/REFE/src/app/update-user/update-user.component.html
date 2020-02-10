@@ -1,4 +1,113 @@
-<section *ngIf="curUser">
+<form *ngIf="updateForm" [formGroup]="updateForm" (ngSubmit)="onSubmit(updateForm.value)">
+    <div>
+        <label for="username">
+            Username
+        </label>
+        <input id="username" type="text" formControlName="username">
+    </div>
 
-    <h1>Updating data for </h1>
-</section>
+    <div>
+        <label for="fname">
+            First name
+        </label>
+        <input id="fname" type="text" formControlName="fname">
+    </div>
+
+    <div>
+        <label for="lname">
+            Last name
+        </label>
+        <input id="lname" type="text" formControlName="lname">
+    </div>
+
+    <div>
+        <label for="phone">
+            Phone Number
+        </label>
+        <input id="phone" type="text" formControlName="phone">
+    </div>
+
+    <div>
+        <label for="state">
+            State
+        </label>
+        <input id="state" type="text" formControlName="state">
+    </div>
+
+    <div>
+        <label for="city">
+            City
+        </label>
+        <input id="city" type="text" formControlName="city">
+    </div>
+
+    <div>
+        <label for="street">
+            Street
+        </label>
+        <input id="street" type="text" formControlName="street">
+    </div>
+
+    <div>
+        <label for="zip_code">
+            Zip Code
+        </label>
+        <input id="zip_code" type="text" formControlName="zip_code">
+    </div>
+
+    <button class="button" type="submit">Update User</button>
+
+</form>
+<button (click)="logForm()">Change email and/or Password</button>
+<div *ngIf="displayModal == true" id="modal">
+    <div id="modalCont">
+        <div class="ModalH">
+            <span class="Close" (click)="displayModal = false">&times;</span>
+            <h2>Change Email and Password</h2>
+        </div>
+        <section>
+            <div class="ModalB">
+                <form *ngIf="displayLoginForm" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+                    <h2>Confirm Email and Password</h2>
+
+                    <div>
+                        <label for="email">
+                            Email
+                        </label>
+                        <input id="email" type="text" formControlName="email">
+                    </div>
+
+                    <div>
+                        <label for="Password">
+                            Password
+                        </label>
+                        <input id="Password" type="text" formControlName="Password">
+                    </div>
+
+                    <button class="button" type="submit">login</button>
+                </form>
+
+                <form *ngIf="displayEmailPassForm" [formGroup]="updateEmail_PassForm"
+                    (ngSubmit)="updateEmail_Pass(updateEmail_PassForm.value)">
+
+                    <h2>Enter new password and email</h2>
+                    <div>
+                        <label for="email">
+                            Email
+                        </label>
+                        <input id="email" type="text" formControlName="email">
+                    </div>
+
+                    <div>
+                        <label for="password">
+                            Password
+                        </label>
+                        <input id="password" type="text" formControlName="password">
+                    </div>
+
+                    <button class="button" type="submit">Update Email and/or Password</button>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

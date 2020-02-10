@@ -59,6 +59,7 @@ import { UpdateUserComponent } from './update-user/update-user.component';
       { path: "signUp", component: SignUpComponent },
       { path: "profile", component: ProfileComponent },
       { path: "update/:reviewId", component: UpdateReviewComponent },
+      { path: "update-user", component: UpdateUserComponent },
       { path: "display/:filter/:searched", component: DisplayComponent },
       { path: "", redirectTo: "/home", pathMatch: 'full' },
 
