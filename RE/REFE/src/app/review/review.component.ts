@@ -18,11 +18,13 @@ export class ReviewComponent implements OnInit {
   movieName: string;
   id = this.route.snapshot.params.id;
   currentUser;
-  userID;
+  isAdmin: boolean = false;
+  userID = "";
   movieData;
   allReviews;
   imageBase = 'https://image.tmdb.org/t/p/';
   size = 'original';
+  userHasReviewed: boolean = false;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -38,7 +40,6 @@ export class ReviewComponent implements OnInit {
         this.userID = user.uid;
         this.currentUser = this.firebaseService.getUser(user.uid).subscribe(data => {
           const res = data.data();
-          console.log(res)
           let userData = new UserData;
           userData.fname = res.fname;
           userData.lname = res.lname;
@@ -50,11 +51,9 @@ export class ReviewComponent implements OnInit {
           userData.zip_code = res.zip_code;
           userData.phone = res.phone;
           userData.username = res.username;
+          this.isAdmin = res.isAdmin
           this.currentUser = userData;
-          console.log(this.currentUser)
         });
-
-        
       } else {
         this.router.navigate(['/login'])
       }
@@ -73,11 +72,15 @@ export class ReviewComponent implements OnInit {
     this.firebaseService.getReviews(this.id).subscribe(data => {
       this.allReviews = data.map(e => {
         return {
-          id: e.payload.doc.id,
+          reviewID: e.payload.doc.id,
           ...e.payload.doc.data()
         }
       })
-      console.log(this.allReviews);
+      this.allReviews.forEach(review => {
+        if (review.userID == this.userID) {
+          this.userHasReviewed = true;
+        }
+      });
     });
   };
 
@@ -86,8 +89,7 @@ export class ReviewComponent implements OnInit {
     this.movieData = this.movieService.getMovieData(this.id).subscribe(data => {
       this.movieData = data
     },
-      err => console.error(err),
-      () => console.log(this.movieData)
+      err => console.error(err)
     )
   }
 
@@ -111,8 +113,11 @@ export class ReviewComponent implements OnInit {
     userReview.rating = newReview.rating;
     userReview.reviewMessage = newReview.reviewMessage;
     this.firebaseService.createUserReview(userReview, this.userID, userReviewId);
-
-    this.router.navigate(['/home'])
+    this.userHasReviewed = true;
   }
 
+  Delete(userReviewID, reviewerId, reviewID) {
+    this.userHasReviewed = false;
+    this.firebaseService.deleteReview(reviewerId, userReviewID, this.id, reviewID)
+  }
 };

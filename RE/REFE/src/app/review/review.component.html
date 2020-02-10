@@ -1,10 +1,9 @@
-
 <div>
     <!-- Background poster -->
-    <img src='{{imageBase}}{{size}}{{movieData.backdrop_path}}' alt="{{movieData.title}} Backdrop" width="100%"/>
+    <img src='{{imageBase}}{{size}}{{movieData.backdrop_path}}' alt="{{movieData.title}} Backdrop" width="100%" />
     <!-- poster image -->
-    <img src="{{imageBase}}{{size}}{{movieData.poster_path}}" alt='{{movieData.title}} poster' height="300" weight='150' 
-    />
+    <img src="{{imageBase}}{{size}}{{movieData.poster_path}}" alt='{{movieData.title}} poster' height="300"
+        weight='150' />
 
     <!-- Displays the data of the movie to the users -->
     <h1>
@@ -13,19 +12,25 @@
     <h2><i>{{movieData.tagline}}</i></h2>
     <div id="displayInfo">
         <b>Released:</b> {{movieData.release_date}}<br>
-        <b>Genres: </b><div *ngFor='let genre of movieData.genres'>{{genre.name}}</div>
+        <b>Genres: </b>
+        <div *ngFor='let genre of movieData.genres'>{{genre.name}}</div>
         <b>Budget: </b>${{movieData.budget}}<br>
         <b>Revenue: </b>${{movieData.revenue}}<br>
         <b>Overview: </b>{{movieData.overview}}<br>
     </div>
-    
-    
-    
+
+
+
 </div>
 
 
 <div id="writeReview">
-    <h3>Write Review For {{movieName}}</h3>
+    <div *ngIf="userHasReviewed; else updateTitle">
+        <h1>Update your review for {{movieName}}</h1>
+    </div>
+    <ng-template #updateTitle>
+        <h1>Write Review For {{movieName}}</h1>
+    </ng-template>
     <section>
         <!-- <input type="text" placeholder="Username" [(ngModel)]="revUsername"> -->
         <input id="ratingBox" type="number" max='5' min='1' [(ngModel)]="revRating">
@@ -36,14 +41,19 @@
         <button (click)="submit(revRating, revMessage)" formtarget="_blank">Submit</button>
     </section>
 </div>
-    
 
-    <div >
-        <ul>
-            <li *ngFor='let review of allReviews'>
-                <h2>{{review.username}}</h2>
-                <h3>{{review.rating}}/5</h3>
-                <p>{{review.reviewMessage}}</p>
-            </li>
-        </ul>
-    </div>
+<div>
+    <h2>{{movieName}} Reviews</h2>
+    <ul>
+        <li *ngFor='let review of allReviews'>
+            <h2>{{review.username}}</h2>
+            <h3>{{review.rating}}/5</h3>
+            <p>{{review.reviewMessage}}</p>
+            <div *ngIf="review.userID == userID|| isAdmin">
+                <button (click)="Delete(review.id, review.userID, review.reviewID)" formtarget="_blank">Delete
+                    Review</button>
+            </div>
+        </li>
+    </ul>
+
+</div>
