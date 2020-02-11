@@ -37,9 +37,8 @@ export class FirebaseService {
     return this.firestore.doc(`users/${userID}`).get();
   }
 
-  async getAllUsers(){
-    const users = await firebase.firestore().collection('users').get()
-    return users.docs.map(doc => doc.data());
+  getAllUsers() {
+    return this.firestore.collection(`users`).snapshotChanges();
   }
 
   //The method made for creating a review
@@ -89,6 +88,10 @@ export class FirebaseService {
   updateUser(user, id) {
     let userData = JSON.parse(JSON.stringify(user))
     this.firestore.collection("users").doc(id).update(userData);
+  }
+
+  deleteUser(id) {
+    this.firestore.collection("users").doc(id).delete();
   }
 
   //User sign in and out

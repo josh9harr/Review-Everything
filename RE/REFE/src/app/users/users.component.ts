@@ -16,18 +16,39 @@ export class UsersComponent implements OnInit {
   constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit() {
+    this.firebaseService.getAllUsers().subscribe(data => {
+      this.userList = data.map(e => {
+        return {
+          userID: e.payload.doc.id,
+          ...e.payload.doc.data()
+        }
+      })
+    });
   }
 
   getUsers() {
-    this.firebaseService.getAllUsers()
-      .then(
-        data => this.userList = data
-      )
     console.log(this.userList)
   }
 
-  Delete() {
+  async Delete(id) {
     this.isLoading = true;
+    console.log(id)
+    let reviews = [];
+    await this.firebaseService.getUserReviews(id).subscribe(data => {
+      reviews = data.map(e => {
+        return {
+          reviewID: e.payload.doc.id,
+          ...e.payload.doc.data()
+        }
+      })
+      reviews.forEach(review => {
+        this.firebaseService.deleteReview(id, review.reviewID, review.mediaId, review.mediaReviewId)
+      });
+
+      this.firebaseService.deleteUser(id);
+      this.isLoading = false;
+    })
+
   }
 
 }
