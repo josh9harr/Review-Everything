@@ -27,8 +27,7 @@ export class LoginComponent implements OnInit {
       if (user) {
         this.router.navigate(['/home'])
       } else {
-        this.checkExists = "Email and/or password is incorrect"
-        console.log("User is not logged in")
+        this.checkExists = "Email and/or password is incorrect. Please try again."
       }
     });
   }
@@ -38,5 +37,3 @@ export class LoginComponent implements OnInit {
   }
 
 }
-
-// tom@tbeatty.com plusUltra!

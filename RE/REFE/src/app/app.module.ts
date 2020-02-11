@@ -26,6 +26,8 @@ import { UpdateReviewComponent } from './update-review/update-review.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { DisplayComponent } from './display/display.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { UsersComponent } from './users/users.component';
+import { FilterPipe } from './filter.pipe';
 
 
 
@@ -39,7 +41,9 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     UpdateReviewComponent,
     SignUpComponent,
     DisplayComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    UsersComponent,
+    FilterPipe
 
   ],
   imports: [
@@ -54,6 +58,7 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     FormsModule,
     RouterModule.forRoot([
       { path: "reviews/:id", component: ReviewComponent },
+      { path: 'users', component: UsersComponent},
       { path: "home", component: ProfileComponent },
       { path: "login", component: LoginComponent },
       { path: "signUp", component: SignUpComponent },

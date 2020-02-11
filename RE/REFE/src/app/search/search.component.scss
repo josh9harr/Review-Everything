@@ -1,22 +1,6 @@
 
-$titleFont: 'Righteous', cursive;
-$otherFont: 'Kanit', sans-serif;
+@import '../../styles.scss';
 
-@mixin navButtons{
-    cursor: pointer;
-    font-size: 16px;
-    font-family: $titleFont;
-    border-radius: 25px;
-    padding: 10px;
-    background-color: #FFF;
-    color: #03a;   
-    border: #03a solid 2px;
-    &:hover {
-        background-color: #03a;
-        color: #fff;
-        border: #fff solid 2px;
-    }
-}
 
 #movieSearch{
     margin: 1%;
@@ -28,10 +12,10 @@ $otherFont: 'Kanit', sans-serif;
 }
 
 #searchBy{
-    @include navButtons
+    @include Buttons
 }
 
 #sBtn{
-    @include navButtons
+    @include Buttons
 }
 
