@@ -94,6 +94,12 @@ export class FirebaseService {
     this.firestore.collection("users").doc(id).delete();
   }
 
+  makeAdmin(id) {
+    this.firestore.collection("users").doc(id).update({
+      isAdmin: true
+    });
+  }
+
   //User sign in and out
   async signIn(email: string, password: string) {
     try {

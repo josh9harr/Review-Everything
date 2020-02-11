@@ -30,11 +30,11 @@ export class UsersComponent implements OnInit {
     console.log(this.userList)
   }
 
-  async Delete(id) {
+  Delete(id) {
     this.isLoading = true;
     console.log(id)
     let reviews = [];
-    await this.firebaseService.getUserReviews(id).subscribe(data => {
+    this.firebaseService.getUserReviews(id).subscribe(data => {
       reviews = data.map(e => {
         return {
           reviewID: e.payload.doc.id,
@@ -49,6 +49,10 @@ export class UsersComponent implements OnInit {
       this.isLoading = false;
     })
 
+  }
+
+  makeAdmin(id) {
+    this.firebaseService.makeAdmin(id);
   }
 
 }

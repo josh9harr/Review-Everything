@@ -84,7 +84,6 @@ export class ReviewComponent implements OnInit {
     });
   };
 
-
   getMovieData() {
     this.movieData = this.movieService.getMovieData(this.id).subscribe(data => {
       this.movieData = data

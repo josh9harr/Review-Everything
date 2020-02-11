@@ -27,7 +27,7 @@
         <!-- <td>{{user.password}}</td> -->
         <div *ngIf="!user.isAdmin">
             <button (click)="Delete(user.userID)" formtarget="_blank">Delete User</button>
-            <button (click)="makeAdmin()" formtarget="_blank">Make User Admin</button>
+            <button (click)="makeAdmin(user.userID)" formtarget="_blank">Make User Admin</button>
         </div>
     </tr>
 </table>
