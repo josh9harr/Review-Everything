@@ -1,5 +1,5 @@
 <button (click)='getUsers()'>Get Users</button>
-<input type="text" [(ngModel)]='search' placeholder="search"> 
+<input type="text" [(ngModel)]='search' placeholder="search">
 
 <table *ngIf='userList'>
     <tr>
@@ -25,5 +25,20 @@
         <td>{{user.email}}</td>
         <td>{{user.username}}</td>
         <!-- <td>{{user.password}}</td> -->
+        <button (click)="Delete()" formtarget="_blank">Delete User</button>
+        <button (click)="makeAdmin()" formtarget="_blank">Make User Admin</button>
     </tr>
-    </table>
+</table>
+
+<div *ngIf="isLoading == true" id="modal">
+    <div id="modalCont">
+        <div class="ModalH">
+            <h2>Loading</h2>
+        </div>
+        <section>
+            <div class="ModalB">
+                <h1> User is being removed</h1>
+            </div>
+        </section>
+    </div>
+</div>

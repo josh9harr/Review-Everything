@@ -11,17 +11,25 @@ import { FilterPipe } from '../filter.pipe';
 })
 export class UsersComponent implements OnInit {
   userList;
+  isLoading: boolean = false;
+
   constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit() {
   }
 
-  getUsers(){
+  getUsers() {
     this.firebaseService.getAllUsers()
-    .then(
-      data => this.userList = data
+      .then(
+        data => this.userList = data
       )
-      console.log(this.userList)
+    console.log(this.userList)
+  }
+
+  Delete() {
+    this.isLoading = true;
   }
 
 }
+
+
