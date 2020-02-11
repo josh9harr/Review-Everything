@@ -107,5 +107,63 @@ export class RegexService {
       } 
   } 
 
+  updateTestForm(user){
+    this.error = false;
+  
+       if(!this.name_patt.test(user.fname)){
+            this.error=true;
+            this.error_msg.nameError = "Not a valid name";
+        }
+        if(!this.name_patt.test(user.lname)){
+            this.error=true;
+            this.error_msg.nameError = "Not a valid name"
+          }else{
+            this.error_msg.addressError = "";
+          }
+        if(!this.address_patt.test(user.street)){
+            this.error=true;
+            this.error_msg.addressError = " Not a valid address.";
+            //  Address must have at least one character, followed by a space and at least one or more other characters."
+  
+        }else{
+          this.error_msg.addressError = "";
+        }
+        // if(!this.name_patt.test(user.city)){
+        //     this.error=true;
+        //     this.error_msg.cityError = " Not a valid city.";
+        //     //  The city needs at least two letters of the alphabet."
+        //
+        // }
+        if(!this.zip_patt.test(user.zip_code)){
+            this.error=true;
+            this.error_msg.zipError =  ' Not a valid zip code.';
+            //  Must either be 5 digits or 5 digits followed by "-" then 4 more digits. ';
+  
+        }else{
+          this.error_msg.zipError = "";
+        }
+        if(!this.phone_patt.test(user.phone)){
+            this.error=true;
+            this.error_msg.phoneError =  " Not a valid Phone Number.";
+  
+        }else{
+          this.error_msg.phoneError = "";
+        }
+        if(!this.state_patt.test(user.state)){
+          this.error=true;
+          this.error_msg.stateError =' Not a State'
+        }else{
+          this.error_msg.stateError = "";
+        }
+
+        if(this.error){
+          console.log(this.error_msg)
+          console.log(user)
+          return this.error_msg;   
+        }else{
+          return true;
+        } 
+    } 
+
   
 }

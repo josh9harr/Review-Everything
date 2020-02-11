@@ -44,7 +44,7 @@ export class UpdateReviewComponent implements OnInit {
           });
         })
       } else {
-        this.router.navigate(['/login'])
+        window.location.replace('/login')
       }
     })
   }
@@ -62,7 +62,7 @@ export class UpdateReviewComponent implements OnInit {
     }
 
     this.firebaseService.updateReview(this.userReview, this.mediaReview);
-    this.router.navigate(['/profile'])
+    window.location.replace('/profile')
   }
 
 }

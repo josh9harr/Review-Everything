@@ -33,7 +33,7 @@ export class SearchComponent implements OnInit {
     if(title == undefined){
       console.log("undefined bruh")
     }else{
-      this.router.navigate([`display/${searchBy}/${title}`])
+      window.location.replace(`display/${searchBy}/${title}`)
     }
   }
 

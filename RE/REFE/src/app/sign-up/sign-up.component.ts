@@ -23,7 +23,7 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
-        this.router.navigate(['/profile'])
+        window.location.replace('/profile')
       }
     });
   }

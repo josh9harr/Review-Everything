@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
         });
 
       } else {
-        this.router.navigate(['/login'])
+        window.location.replace('/login')
       }
     })
   }
@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editReview(userReviewid) {
-    this.router.navigate([`/update/${userReviewid}`])
+    window.location.replace(`/update/${userReviewid}`)
   }
 
   logout() {

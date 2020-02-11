@@ -6,6 +6,7 @@ import * as firebase from "firebase/app"
 import { AngularFireAuth } from "@angular/fire/auth";
 import { UserReview, UserData } from "../user-review.model"
 import { from } from 'rxjs';
+import { RegexService } from '../regex.service';
 
 @Component({
   selector: 'app-update-user',
@@ -22,12 +23,15 @@ export class UpdateUserComponent implements OnInit {
   displayEmailPassForm: boolean = false;
   newPass;
   newEmail;
+  check;
+  error;
 
 
   constructor(
     private router: Router,
     private firebaseService: FirebaseService,
     private formBuilder: FormBuilder,
+    private regex: RegexService,
     private fireAuth: AngularFireAuth,
 
   ) { }
@@ -53,33 +57,44 @@ export class UpdateUserComponent implements OnInit {
           })
         });
       } else {
-        this.router.navigate(['/login'])
+        window.location.replace('/login')
       }
     })
   }
 
   onSubmit(userData) {
     const user = firebase.auth().currentUser;
-    this.firebaseService.getUser(user.uid).subscribe(data => {
-      const res = data.data();
-      if (res.email != userData.email || res.password != userData.password) {
-        if (res.email != userData.email) {
-          this.newEmail = userData.email;
+    console.log(userData)
+    this.check = this.regex.updateTestForm(userData);
+
+    if(this.check==true){
+
+      this.firebaseService.getUser(user.uid).subscribe(data => {
+        const res = data.data();
+        if (res.email != userData.email || res.password != userData.password) {
+          if (res.email != userData.email) {
+            this.newEmail = userData.email;
+          }
+          
+          if (res.password != userData.password) {
+            this.newPass = userData.password
+          }
+          
+          this.firebaseService.updateUser(userData, user.uid)
+          
+        } else {
+          this.firebaseService.updateUser(userData, user.uid)
         }
-
-        if (res.password != userData.password) {
-          this.newPass = userData.password
-        }
-
-        this.firebaseService.updateUser(userData, user.uid)
-
-      } else {
-        this.firebaseService.updateUser(userData, user.uid)
-      }
-    })
-    // this.router.navigate([`/profile`])
+      })
+       window.location.replace(`/profile`)
+    }else{
+      this.error = this.check
+    }
+    
+  
   }
 
+    
   updateEmail_Pass(credentials) {
     const user = firebase.auth().currentUser;
     user.updatePassword(credentials.password)

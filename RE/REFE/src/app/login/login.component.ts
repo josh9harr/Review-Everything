@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
-        this.router.navigate(['/profile'])
+        window.location.replace('/profile')
       }
     });
   }
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     // await this.delay(1000);
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
-        this.router.navigate(['/home'])
+        window.location.replace('/home')
       } else {
         this.checkExists = "Email and/or password is incorrect. Please try again."
       }

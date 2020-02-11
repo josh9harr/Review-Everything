@@ -55,7 +55,7 @@ export class ReviewComponent implements OnInit {
           this.currentUser = userData;
         });
       } else {
-        this.router.navigate(['/login'])
+        window.location.replace('/login')
       }
     });
 
