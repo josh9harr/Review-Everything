@@ -16,18 +16,15 @@ export class UsersComponent implements OnInit {
   constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit() {
+    this.firebaseService.getAllUsers()
   }
 
   getUsers() {
-    this.firebaseService.getAllUsers()
-      .then(
-        data => this.userList = data
-      )
-    console.log(this.userList)
+    console.log(this.userList[0])
   }
 
   Delete() {
-    this.isLoading = true;
+    // this.firebaseService.deleteUser(11);
   }
 
 }

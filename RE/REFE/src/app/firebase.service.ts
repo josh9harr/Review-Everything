@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Reviews } from 'src/app/reviews.model'
 import * as firebase from "firebase/app"
 import { AngularFireAuth } from "@angular/fire/auth";
+import * as admin from "firebase-admin";
 
 @Injectable({
   providedIn: 'root'
@@ -37,9 +38,8 @@ export class FirebaseService {
     return this.firestore.doc(`users/${userID}`).get();
   }
 
-  async getAllUsers(){
-    const users = await firebase.firestore().collection('users').get()
-    return users.docs.map(doc => doc.data());
+  async getAllUsers() {
+    return this.firestore.collection(`users`).snapshotChanges();
   }
 
   //The method made for creating a review
@@ -132,4 +132,10 @@ export class FirebaseService {
       }
     });
   }
+
+  deleteUser(userID) {
+    admin.initializeApp();
+    admin.auth().deleteUser(userID);
+  }
+
 }
