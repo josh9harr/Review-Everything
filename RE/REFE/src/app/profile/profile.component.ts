@@ -26,6 +26,9 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.firebaseService.getUserByUsername("CristianTest").then(data => {
+      console.log(data.docs[0].data());
+    });
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
         this.uid = user.uid;
