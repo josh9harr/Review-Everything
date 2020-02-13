@@ -12,6 +12,7 @@ import { RegexService } from '../regex.service';
 export class SignUpComponent implements OnInit {
   checkExists;
   safe;
+  verPassError;
 
   constructor(
     private router: Router, 
@@ -45,6 +46,7 @@ export class SignUpComponent implements OnInit {
       console.log(user);
     }else{
       console.log("Passwords dont match")
+      this.verPassError = 'Passwords do not match'
     }
       
     this.safe = this.regex.testForm(user);

@@ -21,7 +21,7 @@
         <input type="password" placeholder="Password" [(ngModel)]="password">
         <p class="check" *ngIf="checkExists">{{checkExists.passwordError}}</p>
         <input type="password" placeholder="Confirm Password" [(ngModel)]="verPassword">
-        <p class="check" *ngIf="checkExists">{{checkExists.passwordError}}</p>
+        <p class="check" *ngIf="verPassError">{{verPassError}}</p>
         <input type="text" placeholder="Street" [(ngModel)]="street">
         <p class="check" *ngIf="checkExists">{{checkExists.addressError}}</p>
 
