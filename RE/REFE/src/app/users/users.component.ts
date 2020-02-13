@@ -16,18 +16,18 @@ export class UsersComponent implements OnInit {
   constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit() {
-    this.firebaseService.getAllUsers().subscribe(data => {
-      this.userList = data.map(e => {
+
+  }
+
+  getUsers(username) {
+    this.firebaseService.getUserByUsername(username).then(data => {
+      this.userList = data.docs.map(e => {
         return {
-          userID: e.payload.doc.id,
-          ...e.payload.doc.data()
+          userID: e.id,
+          ...e.data()
         }
       })
     });
-  }
-
-  getUsers() {
-    console.log(this.userList)
   }
 
   Delete(id) {

@@ -1,5 +1,5 @@
-<button (click)='getUsers()'>Get Users</button>
 <input type="text" [(ngModel)]='search' placeholder="search">
+<button (click)='getUsers(search)'>Get Users</button>
 
 <table *ngIf='userList'>
     <tr>

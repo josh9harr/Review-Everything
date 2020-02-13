@@ -37,6 +37,16 @@ export class FirebaseService {
     return this.firestore.doc(`users/${userID}`).get();
   }
 
+  getUserByUsername(username) {
+    const db = firebase.firestore()
+    return db.collection(`users`).where("username", "==", username).get();
+  }
+
+  getUserByMethod(searchMethod, value) {
+    const db = firebase.firestore()
+    return db.collection(`users`).where(searchMethod, "==", value).get();
+  }
+
   getAllUsers() {
     return this.firestore.collection(`users`).snapshotChanges();
   }
