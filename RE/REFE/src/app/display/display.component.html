@@ -7,10 +7,19 @@
     <!-- printing list of movies that are clickable  -->
     <li *ngFor='let movie of list' [class.selected]="movie === selectedMovie" (click)='select(movie)'>
         <div class="clickableMovie">
-            <img class="poster" 
-            src="{{imageBase}}{{size}}{{movie.poster_path}}" 
-            alt='{{movie.title}} poster' height="150" weight='75' />
+            <div *ngIf="movie.poster_path != null; else defaultPoster">
+                <img class="poster" src="{{imageBase}}{{size}}{{movie.poster_path}}" alt='{{movie.title}} poster'
+                    height="150" weight='75' />
+            </div>
+            <ng-template #defaultPoster>
+                <img class="poster is-dark" src="assets/img/default_Poster.png" alt='{{movie.title}} poster'
+                    height="150" weight='75' />
+            </ng-template>
+
             <b>{{movie.title}}</b>
         </div>
     </li>
+    <div id="loadMoreButton">
+        <i class="fa fa-sort-down"></i>
+    </div>
 </ul>
