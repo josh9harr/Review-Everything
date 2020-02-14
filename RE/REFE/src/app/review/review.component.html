@@ -33,7 +33,7 @@
     </ng-template>
     <section>
         <!-- <input type="text" placeholder="Username" [(ngModel)]="revUsername"> -->
-        <input id="ratingBox" type="number" max='5' min='1' [(ngModel)]="revRating">
+        <input id="ratingBox" type="number" max='5' min='1' step=".5" [(ngModel)]="revRating">
         <textarea id="reviewBox" placeholder="Review" [(ngModel)]="revMessage" rows="10" cols="50" maxlength="500">
             Write Your Review Here! 
         </textarea>

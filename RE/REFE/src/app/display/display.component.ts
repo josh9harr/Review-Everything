@@ -25,81 +25,81 @@ export class DisplayComponent implements OnInit {
   imageBase = 'https://image.tmdb.org/t/p/';
   size = 'original';
   genres = GENRES;
-  constructor(private moviesService: MoviesService, 
-    private router: Router, 
+  constructor(private moviesService: MoviesService,
+    private router: Router,
     private firebaseService: FirebaseService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    ) { 
-      this.filter = new FormGroup({
-        searchBy: new FormControl('title')
-     });
-    }
+  ) {
+    this.filter = new FormGroup({
+      searchBy: new FormControl('title')
+    });
+  }
 
   ngOnInit() {
     this.getMovies(this.route.snapshot.params.filter, this.route.snapshot.params.searched)
   }
 
-//gets api data from the service
-getMovies(searchBy: string, title: string) {
-  // returns movies searched by title
-  if(searchBy == 'title'){
-      
-    this.moviesService.getMovie(title).subscribe(data => {
-      //puts api data set to movies then grabs just the movies array to put into this.list
-      this.movies = data
-      this.list = this.movies.results
-    },
-    err => console.error(err ),
-    );
-    // returns movies searched by actor
-  }else if(searchBy == 'actor'){
-    // Calls API to search for the person ID
-    this.moviesService.searchActor(title).subscribe(data => {
-      // Sets the searched id to this.actorId
-      this.actorData = data
-      this.actorId = this.actorData.results[0].id
+  //gets api data from the service
+  getMovies(searchBy: string, title: string) {
+    // returns movies searched by title
+    if (searchBy == 'title') {
 
-      // Discovers movies from the actor
-      this.moviesService.getActor(this.actorId).subscribe(data => {
+      this.moviesService.getMovie(title).subscribe(data => {
         //puts api data set to movies then grabs just the movies array to put into this.list
-        console.log(this.actorId)
-        console.log(data)
         this.movies = data
+        this.list = this.movies.results;
+      },
+        err => console.error(err),
+      );
+      // returns movies searched by actor
+    } else if (searchBy == 'actor') {
+      // Calls API to search for the person ID
+      this.moviesService.searchActor(title).subscribe(data => {
+        // Sets the searched id to this.actorId
+        this.actorData = data
+        this.actorId = this.actorData.results[0].id
+
+        // Discovers movies from the actor
+        this.moviesService.getActor(this.actorId).subscribe(data => {
+          //puts api data set to movies then grabs just the movies array to put into this.list
+          console.log(this.actorId)
+          console.log(data)
+          this.movies = data
+          this.list = this.movies.results
+          console.log(this.list)
+        },
+          err => console.error(err),
+        );
+      })
+
+      // returns movies searched by genre
+    } else if (searchBy == 'genre') {
+      // Loops through list of all genres to find the ID of the searched value
+      this.genres.forEach(element => {
+
+        if (element.name == title) {
+          this.genreId = element.id;
+        }
+      });
+
+      this.moviesService.getGenres(this.genreId).subscribe(data => {
+        //puts api data set to movies then grabs just the movies array to put into this.list
+        this.movies = data
+        console.log(data)
         this.list = this.movies.results
         console.log(this.list)
       },
-      err => console.error(err),
+        err => console.error(err),
       );
-    })
-
-    // returns movies searched by genre
-  }else if(searchBy == 'genre'){
-
-    // Loops through list of all genres to find the ID of the searched value
-    this.genres.forEach(element => {
-
-      if(element.name == title){
-        this.genreId = element.id;
-      }
-    });
-
-    this.moviesService.getGenres(this.genreId).subscribe(data => {
-      //puts api data set to movies then grabs just the movies array to put into this.list
-      this.movies = data
-      this.list = this.movies.results
-      console.log(this.list)
-    },
-    err => console.error(err),
-    );
+    }
   }
-}
 
-  checkError(){
-    if(this.list = []){
+  checkError() {
+    if (this.list = []) {
       console.log('not coming ')
 
-    }else{
+    } else {
       console.log('it should be there')
     }
   }
@@ -118,6 +118,10 @@ getMovies(searchBy: string, title: string) {
     });
     this.selectedMovie = movie;
     this.loadReview(movie.id)
+  }
+
+  loadMore() {
+    console.log("will load more movies")
   }
 
   loadReview(id: string) {

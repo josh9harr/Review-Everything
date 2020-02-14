@@ -47,10 +47,6 @@ export class FirebaseService {
     return db.collection(`users`).where(searchMethod, "==", value).get();
   }
 
-  getAllUsers() {
-    return this.firestore.collection(`users`).snapshotChanges();
-  }
-
   //The method made for creating a review
   createReview(review, id: string, docID: string) {
     let data = JSON.parse(JSON.stringify(review))
