@@ -6,6 +6,14 @@ $otherFont: 'Kanit', sans-serif;
 
 $blue: #0033aa;
 
+th{
+    font-family: $titleFont;
+}
+
+td{
+    font-family: $otherFont;
+}
+
 h1,h2,h3,h4 {
     font-family: $titleFont;
 }
@@ -16,6 +24,7 @@ p{
 
 body{
     margin: 0px;
+    font-family: $otherFont;
 }
 
 nav{
@@ -141,7 +150,19 @@ ul {
 
 //********************************** Mixins *******************************************************************************************
 
-@mixin Buttons($textColor: #03a,$backgroundColor: #fff){
+@mixin basic($textColor: white, $backgroundColor: lightgray){
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    background-color: $backgroundColor;
+    color: $textColor;
+    align-items: center;
+    box-shadow: gray 5px 5px 5px;
+
+    padding: 25px;
+}
+
+@mixin Buttons($textColor: #fff,$backgroundColor: #03a){
     cursor: pointer;
     font-size: 16px;
     font-family: $titleFont;

@@ -1,29 +1,48 @@
-<h1>Profile Page</h1>
-<button (click)="logout()" formtarget="_blank">Logout</button>
-<a href="/update-user">update user Data</a>
-<div>
-    <a href="/users" *ngIf="isAdmin">Admin panel</a>
-</div>
-
-<div id="userData" *ngIf="curUser">
-    <h2>{{curUser.username}}</h2>
-    <p>{{curUser.fname}} {{curUser.lname}}</p>
-    {{curUser.phone}}
-    <p>
-        {{curUser.street}}<br>
-        {{curUser.city}},
-        {{curUser.state}}
-        {{curUser.zip_code}}
-
-    </p>
-</div>
-
-<section id="reviews">
-    <div *ngFor="let review of reviews">
-        <h2>{{review.mediaName}}</h2>
-        <h3>{{review.rating}}</h3>
-        <p>{{review.reviewMessage}}</p>
-        <button (click)="delete(review.userReviewId,review.mediaId,review.mediaReviewId)">Delete Review</button>
-        <button (click)="editReview(review.userReviewId)">Edit Review</button>
+<div id="page">
+    <div id="top">
+        
+        <div id="userData" *ngIf="curUser">
+            <h2>Hello, {{curUser.fname}}</h2>
+            <table>
+                <tr>
+                    <th>Username: </th>
+                    <td>{{curUser.username}}</td>
+                </tr>
+                <tr>
+                    <th>Full Name: </th>
+                    <td>{{curUser.fname}} {{curUser.lname}}</td>
+                </tr>
+                <tr>
+                    <th>Phone Number: </th>
+                <td>{{curUser.phone}}</td>
+            </tr>
+            <tr>
+                <th>Address: </th>
+                <td>{{curUser.street}}<br>
+                    {{curUser.city}},
+                    {{curUser.state}}
+                    {{curUser.zip_code}}</td>
+                </tr>
+                
+                
+            </table>
+        </div>
+        
+        <div id="profileButtons">
+            <button href="/update-user">Update Profile</button>
+            <button href="/users" *ngIf="isAdmin">Admin Features</button>
+            <button (click)="logout()" formtarget="_blank">Log out</button>
+        </div>
     </div>
-</section>
+    
+    <section id="reviews">
+        <div *ngFor="let review of reviews">
+            <img src="{{imageBase}}{{size}}{{review.poster_path}}" alt="Movie Poster" />
+            <h2>{{review.mediaName}}</h2>
+            <h4>{{review.rating}}/5</h4>
+            <p>{{review.reviewMessage}}</p>
+            <button (click)="delete(review.userReviewId,review.mediaId,review.mediaReviewId)">Delete Review</button>
+            <button (click)="editReview(review.userReviewId)">Edit Review</button>
+        </div>
+    </section>
+</div>

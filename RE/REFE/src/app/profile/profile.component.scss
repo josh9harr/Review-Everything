@@ -2,4 +2,24 @@
 
 button{
     @include Buttons;
+    margin: 5px;
+}
+
+#page{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    @include basic(black, lightgray);
+}
+
+#top{
+    width: 400px;
+}
+
+th{
+    text-align: left;
+}
+
+td{
+    text-align: right;
 }

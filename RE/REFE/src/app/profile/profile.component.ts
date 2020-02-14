@@ -17,7 +17,9 @@ export class ProfileComponent implements OnInit {
   uid: string
   curUser: UserData
   isAdmin: boolean = false;
-
+  imageBase = 'https://image.tmdb.org/t/p/';
+  size = 'original';
+  
   constructor(
     private router: Router,
     private firebaseService: FirebaseService,
