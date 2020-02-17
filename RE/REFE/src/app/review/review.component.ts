@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/firebase.service'
 import { ActivatedRoute } from '@angular/router'
+import { FormBuilder } from '@angular/forms';
 import { Reviews } from '../reviews.model';
 import { MoviesService } from '../movies.service';
 import { AngularFireAuth } from "@angular/fire/auth";
@@ -25,11 +26,13 @@ export class ReviewComponent implements OnInit {
   imageBase = 'https://image.tmdb.org/t/p/';
   size = 'original';
   userHasReviewed: boolean = false;
+  starForm;
 
   constructor(
     private firebaseService: FirebaseService,
     private route: ActivatedRoute,
     private movieService: MoviesService,
+    private formBuilder: FormBuilder,
     private fireAuth: AngularFireAuth,
     private router: Router
   ) { }
@@ -53,6 +56,10 @@ export class ReviewComponent implements OnInit {
           userData.username = res.username;
           this.isAdmin = res.isAdmin
           this.currentUser = userData;
+          this.starForm = this.formBuilder.group({
+            rating: ["0.5"],
+            rateMessage: ""
+          });
         });
       } else {
         window.location.replace('/login')
@@ -77,6 +84,7 @@ export class ReviewComponent implements OnInit {
         }
       })
       this.allReviews.forEach(review => {
+
         if (review.userID == this.userID) {
           this.userHasReviewed = true;
         }
@@ -92,7 +100,13 @@ export class ReviewComponent implements OnInit {
     )
   }
 
-  submit(revRating: number, revMessage: string) {
+  testStar(rating) {
+    console.log(rating)
+  }
+
+  submit(credentials) {
+    let revRating = credentials.rating;
+    let revMessage = credentials.rateMessage;
     let newReview = new Reviews;
     let userReview = new UserReview;
     let mediaID = `${this.id}${this.userID}`;
@@ -119,4 +133,5 @@ export class ReviewComponent implements OnInit {
     this.userHasReviewed = false;
     this.firebaseService.deleteReview(reviewerId, userReviewID, this.id, reviewID)
   }
+
 };

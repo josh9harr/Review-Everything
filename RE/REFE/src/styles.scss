@@ -179,6 +179,129 @@ ul {
   list-style: none;
 }
 
+// Star rating system
+#rating_sytem {
+  /* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+  .rating-group {
+    display: inline-flex;
+  }
+
+  /* make hover effect work properly in IE */
+  .rating_Icon {
+    pointer-events: none;
+  }
+
+  /* hide radio inputs */
+  .rating_Input {
+    position: absolute !important;
+    left: -9999px !important;
+  }
+
+  /* set icon padding and size */
+  .star {
+    cursor: pointer;
+    padding: 0 0.1em;
+    font-size: 2rem;
+  }
+
+  /* add padding and positioning to half star labels */
+  .star_Half {
+    z-index: 2;
+    position: relative;
+    width: 15px;
+    margin-right: -21px;
+  }
+
+  /* set default star color */
+  .star_Icon {
+    color: orange;
+  }
+
+  /* set color of none icon when unchecked */
+  .rating_Icon--none {
+    color: #eee;
+  }
+
+  /* if none icon is checked, make it red */
+  .rating_Input--none:checked + .star .rating_Icon--none {
+    color: red;
+  }
+
+  /* if any input is checked, make its following siblings grey */
+  .rating_Input:checked ~ .star .star_Icon {
+    color: #ddd;
+  }
+
+  /* make all stars orange on rating group hover */
+  .rating-group:hover .star .star_Icon,
+  .rating-group:hover .star_Half .star_Icon {
+    color: orange;
+  }
+
+  /* make hovered input's following siblings grey on hover */
+  .rating_Input:hover ~ .star .star_Icon,
+  .rating_Input:hover ~ .star_Half .star_Icon {
+    color: #ddd;
+  }
+
+  /* make none icon grey on rating group hover */
+  .rating-group:hover .rating_Input--none:not(:hover) + .star .rating_Icon--none {
+    color: #eee;
+  }
+
+  /* make none icon red on hover */
+  .rating_Input--none:hover + .star .rating_Icon--none {
+    color: red;
+  }
+}
+
+// Star rating system
+.rating_sytem_noHover {
+  /* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+  .rating-group_noHover {
+    display: inline-flex;
+  }
+
+  /* make hover effect work properly in IE */
+  .rating_Icon_noHover {
+    pointer-events: none;
+  }
+
+  /* hide radio inputs */
+  .rating_Input_noHover {
+    position: absolute !important;
+    left: -9999px !important;
+  }
+
+  /* set icon padding and size */
+  .star_noHover {
+    padding: 0 0.1em;
+    font-size: 2rem;
+  }
+
+  /* add padding and positioning to half star labels */
+  .star_Half_noHover {
+    z-index: 2;
+    position: relative;
+    width: 15px;
+    margin-right: -21px;
+  }
+
+  /* set default star color */
+  .star_Icon_noHover {
+    color: #ddd;
+  }
+
+  .starCheck_noHover {
+    color: orange;
+  }
+
+  /* set color of none icon when unchecked */
+  .rating_Icon--none_noHover {
+    color: #eee;
+  }
+}
+
 #modal {
   // display: none;
   position: fixed;

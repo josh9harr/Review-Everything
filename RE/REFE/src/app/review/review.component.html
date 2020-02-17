@@ -31,26 +31,120 @@
     <ng-template #updateTitle>
         <h1>Write Review For {{movieName}}</h1>
     </ng-template>
-    <section>
-        <!-- <input type="text" placeholder="Username" [(ngModel)]="revUsername"> -->
-        <input id="ratingBox" type="number" max='5' min='1' step=".5" [(ngModel)]="revRating">
-        <textarea id="reviewBox" placeholder="Review" [(ngModel)]="revMessage" rows="10" cols="50" maxlength="500">
-            Write Your Review Here! 
-        </textarea>
+    <form *ngIf="starForm" [formGroup]="starForm" (ngSubmit)="submit(starForm.value)" id="rating_sytem">
+        <div class="rating-group">
+            <label aria-label="0.5 stars" class="star star_Half" for="rating2-05"><i
+                    class="rating_Icon star_Icon fa fa-star-half"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-05" value="0.5" type="radio">
 
-        <button (click)="submit(revRating, revMessage)" formtarget="_blank">Submit</button>
-    </section>
+            <label aria-label="1 star" class="star" for="rating2-10"><i
+                    class="rating_Icon star_Icon fa fa-star"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-10" value="1" type="radio">
+
+
+            <label aria-label="1.5 stars" class="star star_Half" for="rating2-15"><i
+                    class="rating_Icon star_Icon fa fa-star-half"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-15" value="1.5" type="radio">
+
+            <label aria-label="2 stars" class="star" for="rating2-20"><i
+                    class="rating_Icon star_Icon fa fa-star"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-20" value="2" type="radio">
+
+
+            <label aria-label="2.5 stars" class="star star_Half" for="rating2-25"><i
+                    class="rating_Icon star_Icon fa fa-star-half"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-25" value="2.5" type="radio">
+
+            <label aria-label="3 stars" class="star" for="rating2-30"><i
+                    class="rating_Icon star_Icon fa fa-star"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-30" value="3" type="radio">
+
+
+            <label aria-label="3.5 stars" class="star star_Half" for="rating2-35"><i
+                    class="rating_Icon star_Icon fa fa-star-half"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-35" value="3.5" type="radio">
+
+            <label aria-label="4 stars" class="star" for="rating2-40"><i
+                    class="rating_Icon star_Icon fa fa-star"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-40" value="4" type="radio">
+
+
+            <label aria-label="4.5 stars" class="star star_Half" for="rating2-45"><i
+                    class="rating_Icon star_Icon fa fa-star-half"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-45" value="4.5" type="radio">
+
+            <label aria-label="5 stars" class="star" for="rating2-50"><i
+                    class="rating_Icon star_Icon fa fa-star"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-50" value="5" type="radio">
+
+        </div>
+        <input id="reviewBox" placeholder="Write Your Review Here!" rows="10" cols="50" maxlength="500" type="text"
+            formControlName="rateMessage">
+        <button class="button" type="submit">Submit Review</button>
+    </form>
 </div>
 
 <div>
     <h2>{{movieName}} Reviews</h2>
     <ul>
-        <li *ngFor='let review of allReviews'>
+        <li *ngFor='let review of allReviews;'>
             <h2>{{review.username}}</h2>
             <h3>{{review.rating}}/5</h3>
+            <div class="rating_sytem_noHover">
+                <div class="rating-group_noHover ">
+                    <label class="star_noHover  star_Half_noHover " for="rating2-05"><i
+                            class="rating_Icon_noHover  star_Icon_noHover  fa fa-star-half"
+                            [ngClass]="{'starCheck_noHover ': review.rating >= 0.5 }"></i></label>
+
+                    <label aria-label=" 1 star" class="star_noHover " for="rating2-10"><i
+                            class="rating_Icon_noHover  star_Icon_noHover  fa fa-star"
+                            [ngClass]="{'starCheck_noHover ': review.rating >= 1 }"></i></label>
+
+
+                    <label aria-label="1.5 stars" class="star_noHover  star_Half_noHover " for="rating2-15"><i
+                            class="rating_Icon_noHover  star_Icon_noHover  fa fa-star-half"
+                            [ngClass]="{'starCheck_noHover ': review.rating >= 1.5 }"></i></label>
+
+
+                    <label aria-label="2 stars" class="star_noHover " for="rating2-20"><i
+                            class="rating_Icon_noHover  star_Icon_noHover  fa fa-star"
+                            [ngClass]="{'starCheck_noHover ': review.rating >= 2 }"></i></label>
+
+
+                    <label aria-label="2.5 stars" class="star_noHover  star_Half_noHover " for="rating2-25"><i
+                            class="rating_Icon_noHover  star_Icon_noHover  fa fa-star-half"
+                            [ngClass]="{'starCheck_noHover ': review.rating >= 2.5 }"></i></label>
+
+
+                    <label aria-label="3 stars" class="star_noHover " for="rating2-30"><i
+                            class="rating_Icon_noHover star_Icon_noHover  fa fa-star"
+                            [ngClass]="{'starCheck_noHover ': review.rating >= 3 }"></i></label>
+
+
+                    <label aria-label="3.5 stars" class="star_noHover  star_Half_noHover " for="rating2-35"><i
+                            class="rating_Icon_noHover  star_Icon_noHover  fa fa-star-half"
+                            [ngClass]="{'starCheck_noHover ': review.rating >= 3.5 }"></i></label>
+
+
+                    <label aria-label="4 stars" class="star_noHover " for="rating2-40"><i
+                            class="rating_Icon_noHover  star_Icon_noHover  fa fa-star"
+                            [ngClass]="{'starCheck_noHover ': review.rating >= 4 }"></i></label>
+
+
+                    <label aria-label="4.5 stars" class="star_noHover  star_Half_noHover " for="rating2-45"><i
+                            class="rating_Icon_noHover  star_Icon_noHover  fa fa-star-half"
+                            [ngClass]="{'starCheck_noHover ': review.rating >= 4.5 }"></i></label>
+
+
+                    <label aria-label="5 stars" class="star_noHover " for="rating2-50"><i
+                            class="rating_Icon_noHover  star_Icon_noHover  fa fa-star"
+                            [ngClass]="{'starCheck_noHover ': review.rating >= 5}"></i></label>
+
+                </div>
+            </div>
             <p>{{review.reviewMessage}}</p>
             <div *ngIf="review.userID == userID|| isAdmin">
-                <button (click)="Delete(review.id, review.userID, review.reviewID)" formtarget="_blank">Delete
+                <button (click)="Delete(review.id, review.userID, review.reviewID, i)" formtarget="_blank">Delete
                     Review</button>
             </div>
         </li>
