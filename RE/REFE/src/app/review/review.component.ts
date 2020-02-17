@@ -87,6 +87,7 @@ export class ReviewComponent implements OnInit {
 
   getMovieData() {
     this.movieData = this.movieService.getMovieData(this.id).subscribe(data => {
+      console.log(data)
       this.movieData = data
       this.poster = this.movieData.poster_path;
     },

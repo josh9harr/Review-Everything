@@ -1,54 +1,74 @@
-<div>
+<div id="top">
     <!-- Background poster -->
-    <img src='{{imageBase}}{{size}}{{movieData.backdrop_path}}' alt="{{movieData.title}} Backdrop" width="100%" />
-    <!-- poster image -->
-    <img src="{{imageBase}}{{size}}{{movieData.poster_path}}" alt='{{movieData.title}} poster' height="300"
-        weight='150' />
+    <img id="backImg" src='{{imageBase}}{{size}}{{movieData.backdrop_path}}' alt="{{movieData.title}} Backdrop" />
 
-    <!-- Displays the data of the movie to the users -->
-    <h1>
-        {{movieData.title}}
-    </h1>
-    <h2><i>{{movieData.tagline}}</i></h2>
+        <!-- poster image -->
     <div id="displayInfo">
-        <b>Released:</b> {{movieData.release_date}}<br>
-        <b>Genres: </b>
-        <div *ngFor='let genre of movieData.genres'>{{genre.name}}</div>
-        <b>Budget: </b>${{movieData.budget}}<br>
-        <b>Revenue: </b>${{movieData.revenue}}<br>
-        <b>Overview: </b>{{movieData.overview}}<br>
-    </div>
+        <img id="moviePoster" src="{{imageBase}}{{size}}{{movieData.poster_path}}" alt='{{movieData.title}} poster'/>
 
+        <!-- Displays the data of the movie to the users -->
+        <div class="column">
+
+            <h1 id="title">
+                {{movieData.title}}
+            </h1>
+            <!-- <h3 id="tag"><i>{{movieData.tagline}}</i></h3> -->
+            <div id="genres">
+                <div class="genres" *ngFor='let genre of movieData.genres' >{{genre.name}}  &nbsp;</div>
+            </div>
+
+            <section class="row">
+                <h4>Release Date:&nbsp;</h4><p id="date">{{movieData.release_date}}</p>
+                <h4>&nbsp;Run Time:&nbsp;</h4><p id="time">{{movieData.runtime}} Minutes</p>
+            </section>
+
+            <section class="row">
+            </section>
+
+            <section class="row">
+                <h4>Budget:&nbsp;</h4>${{movieData.budget}} <h4>&nbsp;  Revenue:&nbsp;</h4>${{movieData.revenue}}<br>
+            </section>
+            <section class="">
+                <h4>Overview: </h4>
+                {{movieData.overview}}<br>
+            </section>
+        </div>
+    </div>
 
 
 </div>
 
 
 <div id="writeReview">
-    <div *ngIf="userHasReviewed; else updateTitle">
+    <div class="top" *ngIf="userHasReviewed; else updateTitle">
         <h1>Update your review for {{movieName}}</h1>
     </div>
-    <ng-template #updateTitle>
-        <h1>Write Review For {{movieName}}</h1>
+    <ng-template #updateTitle >
+        <div class="top">
+            <h1 >Write Review For {{movieName}}</h1>
+        </div>
     </ng-template>
     <section>
         <!-- <input type="text" placeholder="Username" [(ngModel)]="revUsername"> -->
         <input id="ratingBox" type="number" max='5' min='1' step=".5" [(ngModel)]="revRating">
-        <textarea id="reviewBox" placeholder="Review" [(ngModel)]="revMessage" rows="10" cols="50" maxlength="500">
-            Write Your Review Here! 
+        <textarea id="reviewBox" placeholder="Review (500 Character Limit)" [(ngModel)]="revMessage" rows="10" cols="50" maxlength="500">
+            Write Your Review Here!
         </textarea>
 
         <button (click)="submit(revRating, revMessage)" formtarget="_blank">Submit</button>
     </section>
 </div>
 
-<div>
-    <h2>{{movieName}} Reviews</h2>
+<div id="printReviews">
+    <div class="top">
+        <h1>Reviews for {{movieName}}</h1>
+    </div>
     <ul>
-        <li *ngFor='let review of allReviews'>
-            <h2>{{review.username}}</h2>
-            <h3>{{review.rating}}/5</h3>
-            <p>{{review.reviewMessage}}</p>
+        <h2 id="noReviews" *ngIf='allReviews.length === 0'>There are no reviews at this time. Be the first to write one now!</h2>
+        <li class="listReview" *ngFor='let review of allReviews'>
+            <h2 id="username">{{review.username}}</h2>
+            <h3 id="rating">{{review.rating}}/5</h3>
+            <p id="reviewText">{{review.reviewMessage}}</p>
             <div *ngIf="review.userID == userID|| isAdmin">
                 <button (click)="Delete(review.id, review.userID, review.reviewID)" formtarget="_blank">Delete
                     Review</button>
