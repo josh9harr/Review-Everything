@@ -78,15 +78,4 @@
         <button (click)="delete(review.userReviewId,review.mediaId,review.mediaReviewId)">Delete Review</button>
         <button (click)="editReview(review.userReviewId)">Edit Review</button>
     </div>
-
-    <section id="reviews">
-        <div *ngFor="let review of reviews">
-            <img src="{{imageBase}}{{size}}{{review.poster_path}}" alt="Movie Poster" />
-            <h2>{{review.mediaName}}</h2>
-            <h4>{{review.rating}}/5</h4>
-            <p>{{review.reviewMessage}}</p>
-            <button (click)="delete(review.userReviewId,review.mediaId,review.mediaReviewId)">Delete Review</button>
-            <button (click)="editReview(review.userReviewId)">Edit Review</button>
-        </div>
-    </section>
-    </div>
+</section>
