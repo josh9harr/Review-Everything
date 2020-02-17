@@ -285,6 +285,7 @@ ul {
 
 //********************************** Mixins *******************************************************************************************
 
+
 @mixin basic($textColor: white, $backgroundColor: lightgray){
     display: flex;
     flex-direction: column;
@@ -365,4 +366,14 @@ ul {
 
 .right{
     @include align-right()
+}
+
+
+//********************************* Responsiveness ***********************************************************************************
+
+@media all and (max-width: 700px) {
+
+    nav{
+        display: none;
+    }
 }
