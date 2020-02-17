@@ -27,6 +27,7 @@ export class ReviewComponent implements OnInit {
   size = 'original';
   userHasReviewed: boolean = false;
   starForm;
+  poster;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -94,7 +95,9 @@ export class ReviewComponent implements OnInit {
 
   getMovieData() {
     this.movieData = this.movieService.getMovieData(this.id).subscribe(data => {
+      console.log(data)
       this.movieData = data
+      this.poster = this.movieData.poster_path;
     },
       err => console.error(err)
     )
@@ -118,14 +121,16 @@ export class ReviewComponent implements OnInit {
     newReview.userID = this.userID;
     newReview.id = userReviewId;
     this.firebaseService.createReview(newReview, this.id, mediaID);
-
-
+    
+    
     userReview.mediaName = this.movieName;
     userReview.mediaReviewId = mediaID;
     userReview.mediaId = this.id;
     userReview.rating = newReview.rating;
     userReview.reviewMessage = newReview.reviewMessage;
+    userReview.poster = `${this.imageBase}${this.size}${this.poster}`;
     this.firebaseService.createUserReview(userReview, this.userID, userReviewId);
+    console.log(userReview.poster)
     this.userHasReviewed = true;
   }
 
