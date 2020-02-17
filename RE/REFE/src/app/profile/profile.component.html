@@ -1,8 +1,10 @@
 <div id="page">
     <div id="top">
-        
+            <h1>Hello, {{curUser.fname}}</h1>
+        <p>Here you can see all your account info and reviews</p>
+    </div>
         <div id="userData" *ngIf="curUser">
-            <h2>Hello, {{curUser.fname}}</h2>
+            <h2>Account Information</h2>
             <table>
                 <tr>
                     <th>Username: </th>
@@ -23,26 +25,35 @@
                     {{curUser.state}}
                     {{curUser.zip_code}}</td>
                 </tr>
-                
-                
             </table>
-        </div>
-        
-        <div id="profileButtons">
-            <button href="/update-user">Update Profile</button>
-            <button href="/users" *ngIf="isAdmin">Admin Features</button>
-            <button (click)="logout()" formtarget="_blank">Log out</button>
-        </div>
-    </div>
+            
+            <div id="profileButtons">
+                <button href="/update-user">Update Profile</button>
+                <button href="/users" *ngIf="isAdmin">Admin Features</button>
+                <button (click)="logout()" formtarget="_blank">Log out</button>
+            </div>
+        </div>        
     
     <section id="reviews">
-        <div *ngFor="let review of reviews">
-            <img src="{{imageBase}}{{size}}{{review.poster_path}}" alt="Movie Poster" />
-            <h2>{{review.mediaName}}</h2>
-            <h4>{{review.rating}}/5</h4>
-            <p>{{review.reviewMessage}}</p>
-            <button (click)="delete(review.userReviewId,review.mediaId,review.mediaReviewId)">Delete Review</button>
-            <button (click)="editReview(review.userReviewId)">Edit Review</button>
+        <h2>Reviews</h2>
+        <div *ngFor="let review of reviews" class="review row">
+            <div id="left" class="column">
+                <a href="/reviews/{{review.mediaId}}">
+                    <img class="reviewPoster" src="{{review.poster}}" alt="Movie Poster"/>
+                </a>
+
+            </div>
+            <div id="middle" class="column">
+                <a href="/reviews/{{review.mediaId}}">
+                    <h3>{{review.mediaName}}</h3>
+                </a>
+                <h4>{{review.rating}}/5</h4>
+                <p>{{review.reviewMessage}}</p>
+            </div>
+            <div id="right" class="column">
+                <button (click)="editReview(review.userReviewId)">Edit Review</button>
+                <button (click)="delete(review.userReviewId,review.mediaId,review.mediaReviewId)">Delete Review</button>
+            </div>
         </div>
     </section>
 </div>

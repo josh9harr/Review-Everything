@@ -5,6 +5,7 @@ export class UserReview {
     mediaName: string;
     rating: number;
     reviewMessage: string;
+    poster: string;
 }
 
 export class UserData {

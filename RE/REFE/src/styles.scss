@@ -123,6 +123,22 @@ table {
   border-spacing: 0;
 }
 
+
+//default
+h1{
+    font-size: 2em;
+}
+h2{
+    font-size: 1.75em;
+}
+h3{
+    font-size: 1.4em;
+}
+h4{
+    font-size: 1em;
+}
+
+
 /* You can add global styles to this file, and also import other style files */
 
 // Fonts (titles, everthing else)
@@ -166,9 +182,9 @@ nav {
     text-decoration: none;
     color: #fff;
   }
-  div {
-    flex: 1;
-  }
+//   div {
+//     flex: 1;
+//   }
 }
 
 .poster {
@@ -266,6 +282,67 @@ ul {
     opacity: 1;
   }
 }
+
+//********************************** Mixins *******************************************************************************************
+
+@mixin basic($textColor: white, $backgroundColor: lightgray){
+    display: flex;
+    flex-direction: column;
+    background-color: $backgroundColor;
+    color: $textColor;
+    align-items: center;
+    box-shadow: gray 5px 5px 5px;
+}
+
+@mixin Buttons($textColor: #03a, $backgroundColor: #fff) {
+    cursor: pointer;
+    font-size: 16px;
+    font-family: $titleFont;
+    border-radius: 25px;
+    padding: 10px;
+    background-color: $backgroundColor;
+    color: $textColor;
+    border: $textColor solid 2px;
+    transition: 0.4s;
+    &:hover {
+        background-color: $textColor;
+        color: $backgroundColor;
+        border: $backgroundColor solid 2px;
+        box-shadow: 3px 4px 8px #000000a3;
+    }
+}
+
+@mixin align-left{
+    text-align: left;
+    align-content: left;
+    align-items: left;
+    -webkit-box-align: left;
+    justify-content: left;
+    justify-items: left;
+    justify-self: left;
+    -ms-flex-align: left;
+}
+@mixin align-center{
+    text-align: center;
+    align-content:     center;
+    align-items:       center;
+    -webkit-box-align: center;
+    justify-content:   center;
+    justify-items:     center;
+    justify-self:      center;
+    -ms-flex-align:    center;
+}
+@mixin align-right{
+    text-align: right;
+    align-content:     right;
+    align-items:       right;
+    -webkit-box-align: right;
+    justify-content:   right;
+    justify-items:     right;
+    justify-self:      right;
+    -ms-flex-align:    right;
+}
+
 //********************************** Classes ******************************************************************************************
 .container {
   background-color: #0033aa;
@@ -277,34 +354,15 @@ ul {
   flex-direction: row;
 }
 
-//********************************** Mixins *******************************************************************************************
-
-@mixin basic($textColor: white, $backgroundColor: lightgray){
+.column{
     display: flex;
     flex-direction: column;
-    width: 35%;
-    background-color: $backgroundColor;
-    color: $textColor;
-    align-items: center;
-    box-shadow: gray 5px 5px 5px;
-
-    padding: 25px;
 }
 
-@mixin Buttons($textColor: #03a, $backgroundColor: #fff) {
-  cursor: pointer;
-  font-size: 16px;
-  font-family: $titleFont;
-  border-radius: 25px;
-  padding: 10px;
-  background-color: $backgroundColor;
-  color: $textColor;
-  border: $textColor solid 2px;
-  transition: 0.4s;
-  &:hover {
-    background-color: $textColor;
-    color: $backgroundColor;
-    border: $backgroundColor solid 2px;
-    box-shadow: 3px 4px 8px #000000a3;
-  }
+.left{
+    @include align-left()
+}
+
+.right{
+    @include align-right()
 }

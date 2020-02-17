@@ -1,25 +1,92 @@
 @import '../../styles.scss';
 
-button{
-    @include Buttons;
+button {
+    @include Buttons(#fff,$blue);
     margin: 5px;
 }
 
-#page{
+#page {
     align-items: center;
-    display: flex;
-    flex-direction: column;
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 3%;
+    margin-bottom: 25%;
     @include basic(black, lightgray);
 }
-
-#top{
-    width: 400px;
+#userData{
+    text-align: -webkit-center;
+    padding: 2%;
+    width: 80%;
+    h2{
+        text-align: left;
+    }
 }
 
-th{
+#top {
     text-align: left;
+    width: 100%;
+    color: white;
+    background-color: $blue;
+    h1{
+        padding: 3%;
+        padding-bottom: 0px;
+    }
+    p{
+        padding: 3%;
+        padding-top: 0px;;
+    }
 }
 
-td{
-    text-align: right;
+a {
+    text-decoration: none;
+    color: black;
+}
+
+table{
+    width: 60%;
+    font-size: 20px;
+    th{
+        text-align: left;
+        padding: 5%;
+    }
+    
+    td{
+        text-align: right;
+        padding: 5%;
+    }
+}
+
+.reviewPoster{
+    height: 150px;
+    width: 120px;
+}
+
+#reviews{
+    width: 80%;
+    padding: 2%;
+}
+
+.review{
+    width: 100%;
+    padding: 2% 0%;
+    border-bottom: black 1px solid;
+     p{
+         padding: 3%;
+     }
+     h4{
+         padding: 1%;
+     }
+     #left{
+        width: 20%;
+     }
+     
+     #middle{
+         width: 55%;
+         margin: 10px;
+     }
+     
+     #right{
+         width: 25%;
+     }
+    
 }
