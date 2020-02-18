@@ -19,8 +19,9 @@ export class UsersComponent implements OnInit {
 
   }
 
-  getUsers(username) {
-    this.firebaseService.getUserByUsername(username).then(data => {
+  getUsers(search, searchBy) {
+    // this.firebaseService.getUserByUsername(username).then(data => {
+      this.firebaseService.getUserByUsername(search).then(data => {
       this.userList = data.docs.map(e => {
         return {
           userID: e.id,

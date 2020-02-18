@@ -1,7 +1,13 @@
-<h1>Login</h1>
-<section>
-    <input type="text" placeholder="Email" [(ngModel)]="email">
-    <input type="text" placeholder="Password" [(ngModel)]="password">
-    <button (click)="login(email, password)" formtarget="_blank">Submit</button>
+
+<div class="page">
+    <div class="top">
+        <h1>Login</h1>
+        <p>Don't have an account? <a href="/signUp">Create one here!</a></p>
+    </div>
+    <section>
+        <input id="email" type="text" placeholder="Email" [(ngModel)]="email">
+        <input id="password" type="text" placeholder="Password" [(ngModel)]="password">
+        <button id="btn" (click)="login(email, password)" formtarget="_blank">Log In</button>
         <p id="failed" *ngIf="checkExists">{{checkExists}}</p>
-</section>
+    </section>
+</div>

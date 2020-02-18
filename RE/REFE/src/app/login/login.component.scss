@@ -1,3 +1,31 @@
 #failed{
     color: red;
 }
+input{
+    // display: flex;
+    // flex-direction: row;
+    width: 80%;
+    margin: 1%;
+    align-items: center;
+    padding: 5px;
+    border: gray 2px solid;
+    width: 80%;
+}
+    #email{
+        margin-top: 5%;
+    }
+    #password{
+        margin-bottom: 5%;
+    }
+    #btn{
+        margin: 3%;
+        width: 25%;
+    }
+
+    @media all and (max-width: 450px){
+        .page{
+            margin: 0px;
+            width: 100%;
+            margin-top: 3%;
+        }
+    }

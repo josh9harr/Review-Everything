@@ -1,0 +1,63 @@
+@import '../../styles.scss';
+
+.page{
+    width: 90%;
+    margin-left: 5%;
+}
+
+#searchbox{
+    margin: 3% 0%;
+}
+
+input {
+    border-radius: 25px;
+    width: 80%;
+    height: 30px;
+    font-size: 18px;
+    padding: 10px;
+}
+
+#table1{
+    margin: 2%;
+    padding: 5%;
+    th{
+        font-size: 20px;
+        padding: 1%;
+    }
+    td{
+        padding: 2%;
+    }
+    #fname, #lname, #city, #zip{
+        width: 5%;
+    }
+    #email, #username, #street{
+        width: 15%;
+    }
+    #state{
+        width: 2%;
+    }
+}
+#table2{
+    display: none;
+}
+
+@media all and (max-width: 1000px){
+    .page{
+        margin-left: 0px;
+        width: 100%;
+    }
+    #table1{
+        display: none
+    }
+    #table2{
+        display: block;
+        padding: 10% 0%;
+        th{
+            text-align: left;
+        }
+        td{
+            text-align: right;
+            padding: 3%;
+        }
+    }
+}
