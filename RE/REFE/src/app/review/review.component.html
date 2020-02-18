@@ -1,7 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<i class="fa fa-star-half"></i>
-
 <div id="top">
     <!-- Background poster -->
     <img id="backImg" src='{{imageBase}}{{size}}{{movieData.backdrop_path}}' alt="{{movieData.title}} Backdrop" />
@@ -104,7 +102,7 @@
         </div>
         <textarea id="reviewBox" placeholder="Write Your Review Here! (500 Character Limit)" rows="10" cols="50"
             maxlength="500" type="text" formControlName="rateMessage"></textarea>
-        <button class="button" type="submit">Submit Review</button>
+        <button id="subBtn" class="button" type="submit">Submit Review</button>
     </form>
 </div>
 
@@ -113,7 +111,7 @@
         <h1>Reviews for {{movieName}}</h1>
     </div>
     <ul>
-            <h2 id="noReviews" *ngIf='allReviews.length === 0'>There are no reviews at this time. Be the first to write one now!</h2>        
+            <h2 id="noReviews" *ngIf='allReviews.length === 0'>There are no reviews at this time. Be the first to write one now!</h2>
         <li class="listReview" *ngFor='let review of allReviews;'>
             <h2>{{review.username}}</h2>
             <h3>{{review.rating}}/5</h3>
