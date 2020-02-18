@@ -1,4 +1,4 @@
-<h1>Profile Page</h1>
+<!-- <h1>Profile Page</h1>
 <button (click)="logout()" formtarget="_blank">Logout</button>
 <a href="/update-user">update user Data</a>
 <div>
@@ -77,5 +77,110 @@
         <p>{{review.reviewMessage}}</p>
         <button (click)="delete(review.userReviewId,review.mediaId,review.mediaReviewId)">Delete Review</button>
         <button (click)="editReview(review.userReviewId)">Edit Review</button>
+    </div> -->
+        <div id="userData" *ngIf="curUser">
+            <h2>Account Information</h2>
+            <table>
+                <tr>
+                    <th>Username: </th>
+                    <td>{{curUser.username}}</td>
+                </tr>
+                <tr>
+                    <th>Full Name: </th>
+                    <td>{{curUser.fname}} {{curUser.lname}}</td>
+                </tr>
+                <tr>
+                    <th>Phone Number: </th>
+                <td>{{curUser.phone}}</td>
+            </tr>
+            <tr>
+                <th>Address: </th>
+                <td>{{curUser.street}}<br>
+                    {{curUser.city}},
+                    {{curUser.state}}
+                    {{curUser.zip_code}}</td>
+                </tr>
+            </table>
+            
+            <div id="profileButtons">
+                <button (click)="toAdmin()">Update Profile</button>
+                <button (click)="toUpdate()" *ngIf="isAdmin">Admin Features</button>
+                <button (click)="logout()" formtarget="_blank">Log out</button>
+            </div>
+        </div>        
+    
+    <section id="reviews">
+        <h2>Reviews</h2>
+        <div *ngFor="let review of reviews" class="review">
+            <div id="left" class="column">
+                <a href="/reviews/{{review.mediaId}}">
+                    <img class="reviewPoster" src="{{review.poster}}" alt="Movie Poster"/>
+                </a>
+
+            </div>
+            <div id="middle" class="column">
+                <a href="/reviews/{{review.mediaId}}">
+                    <h3>{{review.mediaName}}</h3>
+                </a>
+                <h4>{{review.rating}}/5</h4>
+                <div class="rating_sytem_noHover">
+                        <div class="rating-group_noHover ">
+                            <label class="star_noHover  star_Half_noHover " for="rating2-05"><i
+                                    class="rating_Icon_noHover  star_Icon_noHover  fa fa-star-half"
+                                    [ngClass]="{'starCheck_noHover ': review.rating >= 0.5 }"></i></label>
+            
+                            <label aria-label=" 1 star" class="star_noHover " for="rating2-10"><i
+                                    class="rating_Icon_noHover  star_Icon_noHover  fa fa-star"
+                                    [ngClass]="{'starCheck_noHover ': review.rating >= 1 }"></i></label>
+            
+            
+                            <label aria-label="1.5 stars" class="star_noHover  star_Half_noHover " for="rating2-15"><i
+                                    class="rating_Icon_noHover  star_Icon_noHover  fa fa-star-half"
+                                    [ngClass]="{'starCheck_noHover ': review.rating >= 1.5 }"></i></label>
+            
+            
+                            <label aria-label="2 stars" class="star_noHover " for="rating2-20"><i
+                                    class="rating_Icon_noHover  star_Icon_noHover  fa fa-star"
+                                    [ngClass]="{'starCheck_noHover ': review.rating >= 2 }"></i></label>
+            
+            
+                            <label aria-label="2.5 stars" class="star_noHover  star_Half_noHover " for="rating2-25"><i
+                                    class="rating_Icon_noHover  star_Icon_noHover  fa fa-star-half"
+                                    [ngClass]="{'starCheck_noHover ': review.rating >= 2.5 }"></i></label>
+            
+            
+                            <label aria-label="3 stars" class="star_noHover " for="rating2-30"><i
+                                    class="rating_Icon_noHover star_Icon_noHover  fa fa-star"
+                                    [ngClass]="{'starCheck_noHover ': review.rating >= 3 }"></i></label>
+            
+            
+                            <label aria-label="3.5 stars" class="star_noHover  star_Half_noHover " for="rating2-35"><i
+                                    class="rating_Icon_noHover  star_Icon_noHover  fa fa-star-half"
+                                    [ngClass]="{'starCheck_noHover ': review.rating >= 3.5 }"></i></label>
+            
+            
+                            <label aria-label="4 stars" class="star_noHover " for="rating2-40"><i
+                                    class="rating_Icon_noHover  star_Icon_noHover  fa fa-star"
+                                    [ngClass]="{'starCheck_noHover ': review.rating >= 4 }"></i></label>
+            
+            
+                            <label aria-label="4.5 stars" class="star_noHover  star_Half_noHover " for="rating2-45"><i
+                                    class="rating_Icon_noHover  star_Icon_noHover  fa fa-star-half"
+                                    [ngClass]="{'starCheck_noHover ': review.rating >= 4.5 }"></i></label>
+            
+            
+                            <label aria-label="5 stars" class="star_noHover " for="rating2-50"><i
+                                    class="rating_Icon_noHover  star_Icon_noHover  fa fa-star"
+                                    [ngClass]="{'starCheck_noHover ': review.rating >= 5}"></i></label>
+            
+                        </div>
+                    </div>
+                <p>{{review.reviewMessage}}</p>
+            </div>
+            <div id="right" class="column">
+                <button (click)="editReview(review.userReviewId)">Edit Review</button>
+                <button (click)="delete(review.userReviewId,review.mediaId,review.mediaReviewId)">Delete Review</button>
+            </div>
+        </div>
+    </section>
     </div>
-</section>

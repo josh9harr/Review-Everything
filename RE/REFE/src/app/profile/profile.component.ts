@@ -83,4 +83,12 @@ export class ProfileComponent implements OnInit {
   logout() {
     this.firebaseService.signOut();
   }
+  
+  toAdmin(){
+    window.location.replace('/update-user')
+  }
+  
+  toUpdate(){
+    window.location.replace('/users')
+  }
 }
