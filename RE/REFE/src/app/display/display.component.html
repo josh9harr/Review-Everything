@@ -1,5 +1,3 @@
-
-
 <div>
     <h2>Showing Results for {{searchResult}}</h2>
 </div>
@@ -7,7 +5,7 @@
 
 <ul id="allMovies">
     <!-- printing list of movies that are clickable  -->
-    <li *ngFor='let movie of list' [class.selected]="movie === selectedMovie" (click)='select(movie)'>
+    <li *ngFor='let movie of list' [class.selected]="movie === selectedMovie" class="movie" (click)='select(movie)'>
         <div class="clickableMovie">
             <div *ngIf="movie.poster_path != null; else defaultPoster">
                 <img class="poster" src="{{imageBase}}{{size}}{{movie.poster_path}}" alt='{{movie.title}} poster'
@@ -21,7 +19,8 @@
             <b>{{movie.title}}</b>
         </div>
     </li>
-    <div id="loadMoreButton">
-        <i class="fa fa-sort-down"></i>
-    </div>
 </ul>
+<div id="loadMoreButton">
+    <h3>Load More</h3>
+    <i id="loadMoreIcon" class=" fa fa-sort-down"></i>
+</div>

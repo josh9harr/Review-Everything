@@ -1,7 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<i class="fa fa-star-half"></i>
-
 <div id="top">
     <!-- Background poster -->
     <img id="backImg" src='{{imageBase}}{{size}}{{movieData.backdrop_path}}' alt="{{movieData.title}} Backdrop" />
@@ -43,8 +41,6 @@
 
 
 </div>
-
-<fa-icon [icon]="faStarHalf"></fa-icon>
 
 <div id="writeReview">
     <div class="top" *ngIf="userHasReviewed; else updateTitle">
@@ -103,7 +99,7 @@
 
         </div>
         <input id="reviewBox" placeholder="Write Your Review Here! (500 Character Limit)" rows="10" cols="50"
-            maxlength="500" type="text" formControlName="rateMessage">
+            maxlength="500" type="textarea" formControlName="rateMessage">
         <button class="button" type="submit">Submit Review</button>
     </form>
 </div>
