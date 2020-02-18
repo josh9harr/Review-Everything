@@ -109,8 +109,8 @@
             </table>
             
             <div id="profileButtons">
-                <button href="/update-user">Update Profile</button>
-                <button href="/users" *ngIf="isAdmin">Admin Features</button>
+                <button (click)="toAdmin()">Update Profile</button>
+                <button (click)="toUpdate()" *ngIf="isAdmin">Admin Features</button>
                 <button (click)="logout()" formtarget="_blank">Log out</button>
             </div>
         </div>        
