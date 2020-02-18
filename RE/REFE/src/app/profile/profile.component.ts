@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router"
 import { FirebaseService } from 'src/app/firebase.service'
 import { AngularFireAuth } from "@angular/fire/auth";
-import { UserReview, UserData } from "../user-review.model"
+import { UserReview, UserData } from "../user-review.model";
+import { MoviesService } from '../movies.service';
 
 
 @Component({
@@ -17,26 +18,28 @@ export class ProfileComponent implements OnInit {
   uid: string
   curUser: UserData
   isAdmin: boolean = false;
-  imageBase = 'https://image.tmdb.org/t/p/';
-  size = 'original';
-  
+  // imageBase = 'https://image.tmdb.org/t/p/';
+  // size = 'original';
+  // poster;
+  userReviews: UserReview;
+
   constructor(
     private router: Router,
     private firebaseService: FirebaseService,
     private fireAuth: AngularFireAuth,
-    private userReview: UserReview
+    private userReview: UserReview,
+    private movieServies: MoviesService,
+    
   ) { }
 
   ngOnInit() {
-    this.firebaseService.getUserByUsername("CristianTest").then(data => {
-      console.log(data.docs[0].data());
-    });
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
         this.uid = user.uid;
         //get review data from database
         this.firebaseService.getUserReviews(user.uid).subscribe(data => {
           this.reviews = data.map(e => {
+            // let data = this.movieServies.getMovieData(this.reviews.mediaId)
             return {
               userReviewId: e.payload.doc.id,
               ...e.payload.doc.data()
