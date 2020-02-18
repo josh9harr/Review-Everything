@@ -29,6 +29,8 @@ import { UpdateUserComponent } from './update-user/update-user.component';
 import { UsersComponent } from './users/users.component';
 import { FilterPipe } from './filter.pipe';
 
+// Font Awesome
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome"
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { FilterPipe } from './filter.pipe';
 
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -58,7 +61,7 @@ import { FilterPipe } from './filter.pipe';
     FormsModule,
     RouterModule.forRoot([
       { path: "reviews/:id", component: ReviewComponent },
-      { path: 'users', component: UsersComponent},
+      { path: 'users', component: UsersComponent },
       { path: "home", component: ProfileComponent },
       { path: "login", component: LoginComponent },
       { path: "signUp", component: SignUpComponent },

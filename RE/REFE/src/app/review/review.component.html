@@ -1,10 +1,14 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<i class="fa fa-star-half"></i>
+
 <div id="top">
     <!-- Background poster -->
     <img id="backImg" src='{{imageBase}}{{size}}{{movieData.backdrop_path}}' alt="{{movieData.title}} Backdrop" />
 
-        <!-- poster image -->
+    <!-- poster image -->
     <div id="displayInfo">
-        <img id="moviePoster" src="{{imageBase}}{{size}}{{movieData.poster_path}}" alt='{{movieData.title}} poster'/>
+        <img id="moviePoster" src="{{imageBase}}{{size}}{{movieData.poster_path}}" alt='{{movieData.title}} poster' />
 
         <!-- Displays the data of the movie to the users -->
         <div class="column">
@@ -14,19 +18,21 @@
             </h1>
             <!-- <h3 id="tag"><i>{{movieData.tagline}}</i></h3> -->
             <div id="genres">
-                <div class="genres" *ngFor='let genre of movieData.genres' >{{genre.name}}  &nbsp;</div>
+                <div class="genres" *ngFor='let genre of movieData.genres'>{{genre.name}} &nbsp;</div>
             </div>
 
             <section class="row">
-                <h4>Release Date:&nbsp;</h4><p id="date">{{movieData.release_date}}</p>
-                <h4>&nbsp;Run Time:&nbsp;</h4><p id="time">{{movieData.runtime}} Minutes</p>
+                <h4>Release Date:&nbsp;</h4>
+                <p id="date">{{movieData.release_date}}</p>
+                <h4>&nbsp;Run Time:&nbsp;</h4>
+                <p id="time">{{movieData.runtime}} Minutes</p>
             </section>
 
             <section class="row">
             </section>
 
             <section class="row">
-                <h4>Budget:&nbsp;</h4>${{movieData.budget}} <h4>&nbsp;  Revenue:&nbsp;</h4>${{movieData.revenue}}<br>
+                <h4>Budget:&nbsp;</h4>${{movieData.budget}} <h4>&nbsp; Revenue:&nbsp;</h4>${{movieData.revenue}}<br>
             </section>
             <section class="">
                 <h4>Overview: </h4>
@@ -38,14 +44,15 @@
 
 </div>
 
+<fa-icon [icon]="faStarHalf"></fa-icon>
 
 <div id="writeReview">
     <div class="top" *ngIf="userHasReviewed; else updateTitle">
         <h1>Update your review for {{movieName}}</h1>
     </div>
-    <ng-template #updateTitle >
+    <ng-template #updateTitle>
         <div class="top">
-            <h1 >Write Review For {{movieName}}</h1>
+            <h1>Write Review For {{movieName}}</h1>
         </div>
     </ng-template>
     <form *ngIf="starForm" [formGroup]="starForm" (ngSubmit)="submit(starForm.value)" id="rating_sytem">
@@ -95,8 +102,8 @@
             <input class="rating_Input" name="rating" formControlName="rating" id="rating2-50" value="5" type="radio">
 
         </div>
-        <input id="reviewBox" placeholder="Write Your Review Here! (500 Character Limit)" rows="10" cols="50" maxlength="500" type="text"
-            formControlName="rateMessage">
+        <input id="reviewBox" placeholder="Write Your Review Here! (500 Character Limit)" rows="10" cols="50"
+            maxlength="500" type="text" formControlName="rateMessage">
         <button class="button" type="submit">Submit Review</button>
     </form>
 </div>
@@ -106,14 +113,14 @@
         <h1>Reviews for {{movieName}}</h1>
     </div>
     <ul>
-        <h2 id="noReviews" *ngIf='allReviews.length === 0'>There are no reviews at this time. Be the first to write one now!</h2>        
+        <h2 id="noReviews" *ngIf='!allReviews'>There are no reviews at this time. Be the first to write one now!</h2>
         <li class="listReview" *ngFor='let review of allReviews;'>
             <h2>{{review.username}}</h2>
             <h3>{{review.rating}}/5</h3>
             <div class="rating_sytem_noHover">
                 <div class="rating-group_noHover ">
                     <label class="star_noHover  star_Half_noHover " for="rating2-05"><i
-                            class="rating_Icon_noHover  star_Icon_noHover  fa fa-star-half"
+                            class="rating_Icon_noHover  star_Icon_noHover  fas fa-star-half"
                             [ngClass]="{'starCheck_noHover ': review.rating >= 0.5 }"></i></label>
 
                     <label aria-label=" 1 star" class="star_noHover " for="rating2-10"><i
