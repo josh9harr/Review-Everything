@@ -1,3 +1,25 @@
 .check{
     color: red;
 }
+
+input{
+    margin: 5px;
+    padding: 5px;
+    border: gray 2px solid;
+    width: 80%;
+}
+
+.top{
+    margin-bottom: 2%;
+}
+
+#changeEP{
+    margin: 3%;
+}
+
+@media all and (max-width: 450px){
+    .page{
+        margin: 3% 0%;
+        width: 100%;
+    }
+}
