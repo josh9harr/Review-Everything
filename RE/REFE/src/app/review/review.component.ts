@@ -7,6 +7,7 @@ import { MoviesService } from '../movies.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { UserReview, UserData } from "../user-review.model"
 import { Router } from "@angular/router"
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome"
 
 @Component({
   selector: 'app-review',
@@ -85,7 +86,6 @@ export class ReviewComponent implements OnInit {
         }
       })
       this.allReviews.forEach(review => {
-
         if (review.userID == this.userID) {
           this.userHasReviewed = true;
         }
@@ -121,8 +121,8 @@ export class ReviewComponent implements OnInit {
     newReview.userID = this.userID;
     newReview.id = userReviewId;
     this.firebaseService.createReview(newReview, this.id, mediaID);
-    
-    
+
+
     userReview.mediaName = this.movieName;
     userReview.mediaReviewId = mediaID;
     userReview.mediaId = this.id;
