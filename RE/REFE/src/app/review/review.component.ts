@@ -23,7 +23,7 @@ export class ReviewComponent implements OnInit {
   isAdmin: boolean = false;
   userID = "";
   movieData;
-  allReviews;
+  allReviews = [];
   imageBase = 'https://image.tmdb.org/t/p/';
   size = 'original';
   userHasReviewed: boolean = false;
