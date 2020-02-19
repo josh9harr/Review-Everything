@@ -163,6 +163,10 @@ p {
   font-family: $otherFont;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0px;
   font-family: $otherFont;
@@ -173,6 +177,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   position: relative;
+  height: 100%;
 }
 
 nav {
@@ -190,16 +195,17 @@ nav {
     text-decoration: none;
     color: #fff;
   }
+
+  a:visited {
+    color: #f9be0a;
+  }
+
   div {
     flex: 0.5;
   }
   //   div {
   //     flex: 1;
   //   }
-}
-
-a:visited {
-  color: #f9be0a;
 }
 
 .poster {
@@ -519,7 +525,8 @@ button {
 }
 
 #site {
-  background-color: #26262670;
+  height: 100%;
+  background-color: #26262675;
   color: #f2f2f2;
   // background: radial-gradient(circle, rgba(0, 0, 0, 0.69) 0%, rgba(244, 244, 244, 0) 100%);
 }
@@ -541,8 +548,18 @@ button {
 
 //********************************* Responsiveness ***********************************************************************************
 
+// @media all and (max-width: 700px) {
+//   // nav {
+//   //   // display: none;
+//   // }
+// }
+
 @media all and (max-width: 700px) {
   nav {
-    display: none;
+    font-size: 12px;
+
+    a {
+      font-size: 16px;
+    }
   }
 }

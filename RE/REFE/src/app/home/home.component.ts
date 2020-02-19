@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  loggedin: boolean = false;
 
-  constructor() { }
+  constructor(
+    private fireAuth: AngularFireAuth,
+  ) { }
 
   ngOnInit() {
+    this.fireAuth.auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.loggedin = true;
+      }
+    });
   }
 
 }
