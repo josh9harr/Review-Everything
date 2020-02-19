@@ -40,7 +40,12 @@
         <div *ngFor="let review of reviews" class="review">
             <div id="left" class="column">
                 <a href="/reviews/{{review.mediaId}}">
-                    <img class="reviewPoster" src="{{review.poster}}" alt="Movie Poster" />
+                    <div *ngIf="review.poster != null; else defaultPoster">
+                        <img class="reviewPoster" src="{{review.poster}}" alt="Movie Poster" />
+                    </div>
+                    <ng-template #defaultPoster>
+                        <img class="poster is-dark" src="assets/img/background_3.jpg" alt=' poster' width="185px" />
+                    </ng-template>
                 </a>
             </div>
             <div id="middle" class="column">

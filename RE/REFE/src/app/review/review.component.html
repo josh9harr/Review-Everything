@@ -2,12 +2,25 @@
 
 <div id="top">
     <!-- Background poster -->
-    <img id="backImg" src='{{imageBase}}{{size}}{{movieData.backdrop_path}}' alt="{{movieData.title}} Backdrop" />
+    <!-- <img id="backImg" src='{{imageBase}}{{size}}{{movieData.backdrop_path}}' alt="{{movieData.title}} Backdrop" /> -->
+
+
+    <div *ngIf="movieData.backdrop_path != null; else defaultBackdrop">
+        <img id="backImg" src='{{imageBase}}{{size}}{{movieData.backdrop_path}}' alt="{{movieData.title}} Backdrop" />
+    </div>
+    <ng-template #defaultBackdrop>
+        <img id="backImg" src="assets/img/backdrop.jpg" alt='{{movie.title}} poster' />
+    </ng-template>
 
     <!-- poster image -->
     <div id="displayInfo">
-        <img id="moviePoster" src="{{imageBase}}{{size}}{{movieData.poster_path}}" alt='{{movieData.title}} poster' />
-
+        <div *ngIf="movieData.poster_path != null; else defaultPoster">
+            <img id="moviePoster" src="{{imageBase}}{{size}}{{movieData.poster_path}}"
+                alt='{{movieData.title}} poster' />
+        </div>
+        <ng-template #defaultPoster>
+            <img id="moviePoster" src="assets/img/background_3.jpg" alt='{{movie.title}} poster' />
+        </ng-template>
         <!-- Displays the data of the movie to the users -->
         <div class="column">
 

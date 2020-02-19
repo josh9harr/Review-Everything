@@ -1,4 +1,56 @@
-<h1>Updating Review for {{displayReview.mediaName}}</h1>
-<input type="text" placeholder="Review text" value="{{displayReview.reviewMessage}}" [(ngModel)]="revMessage">
-<input type="number" max='5' min='1' value="{{displayReview.rating}}" [(ngModel)]="revRating">
-<button (click)="updateReview(revMessage,revRating)">Edit Review</button>
+<div id="writeReview">
+    <div class="top">
+        <h1>Update your review for {{displayReview.mediaName}}</h1>
+    </div>
+    <form *ngIf="starForm" [formGroup]="starForm" (ngSubmit)="updateReview(starForm.value)" id="rating_sytem">
+        <div class="rating-group">
+            <label aria-label="0.5 stars" class="star star_Half" for="rating2-05"><i
+                    class="rating_Icon star_Icon fa fa-star-half"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-05" value="0.5" type="radio">
+
+            <label aria-label="1 star" class="star" for="rating2-10"><i
+                    class="rating_Icon star_Icon fa fa-star"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-10" value="1" type="radio">
+
+
+            <label aria-label="1.5 stars" class="star star_Half" for="rating2-15"><i
+                    class="rating_Icon star_Icon fa fa-star-half"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-15" value="1.5" type="radio">
+
+            <label aria-label="2 stars" class="star" for="rating2-20"><i
+                    class="rating_Icon star_Icon fa fa-star"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-20" value="2" type="radio">
+
+
+            <label aria-label="2.5 stars" class="star star_Half" for="rating2-25"><i
+                    class="rating_Icon star_Icon fa fa-star-half"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-25" value="2.5" type="radio">
+
+            <label aria-label="3 stars" class="star" for="rating2-30"><i
+                    class="rating_Icon star_Icon fa fa-star"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-30" value="3" type="radio">
+
+
+            <label aria-label="3.5 stars" class="star star_Half" for="rating2-35"><i
+                    class="rating_Icon star_Icon fa fa-star-half"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-35" value="3.5" type="radio">
+
+            <label aria-label="4 stars" class="star" for="rating2-40"><i
+                    class="rating_Icon star_Icon fa fa-star"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-40" value="4" type="radio">
+
+
+            <label aria-label="4.5 stars" class="star star_Half" for="rating2-45"><i
+                    class="rating_Icon star_Icon fa fa-star-half"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-45" value="4.5" type="radio">
+
+            <label aria-label="5 stars" class="star" for="rating2-50"><i
+                    class="rating_Icon star_Icon fa fa-star"></i></label>
+            <input class="rating_Input" name="rating" formControlName="rating" id="rating2-50" value="5" type="radio">
+
+        </div>
+        <textarea id="reviewBox" placeholder="Write Your Review Here! (500 Character Limit)" rows="10" cols="50"
+            maxlength="500" type="text" formControlName="rateMessage"></textarea>
+        <button id="subBtn" class="button" type="submit">Submit Review</button>
+    </form>
+</div>

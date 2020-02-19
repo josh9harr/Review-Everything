@@ -3,6 +3,7 @@ import { Router } from "@angular/router"
 import { FirebaseService } from 'src/app/firebase.service'
 import { AngularFireAuth } from "@angular/fire/auth";
 import { ActivatedRoute } from '@angular/router'
+import { FormBuilder } from '@angular/forms';
 import { UserReview } from '../user-review.model'
 
 @Component({
@@ -17,11 +18,13 @@ export class UpdateReviewComponent implements OnInit {
   displayReview = {};
   userReview: UserReview;
   mediaReview;
+  starForm;
 
   constructor(
     private router: Router,
     private firebaseService: FirebaseService,
     private fireAuth: AngularFireAuth,
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute
   ) { }
 
@@ -41,6 +44,14 @@ export class UpdateReviewComponent implements OnInit {
           this.userReview = resReview;
           this.firebaseService.getMediaReview(reviewData.mediaId, reviewData.mediaReviewId).toPromise().then(data => {
             this.mediaReview = data.data();
+            this.starForm = this.formBuilder.group({
+              rating: [reviewData.rating],
+              rateMessage: reviewData.reviewMessage
+            });
+          });
+          this.starForm = this.formBuilder.group({
+            rating: ["0.5"],
+            rateMessage: ""
           });
         })
       } else {
@@ -49,7 +60,9 @@ export class UpdateReviewComponent implements OnInit {
     })
   }
 
-  updateReview(revMessage: string, rating: number) {
+  updateReview(credentials) {
+    const revMessage = credentials.rateMessage;
+    const rating = credentials.rating;
     // console.log("this is running")
     if (revMessage != undefined) {
       this.userReview.reviewMessage = revMessage;
