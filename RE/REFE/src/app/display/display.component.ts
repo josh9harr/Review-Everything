@@ -5,6 +5,8 @@ import { Router } from "@angular/router";
 import { FirebaseService } from 'src/app/firebase.service';
 import { GENRES } from '../../assets/genre';
 import { ActivatedRoute } from '@angular/router';
+import { AngularFireAuth } from "@angular/fire/auth";
+
 
 @Component({
   selector: 'app-display',
@@ -13,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DisplayComponent implements OnInit {
   movies;
-  list;
+  list = [];
   selectedMovie;
   filter;
   reviews;
@@ -25,11 +27,16 @@ export class DisplayComponent implements OnInit {
   imageBase = 'https://image.tmdb.org/t/p/';
   size = 'original';
   genres = GENRES;
+  pageNum = 1;
+  searchID;
+  canLoadMore: boolean = true;
+  loggedin: boolean = false;
   constructor(private moviesService: MoviesService,
     private router: Router,
     private firebaseService: FirebaseService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private fireAuth: AngularFireAuth
   ) {
     this.filter = new FormGroup({
       searchBy: new FormControl('title')
@@ -37,9 +44,14 @@ export class DisplayComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fireAuth.auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.loggedin = true;
+      }
+    });
     this.getMovies(this.route.snapshot.params.filter, this.route.snapshot.params.searched)
+    this.searchBy = new FormControl(this.route.snapshot.params.filter)
   }
-
   //gets api data from the service
   getMovies(searchBy: string, title: string) {
     // returns movies searched by title
@@ -49,23 +61,32 @@ export class DisplayComponent implements OnInit {
         //puts api data set to movies then grabs just the movies array to put into this.list
         this.movies = data
         this.list = this.movies.results;
+        if (this.movies.total_pages == this.pageNum) {
+          this.canLoadMore = false;
+        }
+        this.pageNum++;
       },
         err => console.error(err),
       );
+      this.searchID = title;
       // returns movies searched by actor
     } else if (searchBy == 'actor') {
+      this.searchID = title;
       // Calls API to search for the person ID
       this.moviesService.searchActor(title).subscribe(data => {
         // Sets the searched id to this.actorId
         this.actorData = data
         this.actorId = this.actorData.results[0].id
-
         // Discovers movies from the actor
         this.moviesService.getActor(this.actorId).subscribe(data => {
           //puts api data set to movies then grabs just the movies array to put into this.list
           console.log(this.actorId)
           console.log(data)
           this.movies = data
+          if (this.movies.total_pages == this.pageNum) {
+            this.canLoadMore = false;
+          }
+          this.pageNum++;
           this.list = this.movies.results
           console.log(this.list)
         },
@@ -77,15 +98,20 @@ export class DisplayComponent implements OnInit {
     } else if (searchBy == 'genre') {
       // Loops through list of all genres to find the ID of the searched value
       this.genres.forEach(element => {
-
-        if (element.name == title) {
+        const genreName = title.charAt(0).toUpperCase() + title.substring(1);
+        if (element.name == genreName) {
           this.genreId = element.id;
+          this.searchID = this.genreId;
         }
       });
 
       this.moviesService.getGenres(this.genreId).subscribe(data => {
         //puts api data set to movies then grabs just the movies array to put into this.list
         this.movies = data
+        if (this.movies.total_pages == this.pageNum) {
+          this.canLoadMore = false;
+        }
+        this.pageNum++;
         console.log(data)
         this.list = this.movies.results
         console.log(this.list)
@@ -93,6 +119,7 @@ export class DisplayComponent implements OnInit {
         err => console.error(err),
       );
     }
+
   }
 
   checkError() {
@@ -121,7 +148,51 @@ export class DisplayComponent implements OnInit {
   }
 
   loadMore() {
-    console.log("will load more movies")
+    switch (this.searchBy.value) {
+      case "title":
+        this.moviesService.getMoreMovies(this.searchID, this.pageNum).subscribe(data => {
+          this.movies = data;
+          this.movies.results.forEach(movie => {
+            this.list.push(movie);
+          });
+          if (this.movies.total_pages == this.pageNum) {
+            this.canLoadMore = false;
+          }
+          this.pageNum++;
+        });
+        break;
+      case "genre":
+        this.moviesService.getMoreGenres(this.searchID, this.pageNum).subscribe(data => {
+          this.movies = data;
+          this.movies.results.forEach(movie => {
+            this.list.push(movie)
+          });
+          if (this.movies.total_pages == this.pageNum) {
+            this.canLoadMore = false;
+          }
+          this.pageNum++;
+        });
+        break;
+      case "actor":
+        this.moviesService.searchActor(this.searchID).subscribe(data => {
+          this.actorData = data
+          this.actorId = this.actorData.results[0].id
+
+          this.moviesService.getMoreActorMovies(this.actorId, this.pageNum).subscribe(data => {
+            this.movies = data
+            this.movies.results.forEach(movie => {
+              this.list.push(movie)
+            });
+            if (this.movies.total_pages == this.pageNum) {
+              this.canLoadMore = false;
+            }
+            this.pageNum++;
+          },
+            err => console.error(err),
+          );
+        })
+        break;
+    }
   }
 
   loadReview(id: string) {

@@ -1,27 +1,104 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 body {
   line-height: 1;
@@ -46,19 +123,18 @@ table {
   border-spacing: 0;
 }
 
-
 //default
-h1{
-    font-size: 2em;
+h1 {
+  font-size: 2em;
 }
-h2{
-    font-size: 1.75em;
+h2 {
+  font-size: 1.75em;
 }
-h3{
-    font-size: 1.4em;
+h3 {
+  font-size: 1.4em;
 }
-h4{
-    font-size: 1em;
+h4 {
+  font-size: 1em;
 }
 
 /* You can add global styles to this file, and also import other style files */
@@ -69,24 +145,34 @@ $otherFont: "Kanit", sans-serif;
 
 $blue: #0033aa;
 
-th{
-    font-family: $titleFont;
+th {
+  font-family: $titleFont;
 }
 
-td{
-    font-family: $otherFont;
+td {
+  font-family: $otherFont;
 }
 
-h1,h2,h3,h4 {
-    font-family: $titleFont;
+h1,
+h2,
+h3,
+h4 {
+  font-family: $titleFont;
 }
 p {
   font-family: $otherFont;
 }
 
-body{
-    margin: 0px;
-    font-family: $otherFont;
+body {
+  margin: 0px;
+  font-family: $otherFont;
+  background-image: url("https://www.montcalm.co.uk/blog/wp-content/uploads/2016/09/shutterstock_593338604.jpg");
+  background-color: #cccccc;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
 }
 
 nav {
@@ -104,9 +190,16 @@ nav {
     text-decoration: none;
     color: #fff;
   }
-//   div {
-//     flex: 1;
-//   }
+  div {
+    flex: 0.5;
+  }
+  //   div {
+  //     flex: 1;
+  //   }
+}
+
+a:visited {
+  color: #f9be0a;
 }
 
 .poster {
@@ -330,67 +423,66 @@ ul {
 
 //********************************** Mixins *******************************************************************************************
 
-
-@mixin basic($textColor: white, $backgroundColor: lightgray){
-    display: flex;
-    flex-direction: column;
-    background-color: $backgroundColor;
-    color: $textColor;
-    align-items: center;
-    box-shadow: gray 5px 5px 5px;
+@mixin basic($textColor: white, $backgroundColor: lightgray) {
+  display: flex;
+  flex-direction: column;
+  background-color: $backgroundColor;
+  color: $textColor;
+  align-items: center;
+  box-shadow: gray 5px 5px 5px;
 }
 
 @mixin Buttons($textColor: #03a, $backgroundColor: #fff) {
-    cursor: pointer;
-    font-size: 16px;
-    font-family: $titleFont;
-    border-radius: 25px;
-    padding: 10px;
-    background-color: $backgroundColor;
-    color: $textColor;
-    border: $textColor solid 2px;
-    transition: 0.4s;
-    &:hover {
-        background-color: $textColor;
-        color: $backgroundColor;
-        border: $backgroundColor solid 2px;
-        box-shadow: 3px 4px 8px #000000a3;
-    }
+  cursor: pointer;
+  font-size: 16px;
+  font-family: $titleFont;
+  border-radius: 25px;
+  padding: 10px;
+  background-color: $backgroundColor;
+  color: $textColor;
+  border: $textColor solid 2px;
+  transition: 0.4s;
+  &:hover {
+    background-color: $textColor;
+    color: $backgroundColor;
+    border: $backgroundColor solid 2px;
+    box-shadow: 3px 4px 8px #000000a3;
+  }
 }
 
-button{
-    @include Buttons(#fff,$blue);
+button {
+  @include Buttons(#fff, $blue);
 }
 
-@mixin align-left{
-    text-align: left;
-    align-content: left;
-    align-items: left;
-    -webkit-box-align: left;
-    justify-content: left;
-    justify-items: left;
-    justify-self: left;
-    -ms-flex-align: left;
+@mixin align-left {
+  text-align: left;
+  align-content: left;
+  align-items: left;
+  -webkit-box-align: left;
+  justify-content: left;
+  justify-items: left;
+  justify-self: left;
+  -ms-flex-align: left;
 }
-@mixin align-center{
-    text-align: center;
-    align-content:     center;
-    align-items:       center;
-    -webkit-box-align: center;
-    justify-content:   center;
-    justify-items:     center;
-    justify-self:      center;
-    -ms-flex-align:    center;
+@mixin align-center {
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  -webkit-box-align: center;
+  justify-content: center;
+  justify-items: center;
+  justify-self: center;
+  -ms-flex-align: center;
 }
-@mixin align-right{
-    text-align: right;
-    align-content:     right;
-    align-items:       right;
-    -webkit-box-align: right;
-    justify-content:   right;
-    justify-items:     right;
-    justify-self:      right;
-    -ms-flex-align:    right;
+@mixin align-right {
+  text-align: right;
+  align-content: right;
+  align-items: right;
+  -webkit-box-align: right;
+  justify-content: right;
+  justify-items: right;
+  justify-self: right;
+  -ms-flex-align: right;
 }
 
 //********************************** Classes ******************************************************************************************
@@ -404,50 +496,53 @@ button{
   flex-direction: row;
 }
 
-.column{
-    display: flex;
-    flex-direction: column;
+.column {
+  display: flex;
+  flex-direction: column;
 }
 
-.left{
-    @include align-left()
+.left {
+  @include align-left();
 }
 
-.right{
-    @include align-right()
+.right {
+  @include align-right();
 }
 
 .page {
-    align-items: center;
-    width: 70%;
-    margin-left: 15%;
-    margin-top: 3%;
-    margin-bottom: 25%;
-    @include basic(black, lightgray);
-
+  align-items: center;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 3%;
+  margin-bottom: 25%;
+  @include basic(black, lightgray);
 }
 
-.top{
-        text-align: center;
-        width: 100%;
-        color: white;
-        background-color: $blue;
-        h1{
-            padding: 3%;
-            padding-bottom: 0px;
-        }
-        p{
-            padding: 3%;
-            padding-top: 0px;;
-        }
+#site {
+  background-color: #26262670;
+  color: #f2f2f2;
+  // background: radial-gradient(circle, rgba(0, 0, 0, 0.69) 0%, rgba(244, 244, 244, 0) 100%);
 }
 
+.top {
+  text-align: center;
+  width: 100%;
+  color: white;
+  background-color: $blue;
+  h1 {
+    padding: 3%;
+    padding-bottom: 0px;
+  }
+  p {
+    padding: 3%;
+    padding-top: 0px;
+  }
+}
 
 //********************************* Responsiveness ***********************************************************************************
 
 @media all and (max-width: 700px) {
-
-    nav{
-        display: none;
-    }
+  nav {
+    display: none;
+  }
 }

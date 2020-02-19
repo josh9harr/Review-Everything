@@ -127,7 +127,7 @@ export class FirebaseService {
       console.log(error);
     }).then(_ => {
       const user = firebase.auth().currentUser;
-      if (user != null) {
+      if (user) {
         let data = JSON.parse(JSON.stringify(userData));
         this.firestore.collection("users").doc(user.uid).set(data);
       }

@@ -15,11 +15,11 @@ export class SignUpComponent implements OnInit {
   verPassError;
 
   constructor(
-    private router: Router, 
-    private firebaseService: FirebaseService, 
+    private router: Router,
+    private firebaseService: FirebaseService,
     private fireAuth: AngularFireAuth,
     private regex: RegexService,
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
@@ -30,7 +30,7 @@ export class SignUpComponent implements OnInit {
   }
 
   createUser(email, password, verPassword, fname, lname, phone, state, city, street, zipcode, username) {
-    if(verPassword == password){
+    if (verPassword == password) {
       var user = {
         city: city,
         email: email,
@@ -44,17 +44,18 @@ export class SignUpComponent implements OnInit {
         username: username
       }
       console.log(user);
-    }else{
+    } else {
       console.log("Passwords dont match")
       this.verPassError = 'Passwords do not match'
     }
-      
+
     this.safe = this.regex.testForm(user);
     console.log(this.safe)
-    if(this.safe == true){
+    if (this.safe == true) {
       this.firebaseService.singUp(email, password, user);
+      console.log(email, password, user)
       console.log(user.fname + user.lname + ' was added')
-    }else{
+    } else {
       this.checkExists = this.safe;
     }
 

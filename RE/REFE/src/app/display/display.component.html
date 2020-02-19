@@ -1,13 +1,11 @@
-<div>
-    <h2>Showing Results for {{searchResult}}</h2>
-</div>
+<h1>Showing Results for {{searchResult}}</h1>
 
 
 <ul id="allMovies">
     <!-- printing list of movies that are clickable  -->
     <li *ngFor='let movie of list' [class.selected]="movie === selectedMovie" class="movie" (click)='select(movie)'>
         <div class="clickableMovie">
-            <div *ngIf="movie.poster_path != null; else defaultPoster">
+            <div class="moviePosterSection" *ngIf="movie.poster_path != null; else defaultPoster">
                 <img class="poster" src="{{imageBase}}{{size}}{{movie.poster_path}}" alt='{{movie.title}} poster'
                     height="150" weight='75' />
             </div>
@@ -16,11 +14,17 @@
                     height="150" weight='75' />
             </ng-template>
 
-            <b>{{movie.title}}</b>
+            <h2 class="movieTitle">{{movie.title}}</h2>
         </div>
     </li>
 </ul>
-<div id="loadMoreButton">
+<div *ngIf='canLoadMore; else cantLoad' id="loadMoreButton" (click)="loadMore()">
     <h3>Load More</h3>
     <i id="loadMoreIcon" class=" fa fa-sort-down"></i>
 </div>
+<ng-template #cantLoad>
+    <div id="loadMoreButton">
+        <h3>No More Movies</h3>
+        <i id="loadMoreIcon" class="fa fa-sad-tear"></i>
+    </div>
+</ng-template>

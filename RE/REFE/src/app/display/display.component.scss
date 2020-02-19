@@ -8,6 +8,8 @@
 
 .movie {
   margin: 0px 25px;
+  text-align: center;
+  font-size: 14px;
 }
 
 .clickableMovie {
@@ -18,6 +20,10 @@
   width: 200px;
 }
 
+.moviePosterSection {
+  height: 300px;
+}
+
 .poster {
   height: auto;
   width: 100%;
@@ -25,28 +31,85 @@
 }
 
 .poster:hover {
-  box-shadow: 0px -4px 20px 6px #000000a3;
+  box-shadow: 0px -4px 20px 6px #a19898a3;
   cursor: pointer;
   width: 110%;
   margin-left: -10px;
   border-right: 1px;
 }
 
+.movieTitle {
+  width: 100%;
+  background-color: #262626;
+  transition: 0.4s;
+}
+
 #loadMoreButton {
   width: 80%;
   padding: 1% 10%;
   text-align: center;
+  transition: 0.4s;
+}
+
+#loadMoreButton:hover {
+  cursor: pointer;
+  box-shadow: 0px -4px 20px 6px #a19898a3;
 }
 
 #loadMoreIcon {
   font-size: 70px;
+  margin-top: -35px;
+  transition: 0.4s;
+}
+
+#loadMoreButton h3 {
+  transition: 0.4s;
+}
+
+#loadMoreButton:hover h3 {
+  font-size: 30px;
+}
+
+#loadMoreButton:hover #loadMoreIcon {
+  font-size: 100px;
+  margin-top: -50px;
 }
 
 @media all and (max-width: 450px) {
-  .poster {
-  }
   .clickableMovie {
     width: 150px;
     height: auto;
   }
 }
+
+@media all and (max-width: 580px) {
+  .clickableMovie {
+    width: 100%;
+  }
+
+  .movie {
+    margin: 10px 25px;
+  }
+
+  #allMovies {
+    padding: 1% 22%;
+  }
+}
+
+@media all and (max-width: 450px) {
+  #allMovies {
+    padding: 1% 15%;
+  }
+}
+
+@media all and (max-width: 380px) {
+  .movie {
+    margin: 5px 25px;
+  }
+
+  #allMovies {
+    padding: 1% 10%;
+  }
+}
+
+// #206e72;
