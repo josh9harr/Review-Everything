@@ -98,9 +98,9 @@
             <input class="rating_Input" name="rating" formControlName="rating" id="rating2-50" value="5" type="radio">
 
         </div>
-        <input id="reviewBox" placeholder="Write Your Review Here! (500 Character Limit)" rows="10" cols="50"
-            maxlength="500" type="textarea" formControlName="rateMessage">
-        <button class="button" type="submit">Submit Review</button>
+        <textarea id="reviewBox" placeholder="Write Your Review Here! (500 Character Limit)" rows="10" cols="50"
+            maxlength="500" type="text" formControlName="rateMessage"></textarea>
+        <button id="subBtn" class="button" type="submit">Submit Review</button>
     </form>
 </div>
 
@@ -109,7 +109,8 @@
         <h1>Reviews for {{movieName}}</h1>
     </div>
     <ul>
-        <h2 id="noReviews" *ngIf='!allReviews'>There are no reviews at this time. Be the first to write one now!</h2>
+        <h2 id="noReviews" *ngIf='allReviews.length === 0'>There are no reviews at this time. Be the first to write one
+            now!</h2>
         <li class="listReview" *ngFor='let review of allReviews;'>
             <h2>{{review.username}}</h2>
             <h3>{{review.rating}}/5</h3>
