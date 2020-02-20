@@ -13,10 +13,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 export class FirebaseService {
 
   //This is creating an instance of firebase
-  constructor(
-    private firestore: AngularFirestore,
-    private auth: AngularFireAuth,
-  ) { }
+  constructor(private firestore: AngularFirestore, private auth: AngularFireAuth) { }
 
   //The method made for getting all of the reviews
   getReviews(mediaID: string) {
@@ -89,7 +86,6 @@ export class FirebaseService {
     return this.firestore.collection('users').doc(id).collection('reviews').doc(reviewID).set(data);
   }
 
-  //Gets all the reviews from the user
   getUserReviews(userID: string) {
     return this.firestore.collection("users").doc(userID).collection("reviews").snapshotChanges();
   }
@@ -100,12 +96,10 @@ export class FirebaseService {
     this.firestore.collection("users").doc(id).update(userData);
   }
 
-  //Deletes a user
   deleteUser(id) {
     this.firestore.collection("users").doc(id).delete();
   }
 
-  // Makes a user an admin
   makeAdmin(id) {
     this.firestore.collection("users").doc(id).update({
       isAdmin: true
@@ -128,7 +122,6 @@ export class FirebaseService {
     }
   }
 
-  // Sign the user up for the website
   async singUp(email: string, password: string, userData) {
     await firebase.auth().createUserWithEmailAndPassword(email, password).catch(error => {
       console.log(error);
@@ -141,13 +134,8 @@ export class FirebaseService {
     });
   }
 
-  // Sign the user out
   signOut() {
     return firebase.auth().signOut();
-  }
-
-  resetPassword(email: string) {
-    return this.auth.auth.sendPasswordResetEmail(email);
   }
 
   //Checks who the user is
@@ -159,5 +147,4 @@ export class FirebaseService {
       }
     });
   }
-
 }

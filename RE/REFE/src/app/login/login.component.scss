@@ -1,67 +1,31 @@
-#failed {
-  color: red;
+#failed{
+    color: red;
 }
+input{
+    // display: flex;
+    // flex-direction: row;
+    width: 80%;
+    margin: 1%;
+    align-items: center;
+    padding: 5px;
+    border: gray 2px solid;
+    width: 80%;
+}
+    #email{
+        margin-top: 5%;
+    }
+    #password{
+        margin-bottom: 5%;
+    }
+    #btn{
+        margin: 3%;
+        width: 25%;
+    }
 
-a {
-  color: #f9be0a;
-}
-
-.resetButton {
-  color: #206e72;
-  transition: 0.5s;
-  font-size: medium;
-  margin: auto;
-}
-
-.resetButton:hover {
-  cursor: pointer;
-  font-size: 24px;
-  color: #0b4376;
-}
-
-#btn {
-  width: fit-content !important;
-  margin: auto important;
-}
-
-#loginSection {
-  height: 250px;
-}
-
-#resetSection {
-  height: 180px;
-}
-
-#resetTitle {
-  padding: 2%;
-}
-
-input {
-  // display: flex;
-  // flex-direction: row;
-  width: 80%;
-  margin: 1%;
-  align-items: center;
-  padding: 5px;
-  border: gray 2px solid;
-  width: 80%;
-  text-align: center;
-}
-#email {
-  margin-top: 5%;
-}
-#password {
-  margin-bottom: 5%;
-}
-#btn {
-  margin: 3%;
-  width: 25%;
-}
-
-@media all and (max-width: 450px) {
-  .page {
-    margin: 0px;
-    width: 100%;
-    margin-top: 3%;
-  }
-}
+    @media all and (max-width: 450px){
+        .page{
+            margin: 0px;
+            width: 100%;
+            margin-top: 3%;
+        }
+    }
