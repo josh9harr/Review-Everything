@@ -1,13 +1,27 @@
-
-<div class="page">
+<div *ngIf="!resetPass" class="page">
     <div class="top">
         <h1>Login</h1>
         <p>Don't have an account? <a href="/signUp">Create one here!</a></p>
     </div>
-    <section>
+    <section id="loginSection">
         <input id="email" type="text" placeholder="Email" [(ngModel)]="email">
         <input id="password" type="text" placeholder="Password" [(ngModel)]="password">
         <button id="btn" (click)="login(email, password)" formtarget="_blank">Log In</button>
         <p id="failed" *ngIf="checkExists">{{checkExists}}</p>
+        <div>Forgot your password? <div class="resetButton" (click)="resetPass = true">Reset it here!</div>
+        </div>
+    </section>
+</div>
+
+<div *ngIf="resetPass" class="page">
+    <div class="top">
+        <h1 id="resetTitle">Reset Password</h1>
+    </div>
+    <section id="resetSection">
+        <input id="email" type="text" placeholder="Email" [(ngModel)]="email">
+        <button id="btn" (click)="resetPassword(email)" formtarget="_blank">Reset Password</button>
+        <p id="failed" *ngIf="checkExists">{{checkExists}}</p>
+        <div>Don't have reset your password? <div class="resetButton" (click)="resetPass = false">Login here!</div>
+        </div>
     </section>
 </div>
