@@ -1,0 +1,37 @@
+
+.outer{
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    align-items: baseline;
+    margin: 2%;
+}
+
+.inner{
+    width: 100%;
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    display: inline-block;
+}
+
+.movie{
+    display: inline-block;
+    padding: 1%;
+    text-align: center;
+    cursor: pointer;
+}
+
+#genre {
+    padding: 5%;
+    background: #fff;
+    border-radius: 25px;
+    box-shadow: black 5px 5px 5px;
+
+}
+
+a{
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
+}

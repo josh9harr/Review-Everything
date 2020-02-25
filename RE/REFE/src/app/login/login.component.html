@@ -5,7 +5,9 @@
     </div>
     <section id="loginSection">
         <input id="email" type="text" placeholder="Email" [(ngModel)]="email">
-        <input id="password" type="text" placeholder="Password" [(ngModel)]="password">
+        <input id="password1" type="password" placeholder="Password" [(ngModel)]="password">
+        <input id="password" type="text" placeholder="Password (show)" [(ngModel)]="password" style="display: none;">
+        <button id="showBtn" (click)='showPassword()'>Show</button>
         <button id="btn" (click)="login(email, password)" formtarget="_blank">Log In</button>
         <p id="failed" *ngIf="checkExists">{{checkExists}}</p>
         <div>Forgot your password? <div class="resetButton" (click)="resetPass = true">Reset it here!</div>

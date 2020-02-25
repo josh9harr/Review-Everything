@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
 
   searched(searchBy, title) {
     if(title == undefined){
-      console.log("undefined bruh")
+      alert('You need to enter a title into the search box')
     }else{
       window.location.replace(`display/${searchBy}/${title}`)
     }

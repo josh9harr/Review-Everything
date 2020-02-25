@@ -73,11 +73,13 @@ export class MoviesService {
     );
     return data
   }
-    getPopular(){
-      let data = this.http.get(
-        `${this.start}/discover/movie${this.key}&sort_by=popularity.desc`
-      );
-      return data;
-    }
+
+  getPopular(){
+    let data = this.http.get(
+      `${this.start}discover/movie${this.key}&sort_by=popularity.desc`
+    );
+    return data;
+  }
+
 
 }

@@ -18,8 +18,10 @@ export class LoginComponent implements OnInit {
 
   checkExists;
   resetPass: boolean = false;
+  clicked = 0;
 
   ngOnInit() {
+    
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
         window.location.replace('/profile')
@@ -52,5 +54,20 @@ export class LoginComponent implements OnInit {
         console.log(error)
       });
   }
+
+  showPassword(){
+    if(this.clicked%2 == 0){
+      document.getElementById('password1').style.display = 'none';
+      document.getElementById('password').style.display = 'block';
+      document.getElementById('showBtn').innerText = 'Hide';
+    }else{
+      document.getElementById('showBtn').innerText = 'Show';
+      document.getElementById('password1').style.display = 'block';
+      document.getElementById('password').style.display = 'none';
+    }
+    this.clicked += 1;
+  }
+
+
 
 }

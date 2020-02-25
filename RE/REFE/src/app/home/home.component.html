@@ -1,1 +1,32 @@
-<p>home works!</p>
+<div class="page">
+
+    <div class="top">
+        <h1>Welcome to Review Everything</h1>
+        <p>You can search for any movie you seen and write a review for it.</p>
+    </div>
+
+    <div id="popular" class="outer">
+        <h2>Popular Movies</h2>
+
+        <div class="inner">
+            <div class="movie" *ngFor='let movie of popular' [class.selected]="movie === selectedMovie" (click)='select(movie)'>
+                <img src="{{imageBase}}{{size}}{{movie.poster_path}}" alt="{{movie.title}} poster" height="250" >
+                <h4>{{movie.title}}</h4>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="genre" class="outer">
+        <h2>{{genreName}} <a href="/display/genre/{{genreName}}">See More ></a></h2>
+
+        <div class="inner">
+            <div class="movie" *ngFor='let movie of genre' [class.selected]="movie === selectedMovie" (click)='select(movie)'>
+                <img src="{{imageBase}}{{size}}{{movie.poster_path}}" alt="{{movie.title}} poster" height="250" >
+                <h4>{{movie.title}}</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div id="keyword" class="outer"></div> -->
+</div>
