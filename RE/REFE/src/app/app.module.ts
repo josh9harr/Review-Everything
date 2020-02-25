@@ -1,4 +1,4 @@
-
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgModule } from '@angular/core';
@@ -51,6 +51,7 @@ import { HomeComponent } from './home/home.component'
 
   ],
   imports: [
+    RecaptchaFormsModule,
     FontAwesomeModule,
     BrowserModule,
     HttpClientModule,

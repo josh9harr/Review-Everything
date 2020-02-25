@@ -30,37 +30,50 @@ export class SignUpComponent implements OnInit {
   }
 
   createUser(email, password, verPassword, fname, lname, phone, state, city, street, zipcode, username) {
-    if (verPassword == password) {
-      var user = {
-        city: city,
-        email: email,
-        fname: fname,
-        lname: lname,
-        password: password,
-        phone: phone,
-        state: state,
-        street: street,
-        zip_code: zipcode,
-        username: username
+    //reCaptcha
+    if(grecaptcha && grecaptcha.getResponse().length > 0){
+      if (verPassword == password) {
+        var user = {
+          city: city,
+          email: email,
+          fname: fname,
+          lname: lname,
+          password: password,
+          phone: phone,
+          state: state,
+          street: street,
+          zip_code: zipcode,
+          username: username
+        }
+        console.log(user);
+      } else {
+        console.log("Passwords dont match")
+        this.verPassError = 'Passwords do not match'
       }
-      console.log(user);
-    } else {
-      console.log("Passwords dont match")
-      this.verPassError = 'Passwords do not match'
-    }
 
-    this.safe = this.regex.testForm(user);
-    console.log(this.safe)
-    if (this.safe == true) {
-      this.firebaseService.singUp(email, password, user);
-      console.log(email, password, user)
-      console.log(user.fname + user.lname + ' was added')
-    } else {
-      this.checkExists = this.safe;
+      this.safe = this.regex.testForm(user);
+      console.log(this.safe)
+      if (this.safe == true) {
+        this.firebaseService.singUp(email, password, user);
+        console.log(email, password, user)
+        console.log(user.fname + user.lname + ' was added')
+      } else {
+        this.checkExists = this.safe;
+      }
+
+    }else{
+      alert('You need to verify you are Human')
     }
 
   }
 
+  // captcha(token){
+  //     // document.getElementById("demo-form").submit();
+  //     console.log(token);
+  // }
+
+  
+  
 
 
 }

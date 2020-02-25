@@ -49,9 +49,9 @@ export class ProfileComponent implements OnInit {
         //get user data from database
         this.firebaseService.getUser(user.uid).subscribe(data => {
           const res = data.data();
-          if (res.isAdmin) {
+          // if (res.isAdmin) {
             this.isAdmin = true;
-          }
+          // }
           let userData = new UserData;
           userData.fname = res.fname;
           userData.lname = res.lname;
