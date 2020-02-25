@@ -68,6 +68,15 @@
   transition: 0.4s;
 }
 
+#noLoadMoreIcon {
+  font-size: 70px;
+  transition: 0.4s;
+}
+
+#loadMoreButton:hover #noLoadMoreIcon {
+  font-size: 100px;
+}
+
 #loadMoreButton h3 {
   transition: 0.4s;
 }

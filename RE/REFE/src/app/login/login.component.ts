@@ -10,8 +10,15 @@ import { AngularFireAuth } from "@angular/fire/auth";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, private firebaseService: FirebaseService, private fireAuth: AngularFireAuth) { }
+  constructor(
+    private router: Router,
+    private firebaseService: FirebaseService,
+    private fireAuth: AngularFireAuth,
+  ) { }
+
   checkExists;
+  resetPass: boolean = false;
+
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
@@ -34,6 +41,16 @@ export class LoginComponent implements OnInit {
 
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  resetPassword(email: string) {
+    this.firebaseService.resetPassword(email)
+      .then(res => {
+        this.resetPass = false;
+      })
+      .catch(error => {
+        console.log(error)
+      });
   }
 
 }
