@@ -49,13 +49,7 @@ export class SignUpComponent implements OnInit {
 
       this.safe = this.regex.testForm(user);
       if (this.safe == true) {
-        this.firebaseService.singUp(email, password, user);
-        console.log(user.fname + user.lname + ' was added')
-        this.fireAuth.auth.onAuthStateChanged((user) => {
-          if (user) {
-            window.location.replace('/home')
-          }
-        });
+        this.firebaseService.singUp(email, password, user)
       } else {
         this.checkExists = this.safe;
         alert('Something is wrong')
