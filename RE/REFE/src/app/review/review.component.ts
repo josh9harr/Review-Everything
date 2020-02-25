@@ -29,6 +29,9 @@ export class ReviewComponent implements OnInit {
   userHasReviewed: boolean = false;
   starForm;
   poster;
+  averageRating;
+  review;
+  allRatings =[];
 
   constructor(
     private firebaseService: FirebaseService,
@@ -63,6 +66,7 @@ export class ReviewComponent implements OnInit {
             rateMessage: ""
           });
         });
+        this.getAverageRating();
       } else {
         window.location.replace('/login')
       }
@@ -139,4 +143,36 @@ export class ReviewComponent implements OnInit {
     this.firebaseService.deleteReview(reviewerId, userReviewID, this.id, reviewID)
   }
 
-};
+  getAverageRating(){
+    //gets all reviews
+    this.firebaseService.getReviews(this.id).subscribe(data => {
+      this.allReviews = data.map(e => {
+        return {
+          reviewID: e.payload.doc.id,
+          ...e.payload.doc.data()
+        }
+      })
+
+      //Adds rating to array
+      this.allReviews.forEach(review => {
+        if (review.rating) {
+          this.allRatings.push(Number(review.rating));
+        }
+      });
+
+      //If ratings exist, add all ratings then divide by number of rating
+      if(this.allRatings.length !=0){
+        var sum = 0;
+        this.allRatings.forEach(rating => {
+          sum+=rating;
+        })
+        this.averageRating = sum/this.allRatings.length;
+        
+      }else{
+        this.averageRating = 0;
+      }
+
+      });
+    }
+    
+  };
