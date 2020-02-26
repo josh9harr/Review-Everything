@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private fireAuth: AngularFireAuth,
     private movieService: MoviesService,
-    private router: Router,
     private firebaseService: FirebaseService,
+    private router: Router,
 
   ) { }
 
