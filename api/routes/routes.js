@@ -18,6 +18,7 @@ exports.index = (req, res) => {
 
 exports.movie = (req, res) => {
     // console.log(req.params.movieName)
+    // let movieName = req.params.movieName.
     db.collection('media').where("name", "==", req.params.movieName).get()
         .then((movies) => {
             let moviesData = [];

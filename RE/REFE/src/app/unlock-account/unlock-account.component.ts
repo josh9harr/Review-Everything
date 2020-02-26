@@ -44,5 +44,11 @@ export class UnlockAccountComponent implements OnInit {
   UpdatePass(password) {
     this.firebaseService.unlockAccount(password, this.route.snapshot.params.email);
     this.emailIsLocked = false;
+    this.router.navigateByUrl("/home")
+  }
+
+  resetPassword() {
+    this.firebaseService.resetPassword(this.route.snapshot.params.email)
+    this.router.navigateByUrl("/home")
   }
 }

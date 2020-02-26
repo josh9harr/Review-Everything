@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   clicked = 0;
 
   ngOnInit() {
-    
+
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
         window.location.replace('/profile')
@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
 
   async login(email: string, password: string) {
     await this.firebaseService.signIn(email, password)
-    // await this.delay(1000);
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
         window.location.replace('/home')
@@ -55,12 +54,12 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  showPassword(){
-    if(this.clicked%2 == 0){
+  showPassword() {
+    if (this.clicked % 2 == 0) {
       document.getElementById('password1').style.display = 'none';
       document.getElementById('password').style.display = 'block';
       document.getElementById('showBtn').innerText = 'Hide';
-    }else{
+    } else {
       document.getElementById('showBtn').innerText = 'Show';
       document.getElementById('password1').style.display = 'block';
       document.getElementById('password').style.display = 'none';

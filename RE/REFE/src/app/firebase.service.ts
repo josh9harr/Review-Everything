@@ -178,11 +178,11 @@ export class FirebaseService {
     await firebase.auth().createUserWithEmailAndPassword(email, password).catch(error => {
       console.log(error);
     }).then(_ => {
-        const user = firebase.auth().currentUser;
-        let data = JSON.parse(JSON.stringify(userData));
-        this.firestore.collection("users").doc(user.uid).set(data);
-      }).then ( _ => {
-        window.location.replace('/home')        
+      const user = firebase.auth().currentUser;
+      let data = JSON.parse(JSON.stringify(userData));
+      this.firestore.collection("users").doc(user.uid).set(data);
+    }).then(_ => {
+      window.location.replace('/home')
     });
   }
 
@@ -192,7 +192,7 @@ export class FirebaseService {
   }
 
   resetPassword(email: string) {
-    this.auth.auth.sendPasswordResetEmail(email)
+    this.firestore.collection("loginAttempts").doc(email).delete();
     return this.auth.auth.sendPasswordResetEmail(email);
   }
 

@@ -1,69 +1,72 @@
-@import '../../styles.scss';
+@import "../../styles.scss";
 
-body{
-    justify-content: center;
+body {
+  justify-content: center;
 }
 
-.check{
-    color: red;
-    padding: 0px;
-    margin: 0px;
-    align-items: flex-start;
+#login:visited {
+  color: $yellow;
 }
 
-#top{
-    margin: 0px;
-    background-color: $blue;
-    width: 100%;
-    text-align: center;
-    #head{
-        margin: 15px 0px 0px 0px;
-    }
-    #toLog{
-        margin: 0px 0px 15px 0px;
-    }
+.check {
+  color: red;
+  padding: 0px;
+  margin: 0px;
+  align-items: flex-start;
 }
 
-#signup{
-    @include basic;
-    margin: 3% 25%;
+#top {
+  margin: 0px;
+  background-color: $blue;
+  width: 100%;
+  text-align: center;
+  #head {
+    margin: 15px 0px 0px 0px;
+  }
+  #toLog {
+    margin: 0px 0px 15px 0px;
+  }
 }
 
-#inputs{
-    display: flex;
-    flex-direction: column;
+#signup {
+  @include basic;
+  margin: 3% 25%;
+}
+
+#inputs {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 15px;
+  align-items: center;
+  input {
+    margin: 5px;
+    padding: 5px;
+    border: gray 2px solid;
     width: 80%;
-    margin: 15px;
-    align-items: center;
-    input{
-        margin: 5px;
-        padding: 5px;
-        border: gray 2px solid;
-        width: 80%;
-    }
-    #addy{
-        justify-content: center;
-    }
-    #city{
-        width: 40%;
-    }
-    #state{
-        width: 10%;
-    }
-    #zip{
-        width: 20%;
-    }
-    button{
-        @include Buttons;
-        width: 25%;
-        padding: 10px;
-        margin: 10px;
-
-    }
+  }
+  #addy {
+    justify-content: center;
+  }
+  #city {
+    width: 40%;
+  }
+  #state {
+    width: 10%;
+  }
+  #zip {
+    width: 20%;
+  }
+  button {
+    @include Buttons;
+    width: 25%;
+    padding: 10px;
+    margin: 10px;
+  }
 }
 
-@media all and (max-width: 450px){
-    #signup{    
-        margin: 0px;;
-    }
+@media all and (max-width: 450px) {
+  #signup {
+    margin: 0px;
+  }
 }

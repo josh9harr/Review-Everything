@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
     private fireAuth: AngularFireAuth,
     private userReview: UserReview,
     private movieServies: MoviesService,
-    
+
   ) { }
 
   ngOnInit() {
@@ -49,9 +49,9 @@ export class ProfileComponent implements OnInit {
         //get user data from database
         this.firebaseService.getUser(user.uid).subscribe(data => {
           const res = data.data();
-          // if (res.isAdmin) {
+          if (res.isAdmin) {
             this.isAdmin = true;
-          // }
+          }
           let userData = new UserData;
           userData.fname = res.fname;
           userData.lname = res.lname;
@@ -83,12 +83,12 @@ export class ProfileComponent implements OnInit {
   logout() {
     this.firebaseService.signOut();
   }
-  
-  toAdmin(){
+
+  toAdmin() {
     window.location.replace('/update-user')
   }
-  
-  toUpdate(){
+
+  toUpdate() {
     window.location.replace('/users')
   }
 }

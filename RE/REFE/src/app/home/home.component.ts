@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  showGenre(){
+  showGenre() {
 
     let rand = Math.floor(Math.random() * this.genres.length)
 
@@ -63,33 +63,33 @@ export class HomeComponent implements OnInit {
 
   }
 
-    //needed for selecting the movie and displaying the data
-    select(movie): void {
-      this.firebaseService.getReviews(movie.id).subscribe(data => {
-        this.reviews = data.map(e => {
-          return {
-            id: e.payload.doc.id,
-            ...e.payload.doc.data()
-          }
-        })
-      });
-      this.selectedMovie = movie;
-      this.loadReview(movie.id)
-    }
+  //needed for selecting the movie and displaying the data
+  select(movie): void {
+    this.firebaseService.getReviews(movie.id).subscribe(data => {
+      this.reviews = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        }
+      })
+    });
+    this.selectedMovie = movie;
+    this.loadReview(movie.id)
+  }
 
-    loadReview(id: string) {
-      const mediaExists = this.firebaseService.checkMedia(id);
-      if (mediaExists) {
+  loadReview(id: string) {
+    const mediaExists = this.firebaseService.checkMedia(id);
+    if (mediaExists) {
+      this.router.navigate(['/reviews/', id])
+    } else {
+      let media = {
+        name: this.selectedMovie.title
+      };
+      this.firebaseService.createMedia(media, this.selectedMovie.id).then(_ => {
         this.router.navigate(['/reviews/', id])
-      } else {
-        let media = {
-          name: this.selectedMovie.title
-        };
-        this.firebaseService.createMedia(media, this.selectedMovie.id).then(_ => {
-          this.router.navigate(['/reviews/', id])
-        });
-  
-      }
+      });
+
     }
+  }
 
 }

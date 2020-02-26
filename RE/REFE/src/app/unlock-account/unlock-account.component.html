@@ -12,7 +12,7 @@
             <button id="btn" (click)="login(CurrentPassword)" formtarget="_blank">Log In</button>
             <div (click)="resetPass = true">Reset Password</div>
         </section>
-        <ng-template #newPassSection>
+        <ng-template #newPassSection class="page">
             <section *ngIf="userLoggedIn" class="pageContent">
                 <input id="password" type="text" placeholder="New Password" [(ngModel)]="newPassword">
                 <button id="btn" (click)="UpdatePass(newPassword)" formtarget="_blank">Log In</button>
@@ -21,14 +21,16 @@
     </div>
 
     <ng-template #resetPassSection>
-        <div class="top">
-            <h1>resetPass</h1>
-            <p>Are you sure you want to reset your password?</p>
+        <div class="page">
+            <div class="top">
+                <h1>resetPass</h1>
+                <p>Are you sure you want to reset your password?</p>
+            </div>
+            <section class="pageContent">
+                <button id="btn" (click)=resetPassword()>Confirm Reset</button>
+                <div (click)="resetPass = false">Cancel Password</div>
+            </section>
         </div>
-        <section class="pageContent">
-            <button id="btn" (click)=resetPassword()>Confirm Password Reset</button>
-            <div (click)="resetPass = false">Cancel Password</div>
-        </section>
     </ng-template>
 </div>
 
