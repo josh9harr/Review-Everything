@@ -1,0 +1,44 @@
+<div *ngIf="emailIsLocked; else errorMessage">
+
+    <div *ngIf="!resetPass; else resetPassSection" class="page">
+        <div class="top">
+            <h1>Unlock Profile</h1>
+            <p>To unlock your profile, enter your password and then enter a new password for security
+                reason.</p>
+        </div>
+
+        <section *ngIf="!userLoggedIn; else newPassSection" class="pageContent">
+            <input id="password" type="text" placeholder="Current Password" [(ngModel)]="CurrentPassword">
+            <button id="btn" (click)="login(CurrentPassword)" formtarget="_blank">Log In</button>
+            <div (click)="resetPass = true">Reset Password</div>
+        </section>
+        <ng-template #newPassSection>
+            <section *ngIf="userLoggedIn" class="pageContent">
+                <input id="password" type="text" placeholder="New Password" [(ngModel)]="newPassword">
+                <button id="btn" (click)="UpdatePass(newPassword)" formtarget="_blank">Log In</button>
+            </section>
+        </ng-template>
+    </div>
+
+    <ng-template #resetPassSection>
+        <div class="top">
+            <h1>resetPass</h1>
+            <p>Are you sure you want to reset your password?</p>
+        </div>
+        <section class="pageContent">
+            <button id="btn" (click)=resetPassword()>Confirm Password Reset</button>
+            <div (click)="resetPass = false">Cancel Password</div>
+        </section>
+    </ng-template>
+</div>
+
+<ng-template #errorMessage>
+    <div class="page">
+        <div class="top">
+            <h1>Unlock Profile</h1>
+        </div>
+        <section class="pageContent">
+            <h1>The account attached to that email is not locked. Please return to the home page.</h1>
+        </section>
+    </div>
+</ng-template>

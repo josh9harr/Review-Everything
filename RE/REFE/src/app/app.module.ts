@@ -31,7 +31,8 @@ import { FilterPipe } from './filter.pipe';
 
 // Font Awesome
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { HomeComponent } from './home/home.component'
+import { HomeComponent } from './home/home.component';
+import { UnlockAccountComponent } from './unlock-account/unlock-account.component'
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { HomeComponent } from './home/home.component'
     UpdateUserComponent,
     UsersComponent,
     FilterPipe,
-    HomeComponent
+    HomeComponent,
+    UnlockAccountComponent
 
   ],
   imports: [
@@ -68,6 +70,7 @@ import { HomeComponent } from './home/home.component'
       { path: "home", component: HomeComponent },
       { path: "login", component: LoginComponent },
       { path: "signUp", component: SignUpComponent },
+      { path: "unlock-account/:email", component: UnlockAccountComponent },
       { path: "profile", component: ProfileComponent },
       { path: "update/:reviewId", component: UpdateReviewComponent },
       { path: "update-user", component: UpdateUserComponent },
