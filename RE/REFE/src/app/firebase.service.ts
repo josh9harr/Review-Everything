@@ -180,9 +180,9 @@ export class FirebaseService {
     }).then(_ => {
       const user = firebase.auth().currentUser;
       let data = JSON.parse(JSON.stringify(userData));
-      this.firestore.collection("users").doc(user.uid).set(data);
-    }).then(_ => {
-      window.location.replace('/home')
+      this.firestore.collection("users").doc(user.uid).set(data).then(_ => {
+        window.location.replace('/home')
+      })
     });
   }
 
