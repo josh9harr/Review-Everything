@@ -166,7 +166,8 @@ export class ReviewComponent implements OnInit {
         this.allRatings.forEach(rating => {
           sum+=rating;
         })
-        this.averageRating = sum/this.allRatings.length;
+        this.averageRating = Math.round(sum/this.allRatings.length*10)/10;
+        
         
       }else{
         this.averageRating = 0;
