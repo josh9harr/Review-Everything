@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Reviews } from 'src/app/reviews.model'
 import * as firebase from "firebase/app"
 import { AngularFireAuth } from "@angular/fire/auth";
+import { send } from 'emailjs-com'
 
 @Injectable({
   providedIn: 'root'
@@ -114,18 +115,62 @@ export class FirebaseService {
 
   //User sign in and out
   async signIn(email: string, password: string) {
-    try {
-      console.log(email);
-      await this.auth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        .then(async function () {
-          await firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
-          }).catch(function (error) {
-            console.log(error)
-          })
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    this.firestore.collection("loginAttempts").doc(email).get().toPromise().then(doc => {
+      if (doc.exists) {
+        let docData = doc.data();
+        if (docData.loginAttempts == 10) {
+          return "Current account is locked. Please check your email to reset your password"
+        } else {
+          this.auth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .then(async function () {
+              firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(_ => {
+                  firebase.firestore().collection("loginAttempts").doc(email).delete();
+                }).catch(function (error) {
+                  if (docData.loginAttempts == 9) {
+                    firebase.firestore().collection("loginAttempts").doc(email).update({
+                      loginAttempts: firebase.firestore.FieldValue.increment(1),
+                      accountLocked: true
+                    });
+                    // sendEmail()
+                    send("gmail", "accountlock", { "userEmail": email, "resetLink": `http://localhost:4200/unlock-account/${email}` }, "user_ui8QLUfGGmXZUX37Y2Ki9")
+                    const db = firebase.firestore()
+                    return db.collection(`users`).where("isAdmin", "==", true).get().then(res => {
+                      res.docs.forEach(doc => {
+                        let data = doc.data();
+                        console.log(data.username, data.email)
+                        send("gmail", "template_oZSS2hDH", { "adminEmail": data.email, "name": data.username, "userEmail": email }, "user_ui8QLUfGGmXZUX37Y2Ki9")
+                      });
+                    });
+                  } else {
+                    firebase.firestore().collection("loginAttempts").doc(email).update({
+                      loginAttempts: firebase.firestore.FieldValue.increment(1)
+                    });
+                  }
+                });
+            });
+        }
+
+      } else {
+        this.auth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+          .then(async function () {
+            firebase.auth().signInWithEmailAndPassword(email, password)
+              .then(_ => {
+                firebase.firestore().collection("loginAttempts").doc(email).delete();
+              }).catch(function (error) {
+                firebase.firestore().collection("loginAttempts").doc(email).set({ loginAttempts: 1, accountLocked: false });
+              })
+          });
+      }
+    });
+  }
+
+  async signInWithoutCheck(email: string, password: string) {
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+  }
+
+  accountIsLocked(email: string) {
+    return this.firestore.collection("loginAttempts").doc(email).get()
   }
 
   // Sign the user up for the website
@@ -147,7 +192,18 @@ export class FirebaseService {
   }
 
   resetPassword(email: string) {
+    this.auth.auth.sendPasswordResetEmail(email)
     return this.auth.auth.sendPasswordResetEmail(email);
+  }
+
+  unlockAccount(password, email) {
+    firebase.auth().currentUser.updatePassword(password)
+      .then(_ => {
+        this.firestore.collection("loginAttempts").doc(email).delete();
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   //Checks who the user is
