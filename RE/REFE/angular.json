@@ -14,6 +14,10 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
+          },
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
